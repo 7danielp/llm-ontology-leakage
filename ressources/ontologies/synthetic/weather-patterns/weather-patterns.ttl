@@ -1,0 +1,330 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix weather-patterns: <http://example.org/weather-patterns#> .
+
+weather-patterns:Blizzard a owl:Class ;
+    rdfs:subClassOf weather-patterns:ExtremeWeatherEvent .
+
+weather-patterns:ColdFront a owl:Class ;
+    rdfs:subClassOf weather-patterns:FrontalSystem .
+
+weather-patterns:Drought a owl:Class ;
+    rdfs:subClassOf weather-patterns:ExtremeWeatherEvent .
+
+weather-patterns:Flood a owl:Class ;
+    rdfs:subClassOf weather-patterns:ExtremeWeatherEvent .
+
+weather-patterns:Heatwave a owl:Class ;
+    rdfs:subClassOf weather-patterns:ExtremeWeatherEvent .
+
+weather-patterns:OccludedFront a owl:Class ;
+    rdfs:subClassOf weather-patterns:FrontalSystem .
+
+weather-patterns:StationaryFront a owl:Class ;
+    rdfs:subClassOf weather-patterns:FrontalSystem .
+
+weather-patterns:Thunderstorm a owl:Class ;
+    rdfs:subClassOf weather-patterns:StormSystem .
+
+weather-patterns:Tornado a owl:Class ;
+    rdfs:subClassOf weather-patterns:ExtremeWeatherEvent .
+
+weather-patterns:WarmFront a owl:Class ;
+    rdfs:subClassOf weather-patterns:FrontalSystem .
+
+weather-patterns:associatedWith a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:AtmosphericPhenomenon ;
+    rdfs:range weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:causes a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:MeteorologicalDriver ;
+    rdfs:range weather-patterns:ExtremeWeatherEvent .
+
+weather-patterns:characterizes a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:AtmosphericCondition ;
+    rdfs:range weather-patterns:AtmosphericCondition .
+
+weather-patterns:contains a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:StormSystem ;
+    rdfs:range weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:follows a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:WindPattern ;
+    rdfs:range weather-patterns:FrontalSystem .
+
+weather-patterns:hasAltitude a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:CloudType ;
+    rdfs:range weather-patterns:CloudType .
+
+weather-patterns:hasAnomaly a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:TemperatureState ;
+    rdfs:range weather-patterns:TemperatureState .
+
+weather-patterns:hasAttribute a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:AtmosphericCondition ;
+    rdfs:range weather-patterns:AtmosphericCondition .
+
+weather-patterns:hasBoundary a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:FrontalSystem ;
+    rdfs:range weather-patterns:FrontalSystem .
+
+weather-patterns:hasCloudCover a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:AtmosphericPhenomenon ;
+    rdfs:range weather-patterns:CloudType .
+
+weather-patterns:hasComponent a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:StormSystem ;
+    rdfs:range weather-patterns:StormSystem .
+
+weather-patterns:hasConvergence a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:WindPattern ;
+    rdfs:range weather-patterns:WindPattern .
+
+weather-patterns:hasCore a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:CyclonicSystem ;
+    rdfs:range weather-patterns:CyclonicSystem .
+
+weather-patterns:hasCycle a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:AtmosphericPhenomenon ;
+    rdfs:range weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:hasDirection a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:WindPattern ;
+    rdfs:range weather-patterns:WindPattern .
+
+weather-patterns:hasDivergence a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:WindPattern ;
+    rdfs:range weather-patterns:WindPattern .
+
+weather-patterns:hasDriver a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:AtmosphericPhenomenon ;
+    rdfs:range weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:hasDuration a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:ExtremeWeatherEvent ;
+    rdfs:range weather-patterns:ExtremeWeatherEvent .
+
+weather-patterns:hasEffect a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:ExtremeWeatherEvent ;
+    rdfs:range weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:hasEye a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:Hurricane ;
+    rdfs:range weather-patterns:Hurricane .
+
+weather-patterns:hasEyeWall a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:Hurricane ;
+    rdfs:range weather-patterns:Hurricane .
+
+weather-patterns:hasForce a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:MeteorologicalDriver ;
+    rdfs:range weather-patterns:MeteorologicalDriver .
+
+weather-patterns:hasFrequency a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:ExtremeWeatherEvent ;
+    rdfs:range weather-patterns:ExtremeWeatherEvent .
+
+weather-patterns:hasFrontalBoundary a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:FrontalSystem ;
+    rdfs:range weather-patterns:FrontalSystem .
+
+weather-patterns:hasHumidity a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:HumidityState ;
+    rdfs:range weather-patterns:HumidityState .
+
+weather-patterns:hasIntensity a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:ExtremeWeatherEvent ;
+    rdfs:range weather-patterns:ExtremeWeatherEvent .
+
+weather-patterns:hasInteraction a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:AtmosphericPhenomenon ;
+    rdfs:range weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:hasLatitudinalPosition a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:AtmosphericPhenomenon ;
+    rdfs:range weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:hasLiftingMechanism a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:FrontalSystem ;
+    rdfs:range weather-patterns:FrontalSystem .
+
+weather-patterns:hasLongitudinalPosition a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:AtmosphericPhenomenon ;
+    rdfs:range weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:hasMoistureContent a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:HumidityState ;
+    rdfs:range weather-patterns:HumidityState .
+
+weather-patterns:hasMovementDirection a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:WindPattern ;
+    rdfs:range weather-patterns:WindPattern .
+
+weather-patterns:hasOrigin a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:MeteorologicalDriver ;
+    rdfs:range weather-patterns:MeteorologicalDriver .
+
+weather-patterns:hasPattern a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:WindPattern ;
+    rdfs:range weather-patterns:AtmosphericCondition .
+
+weather-patterns:hasPrecipitation a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:AtmosphericPhenomenon ;
+    rdfs:range weather-patterns:PrecipitationType .
+
+weather-patterns:hasPressure a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:PressureSystem ;
+    rdfs:range weather-patterns:PressureSystem .
+
+weather-patterns:hasPressureGradient a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:PressureSystem ;
+    rdfs:range weather-patterns:PressureSystem .
+
+weather-patterns:hasRotation a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:CyclonicSystem ;
+    rdfs:range weather-patterns:CyclonicSystem .
+
+weather-patterns:hasScale a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:AtmosphericPhenomenon ;
+    rdfs:range weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:hasSeasonality a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:AtmosphericPhenomenon ;
+    rdfs:range weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:hasSeverity a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:ExtremeWeatherEvent ;
+    rdfs:range weather-patterns:ExtremeWeatherEvent .
+
+weather-patterns:hasSpatialExtent a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:AtmosphericPhenomenon ;
+    rdfs:range weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:hasSpiralBand a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:Hurricane ;
+    rdfs:range weather-patterns:Hurricane .
+
+weather-patterns:hasState a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:AtmosphericCondition ;
+    rdfs:range weather-patterns:AtmosphericCondition .
+
+weather-patterns:hasStructure a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:StormSystem ;
+    rdfs:range weather-patterns:StormSystem .
+
+weather-patterns:hasTemperature a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:TemperatureState ;
+    rdfs:range weather-patterns:TemperatureState .
+
+weather-patterns:hasThermalStructure a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:AirMass ;
+    rdfs:range weather-patterns:AirMass .
+
+weather-patterns:hasTrajectory a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:StormSystem ;
+    rdfs:range weather-patterns:StormSystem .
+
+weather-patterns:hasTrend a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:TemperatureState ;
+    rdfs:range weather-patterns:TemperatureState .
+
+weather-patterns:hasVelocity a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:WindPattern ;
+    rdfs:range weather-patterns:WindPattern .
+
+weather-patterns:hasVerticalDevelopment a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:CloudType ;
+    rdfs:range weather-patterns:CloudType .
+
+weather-patterns:hasVorticity a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:CyclonicSystem ;
+    rdfs:range weather-patterns:CyclonicSystem .
+
+weather-patterns:hasWindSpeed a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:WindPattern ;
+    rdfs:range weather-patterns:WindPattern .
+
+weather-patterns:impacts a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:ExtremeWeatherEvent ;
+    rdfs:range weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:intersectsWith a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:FrontalSystem ;
+    rdfs:range weather-patterns:FrontalSystem .
+
+weather-patterns:isDrivenBy a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:AtmosphericPhenomenon ;
+    rdfs:range weather-patterns:MeteorologicalDriver .
+
+weather-patterns:isTypeof a owl:ObjectProperty .
+
+weather-patterns:locatedIn a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:AtmosphericPhenomenon ;
+    rdfs:range weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:manifestsAs a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:AtmosphericPhenomenon ;
+    rdfs:range weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:mitigates a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:MeteorologicalDriver ;
+    rdfs:range weather-patterns:ExtremeWeatherEvent .
+
+weather-patterns:occursDuring a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:ExtremeWeatherEvent ;
+    rdfs:range weather-patterns:AtmosphericCondition .
+
+weather-patterns:partOf a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:AtmosphericPhenomenon ;
+    rdfs:range weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:precedes a owl:ObjectProperty ;
+    rdfs:domain weather-patterns:FrontalSystem ;
+    rdfs:range weather-patterns:FrontalSystem .
+
+weather-patterns:PrecipitationType a owl:Class ;
+    rdfs:subClassOf weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:TropicalCyclone a owl:Class ;
+    rdfs:subClassOf weather-patterns:CyclonicSystem .
+
+weather-patterns:AirMass a owl:Class ;
+    rdfs:subClassOf weather-patterns:AtmosphericCondition .
+
+weather-patterns:HumidityState a owl:Class ;
+    rdfs:subClassOf weather-patterns:AtmosphericCondition .
+
+weather-patterns:PressureSystem a owl:Class ;
+    rdfs:subClassOf weather-patterns:AtmosphericCondition .
+
+weather-patterns:CloudType a owl:Class ;
+    rdfs:subClassOf weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:Hurricane a owl:Class ;
+    rdfs:subClassOf weather-patterns:TropicalCyclone .
+
+weather-patterns:TemperatureState a owl:Class ;
+    rdfs:subClassOf weather-patterns:AtmosphericCondition .
+
+weather-patterns:CyclonicSystem a owl:Class ;
+    rdfs:subClassOf weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:MeteorologicalDriver a owl:Class ;
+    rdfs:subClassOf weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:StormSystem a owl:Class ;
+    rdfs:subClassOf weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:AtmosphericCondition a owl:Class .
+
+weather-patterns:WindPattern a owl:Class ;
+    rdfs:subClassOf weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:FrontalSystem a owl:Class ;
+    rdfs:subClassOf weather-patterns:AtmosphericPhenomenon .
+
+weather-patterns:ExtremeWeatherEvent a owl:Class ;
+    rdfs:subClassOf weather-patterns:StormSystem .
+
+weather-patterns:AtmosphericPhenomenon a owl:Class .
+

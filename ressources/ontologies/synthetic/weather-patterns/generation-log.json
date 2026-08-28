@@ -1,0 +1,120 @@
+{
+  "generated_at": "2026-08-04T11:08:01",
+  "generator_model": "gemma4-26b",
+  "temperature": 0.5,
+  "system_prompt": "You are an ontology engineer",
+  "requested": {
+    "N_classes": 22,
+    "M_properties": 62
+  },
+  "characteristics_table": [
+    {
+      "ontology": "FOAF",
+      "classes": 15,
+      "properties": 62
+    },
+    {
+      "ontology": "SCHEMA",
+      "classes": 1014,
+      "properties": 1684
+    },
+    {
+      "ontology": "DCTERMS",
+      "classes": 22,
+      "properties": 55
+    },
+    {
+      "ontology": "GOODRELATIONS",
+      "classes": 37,
+      "properties": 102
+    },
+    {
+      "ontology": "NFO",
+      "classes": 52,
+      "properties": 74
+    },
+    {
+      "ontology": "ORG",
+      "classes": 9,
+      "properties": 35
+    },
+    {
+      "ontology": "CINELAB",
+      "classes": 22,
+      "properties": 24
+    },
+    {
+      "ontology": "EPPLAN",
+      "classes": 35,
+      "properties": 73
+    },
+    {
+      "ontology": "URBANIOT",
+      "classes": 13,
+      "properties": 50
+    }
+  ],
+  "domain_prompt": "We are building a benchmark of ontologies covering the following domains:\n- people and social networks (FOAF)\n- general web content markup (schema.org)\n- document and resource metadata (Dublin Core Terms)\n- e-commerce offers and products (GoodRelations)\n- desktop files and documents (NEPOMUK File Ontology)\n- organizational structures (W3C Organization Ontology)\n- film and video annotation (Cinelab)\n- scientific workflow plans (EP-Plan)\n- electric mobility and charging infrastructure (Urban IoT)\n\nName ONE everyday domain for a new ontology that is unrelated to all of the domains above. Reply with the domain name only (one or two words).",
+  "domain_answer_raw": "Weather patterns",
+  "domain": "Weather patterns",
+  "generation_prompt": "Build me an ontology of Weather patterns with 22 Classes and 62 ObjectProperties, please. Provide the result as\n1. List of Classes (one per line)\n2. List of ObjectProperties (one per line)\n3. List of subclass axioms in the format \"A,B\" (one per line, where A is a subclass of B)\n4. List of domain axioms in the format P,D (one per line, where P is a property, D is its domain - leave empty if there is no suitable class)\n5. List of range axioms in the format P,R (one per line, where P is a property, R is its range - leave empty if there is no suitable class)",
+  "generation_answer_raw": "As an ontology engineer, I have designed this ontology to capture the complex relationships between atmospheric phenomena, meteorological drivers, and spatial-temporal impacts. The structure follows a hierarchical pattern where specific weather phenomena are categorized under broader atmospheric states.\n\n### 1. List of Classes\nAtmosphericPhenomenon\nPrecipitationType\nCloudType\nWindPattern\nStormSystem\nCyclonicSystem\nTropicalCyclone\nTemperatureState\nHumidityState\nPressureSystem\nFrontalSystem\nColdFront\nWarmFront\nStationaryFront\nOccludedFront\nExtremeWeatherEvent\nThunderstorm\nTornado\nHurricane\nBlizzard\nHeatwave\nDrought\nFlood\nAtmosphericCondition\nAirMass\nMeteorologicalDriver\n\n### 2. List of ObjectProperties\nhasPrecipitation\nhasCloudCover\nhasWindSpeed\nhasTemperature\nhasPressure\nhasHumidity\nisDrivenBy\nmanifestsAs\nlocatedIn\npartOf\nassociatedWith\ncauses\nmitigates\nfollows\nprecedes\nintersectsWith\ncontains\ncharacterizes\nimpacts\noccursDuring\nisTypeof\nhasFrontalBoundary\nhasCore\nhasEye\nhasEyeWall\nhasSpiralBand\nhasIntensity\nhasDuration\nhasSpatialExtent\nhasMovementDirection\nhasPressureGradient\nhasThermalStructure\nhasMoistureContent\nhasVerticalDevelopment\nhasLiftingMechanism\nhasConvergence\nhasDivergence\nhasRotation\nhasVorticity\nhasLatitudinalPosition\nhasLongitudinalPosition\nhasAltitude\nhasSeasonality\nhasScale\nhasSeverity\nhasFrequency\nhasPattern\nhasStructure\nhasBoundary\nhasInteraction\nhasEffect\nhasOrigin\nhasTrajectory\nhasVelocity\nhasDirection\nhasTrend\nhasAnomaly\nhasCycle\nhasForce\nhasDriver\nhasComponent\nhasAttribute\nhasState\n\n### 3. List of subclass axioms\nPrecipitationType,AtmosphericPhenomenon\nCloudType,AtmosphericPhenomenon\nWindPattern,AtmosphericPhenomenon\nStormSystem,AtmosphericPhenomenon\nCyclonicSystem,AtmosphericPhenomenon\nTropicalCyclone,CyclonicSystem\nTemperatureState,AtmosphericCondition\nHumidityState,AtmosphericCondition\nPressureSystem,AtmosphericCondition\nFrontalSystem,AtmosphericPhenomenon\nColdFront,FrontalSystem\nWarmFront,FrontalSystem\nStationaryFront,FrontalSystem\nOccludedFront,FrontalSystem\nExtremeWeatherEvent,StormSystem\nThunderstorm,StormSystem\nTornado,ExtremeWeatherEvent\nHurricane,TropicalCyclone\nBlizzard,ExtremeWeatherEvent\nHeatwave,ExtremeWeatherEvent\nDrought,ExtremeWeatherEvent\nFlood,ExtremeWeatherEvent\nAirMass,AtmosphericCondition\nMeteorologicalDriver,AtmosphericPhenomenon\n\n### 4. List of domain axioms\nhasPrecipitation,AtmosphericPhenomenon\nhasCloudCover,AtmosphericPhenomenon\nhasWindSpeed,WindPattern\nhasTemperature,TemperatureState\nhasPressure,PressureSystem\nhasHumidity,HumidityState\nisDrivenBy,AtmosphericPhenomenon\nmanifestsAs,AtmosphericPhenomenon\nlocatedIn,AtmosphericPhenomenon\npartOf,AtmosphericPhenomenon\nassociatedWith,AtmosphericPhenomenon\ncauses,MeteorologicalDriver\nmitigates,MeteorologicalDriver\nfollows,WindPattern\nprecedes,FrontalSystem\nintersectsWith,FrontalSystem\ncontains,StormSystem\ncharacterizes,AtmosphericCondition\nimpacts,ExtremeWeatherEvent\noccursDuring,ExtremeWeatherEvent\nhasFrontalBoundary,FrontalSystem\nhasCore,CyclonicSystem\nhasEye,Hurricane\nhasEyeWall,Hurricane\nhasSpiralBand,Hurricane\nhasIntensity,ExtremeWeatherEvent\nhasDuration,ExtremeWeatherEvent\nhasSpatialExtent,AtmosphericPhenomenon\nhasMovementDirection,WindPattern\nhasPressureGradient,PressureSystem\nhasThermalStructure,AirMass\nhasMoistureContent,HumidityState\nhasVerticalDevelopment,CloudType\nhasLiftingMechanism,FrontalSystem\nhasConvergence,WindPattern\nhasDivergence,WindPattern\nhasRotation,CyclonicSystem\nhasVorticity,CyclonicSystem\nhasLatitudinalPosition,AtmosphericPhenomenon\nhasLongitudinalPosition,AtmosphericPhenomenon\nhasAltitude,CloudType\nhasSeasonality,AtmosphericPhenomenon\nhasScale,AtmosphericPhenomenon\nhasSeverity,ExtremeWeatherEvent\nhasFrequency,ExtremeWeatherEvent\nhasPattern,WindPattern\nhasStructure,StormSystem\nhasBoundary,FrontalSystem\nhasInteraction,AtmosphericPhenomenon\nhasEffect,ExtremeWeatherEvent\nhasOrigin,MeteorologicalDriver\nhasTrajectory,StormSystem\nhasVelocity,WindPattern\nhasDirection,WindPattern\nhasTrend,TemperatureState\nhasAnomaly,TemperatureState\nhasCycle,AtmosphericPhenomenon\nhasForce,MeteorologicalDriver\nhasDriver,AtmosphericPhenomenon\nhasComponent,StormSystem\nhasAttribute,AtmosphericCondition\nhasState,AtmosphericCondition\n\n### 5. List of range axioms\nhasPrecipitation,PrecipitationType\nhasCloudCover,CloudType\nhasWindSpeed,WindPattern\nhasTemperature,TemperatureState\nhasPressure,PressureSystem\nhasHumidity,HumidityState\nisDrivenBy,MeteorologicalDriver\nmanifestsAs,AtmosphericPhenomenon\nlocatedIn,AtmosphericPhenomenon\npartOf,AtmosphericPhenomenon\nassociatedWith,AtmosphericPhenomenon\ncauses,ExtremeWeatherEvent\nmitigates,ExtremeWeatherEvent\nfollows,FrontalSystem\nprecedes,FrontalSystem\nintersectsWith,FrontalSystem\ncontains,AtmosphericPhenomenon\ncharacterizes,AtmosphericCondition\nimpacts,AtmosphericPhenomenon\noccursDuring,AtmosphericCondition\nhasFrontalBoundary,FrontalSystem\nhasCore,CyclonicSystem\nhasEye,Hurricane\nhasEyeWall,Hurricane\nhasSpiralBand,Hurricane\nhasIntensity,ExtremeWeatherEvent\nhasDuration,ExtremeWeatherEvent\nhasSpatialExtent,AtmosphericPhenomenon\nhasMovementDirection,WindPattern\nhasPressureGradient,PressureSystem\nhasThermalStructure,AirMass\nhasMoistureContent,HumidityState\nhasVerticalDevelopment,CloudType\nhasLiftingMechanism,FrontalSystem\nhasConvergence,WindPattern\nhasDivergence,WindPattern\nhasRotation,CyclonicSystem\nhasVorticity,CyclonicSystem\nhasLatitudinalPosition,AtmosphericPhenomenon\nhasLongitudinalPosition,AtmosphericPhenomenon\nhasAltitude,CloudType\nhasSeasonality,AtmosphericPhenomenon\nhasScale,AtmosphericPhenomenon\nhasSeverity,ExtremeWeatherEvent\nhasFrequency,ExtremeWeatherEvent\nhasPattern,AtmosphericCondition\nhasStructure,StormSystem\nhasBoundary,FrontalSystem\nhasInteraction,AtmosphericPhenomenon\nhasEffect,AtmosphericPhenomenon\nhasOrigin,MeteorologicalDriver\nhasTrajectory,StormSystem\nhasVelocity,WindPattern\nhasDirection,WindPattern\nhasTrend,TemperatureState\nhasAnomaly,TemperatureState\nhasCycle,AtmosphericPhenomenon\nhasForce,MeteorologicalDriver\nhasDriver,AtmosphericPhenomenon\nhasComponent,StormSystem\nhasAttribute,AtmosphericCondition\nhasState,AtmosphericCondition",
+  "generation_finish_reason": "stop",
+  "namespace": "http://example.org/weather-patterns#",
+  "parse_stats": {
+    "dropped": [],
+    "empty": 0,
+    "subclass": 24,
+    "domain": 62,
+    "range": 62,
+    "classes": 26,
+    "properties": 63
+  },
+  "jaccard_freshness": [
+    {
+      "ontology": "FOAF",
+      "jaccard_classes": 0.0,
+      "jaccard_properties": 0.0
+    },
+    {
+      "ontology": "SCHEMA",
+      "jaccard_classes": 0.0,
+      "jaccard_properties": 0.001
+    },
+    {
+      "ontology": "DCTERMS",
+      "jaccard_classes": 0.0,
+      "jaccard_properties": 0.0
+    },
+    {
+      "ontology": "GOODRELATIONS",
+      "jaccard_classes": 0.0,
+      "jaccard_properties": 0.0
+    },
+    {
+      "ontology": "NFO",
+      "jaccard_classes": 0.0,
+      "jaccard_properties": 0.0
+    },
+    {
+      "ontology": "ORG",
+      "jaccard_classes": 0.0,
+      "jaccard_properties": 0.0
+    },
+    {
+      "ontology": "CINELAB",
+      "jaccard_classes": 0.0,
+      "jaccard_properties": 0.0
+    },
+    {
+      "ontology": "EPPLAN",
+      "jaccard_classes": 0.0,
+      "jaccard_properties": 0.008
+    },
+    {
+      "ontology": "URBANIOT",
+      "jaccard_classes": 0.0,
+      "jaccard_properties": 0.0
+    }
+  ]
+}
