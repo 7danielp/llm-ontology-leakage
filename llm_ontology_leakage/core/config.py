@@ -22,7 +22,7 @@ DEFAULT_AXIOM_PREDICATES: dict[TaskName, str] = {
 }
 
 # One preset per ontology
-# prefix_map covers namespaces the file leaves undeclared (else prefix rendering falls back to f.e. "ns1:")
+# prefix_map covers namespaces the file leaves undeclared (else prefix rendering falls back to e.g. "ns1:")
 # ontology_namespace is the boundary for the internal/external gold flag
 ONTOLOGY_PRESETS: dict[str, dict] = {
     "FOAF": {
@@ -213,7 +213,7 @@ def build_run_config(
         model=model,
         temperature=0.0,
         max_tokens=None,
-        axiom_predicates={**DEFAULT_AXIOM_PREDICATES, **preset.get("axiom_predicates", {})},
+        axiom_predicates={**DEFAULT_AXIOM_PREDICATES, **preset.get("axiom_predicates", {})},  # preset entries overwrite the defaults
         limit=None,
         results_dir=Path("results"),
     )
