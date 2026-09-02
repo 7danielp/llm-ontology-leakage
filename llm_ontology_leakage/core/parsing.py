@@ -11,8 +11,8 @@ def parse_elements(raw: str, list_valued: bool) -> list[str]:
     """Turn model output into a list of identifier candidates"""
     if not list_valued:
         return [normalize_answer(raw)]
-    # comma split (other layouts count as wrong), and duplicates dropped for exact set matching
-    return list(dict.fromkeys(normalize_answer(part) for part in raw.split(",")))
+    # comma split (other layouts count as wrong), duplicates and empty fragments (e.g. a trailing comma) dropped
+    return [c for c in dict.fromkeys(normalize_answer(part) for part in raw.split(",")) if c]
 
 
 def matches_format(raw: str, list_valued: bool, fmt: IdFormat) -> bool:
