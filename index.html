@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Command Builder for llm ontology leakage</title>
+<style>
+  :root {
+    --bg: #0d1117; --panel: #161b22; --border: #30363d; --hover: #21262d;
+    --text: #c9d1d9; --muted: #8b949e; --accent: #58a6ff; --green: #238636;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }  /* .row and .checks set display, hidden must still win */
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 14px/1.5 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    display: flex; flex-direction: column; min-height: 100vh; align-items: center;
+  }
+  main { width: 100%; max-width: 640px; padding: 48px 24px 24px; }
+  h1 { font-size: 22px; font-weight: 600; margin: 0 0 4px; }
+  .thesis { color: var(--muted); font-size: 14px; font-style: italic; margin: 0 0 16px; }
+  .subtitle { color: var(--muted); margin: 0 0 32px; }
+  .step {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 6px;
+    padding: 16px; margin-bottom: 12px; transition: opacity .2s;
+  }
+  .step.disabled { opacity: .35; pointer-events: none; }
+  .step label.title { display: block; font-weight: 600; margin-bottom: 8px; }
+  .row { display: flex; gap: 12px; }
+  .row > div { flex: 1; min-width: 0; }
+  input[type=text], input[type=number] {
+    width: 100%; padding: 6px 10px; background: var(--bg); color: var(--text);
+    border: 1px solid var(--border); border-radius: 6px; font-size: 14px;
+  }
+  input:focus { outline: none; border-color: var(--accent); }
+
+  /* custom dropdown */
+  .dd { position: relative; }
+  .dd-btn {
+    width: 100%; display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; padding: 6px 10px; background: var(--bg); color: var(--muted);
+    border: 1px solid var(--border); border-radius: 6px; font-size: 14px;
+    cursor: pointer; text-align: left;
+  }
+  .dd-btn:hover { border-color: #8b949e; }
+  .dd.open .dd-btn, .dd-btn:focus { outline: none; border-color: var(--accent); }
+  .dd.has-value .dd-btn { color: var(--text); }
+  .dd-btn .caret { flex: none; transition: transform .15s; color: var(--muted); }
+  .dd.open .caret { transform: rotate(180deg); }
+  .dd-menu {
+    position: absolute; z-index: 10; top: calc(100% + 6px); left: 0; right: 0;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(1, 4, 9, .8); padding: 4px;
+    max-height: 260px; overflow-y: auto; display: none;
+  }
+  .dd.open .dd-menu { display: block; }
+  .dd-item {
+    display: flex; align-items: center; gap: 8px; padding: 6px 8px;
+    border-radius: 4px; cursor: pointer; color: var(--text);
+  }
+  .dd-item:hover { background: var(--hover); }
+  .dd-item .tick { width: 16px; flex: none; color: var(--accent); visibility: hidden; }
+  .dd-item.selected .tick { visibility: visible; }
+  .dd-item .note { margin-left: auto; color: var(--muted); font-size: 12px; }
+
+  .checks { display: flex; flex-wrap: wrap; gap: 6px 14px; }
+  .checks label { display: flex; align-items: center; gap: 6px; color: var(--text); }
+  .checks input { accent-color: var(--green); }
+  .hint { color: var(--muted); font-size: 12px; margin-top: 6px; }
+
+  #commandBox {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 6px;
+    padding: 16px; margin-top: 24px;
+  }
+  #commandBox .head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  #commandBox .head span { font-weight: 600; }
+  pre {
+    margin: 0; padding: 12px; background: var(--bg); border: 1px solid var(--border);
+    border-radius: 6px; overflow-x: auto; font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+    white-space: pre-wrap; word-break: break-all; min-height: 44px;
+  }
+  #copyBtn {
+    background: var(--green); color: #fff; border: 1px solid rgba(240,246,252,.1);
+    border-radius: 6px; padding: 5px 14px; font-size: 13px; font-weight: 600; cursor: pointer;
+  }
+  #copyBtn:hover { filter: brightness(1.1); }
+  #copyBtn.copied { background: #1f6feb; }
+  footer { margin-top: auto; padding: 32px; }
+  footer a { color: var(--muted); display: flex; align-items: center; gap: 10px; text-decoration: none; font-size: 13px; }
+  footer a:hover { color: var(--text); }
+</style>
+</head>
+<body>
+<main>
+  <h1>How Much Do Current LLMs Know About Public Ontologies?</h1>
+  <p class="subtitle">Command Builder: pick the options for the run, copy the finished command and run it in the terminal</p>
+
+  <div class="step" id="stepCommand">
+    <label class="title">1. Command</label>
+    <div id="ddCommand"></div>
+  </div>
+
+  <div class="step disabled" id="stepMethod">
+    <label class="title">2. Method</label>
+    <div id="ddMethod"></div>
+  </div>
+
+  <div class="step disabled" id="stepPreset">
+    <label class="title">3. Ontology</label>
+    <div id="ddPreset"></div>
+  </div>
+
+  <div class="step disabled" id="stepAxes">
+    <label class="title">4. Tasks, Models, Formats</label>
+    <div class="row">
+      <div id="ddTask"></div>
+      <div id="ddModel"></div>
+      <div id="ddFormat"></div>
+    </div>
+    <div class="hint" id="axesHint"></div>
+  </div>
+
+  <div class="step disabled" id="stepExtras">
+    <label class="title">5. Optional</label>
+    <div class="row" id="extrasRuns">
+      <div><input type="number" id="limit" min="1" placeholder="--limit (first N questions)"></div>
+      <div><input type="text" id="resultsDir" placeholder="--results-dir (default: results)"></div>
+    </div>
+    <div class="checks" id="extrasSynthetic" hidden>
+      <label><input type="checkbox" id="dryRun"> --dry-run (only print N and M, no generation)</label>
+    </div>
+  </div>
+
+  <div id="commandBox">
+    <div class="head">
+      <span>Your command</span>
+      <button id="copyBtn">Copy</button>
+    </div>
+    <pre id="output">uv run main.py ...</pre>
+  </div>
+</main>
+
+<footer>
+  <a href="https://github.com/7danielp/llm-ontology-leakage" aria-label="GitHub repository" title="Open the repository">
+    <span>To the GitHub repository</span>
+    <svg height="28" viewBox="0 0 16 16" width="28" fill="currentColor" aria-hidden="true">
+      <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38
+      0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95
+      0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68
+      0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82
+      1.27-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82
+      1.19.15.42.63 1.22 2.49.88 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+    </svg>
+  </a>
+</footer>
+
+<script>
+  const PRESETS = ["FOAF", "SCHEMA", "DCTERMS", "GOODRELATIONS", "NFO",
+                   "ORG", "CINELAB", "EPPLAN", "URBANIOT", "SYNTH-1"];
+  const TASKS = ["taxonomy", "domain", "range", "property"];
+  const MAKI_MODELS = ["qwen3.5-122b", "llama-3.3-70b", "qwen3.6-36b", "ministral-3-14b"];
+  const OPENAI_MODELS = ["gpt-5.6-luna", "gpt-5.6-luna+web"];
+  const ALL_MODELS = MAKI_MODELS.concat(OPENAI_MODELS);
+  const FORMATS = ["plain", "prefix", "full"];
+  const MINK_TASKS = ["taxonomy", "domain", "range"];
+  const $ = id => document.getElementById(id);
+
+  /* GitHub-style dropdown, single or multi select */
+  function Dropdown(mount, placeholder, items, onchange, multi = false) {
+    const root = document.createElement("div"); root.className = "dd";
+    root.innerHTML = `
+      <button type="button" class="dd-btn">
+        <span class="dd-label">${placeholder}</span>
+        <svg class="caret" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M4.427 6.427A.6.6 0 0 1 4.851 5.4h6.298a.6.6 0 0 1 .424 1.027L8.424 9.576a.6.6 0 0 1-.848 0Z"/>
+        </svg>
+      </button>
+      <div class="dd-menu"></div>`;
+    mount.replaceChildren(root);
+    const menu = root.querySelector(".dd-menu");
+    const label = root.querySelector(".dd-label");
+    let current = items;
+    let selected = new Set();
+    const dd = {
+      get value() { return multi ? [...selected] : (selected.values().next().value || ""); },
+      get list() { return [...selected]; },
+    };
+
+    function render() {
+      menu.innerHTML = "";
+      for (const it of current) {
+        const [value, note] = Array.isArray(it) ? it : [it, ""];
+        const el = document.createElement("div");
+        el.className = "dd-item" + (selected.has(value) ? " selected" : "");
+        el.innerHTML = `<svg class="tick" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 1 1 1.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 0 1 1.06 0Z"/></svg>
+          <span>${value}</span>${note ? `<span class="note">${note}</span>` : ""}`;
+        el.addEventListener("click", e => {
+          if (multi) e.stopPropagation();
+          if (multi && selected.has(value)) selected.delete(value);
+          else { if (!multi) selected.clear(); selected.add(value); }
+          if (!multi) root.classList.remove("open");
+          render(); refresh(); onchange();
+        });
+        menu.append(el);
+      }
+    }
+    function refresh() {
+      const vals = [...selected];
+      label.textContent = !vals.length ? placeholder
+        : (multi && vals.length > 2 ? `${vals.length} selected` : vals.join(", "));
+      root.classList.toggle("has-value", vals.length > 0);
+    }
+    root.querySelector(".dd-btn").addEventListener("click", e => {
+      e.stopPropagation();
+      document.querySelectorAll(".dd.open").forEach(o => o !== root && o.classList.remove("open"));
+      root.classList.toggle("open");
+    });
+    render();
+    return dd;
+  }
+  document.addEventListener("click", () =>
+    document.querySelectorAll(".dd.open").forEach(o => o.classList.remove("open")));
+  document.addEventListener("keydown", e => { if (e.key === "Escape")
+    document.querySelectorAll(".dd.open").forEach(o => o.classList.remove("open")); });
+
+  const ddCommand = Dropdown($("ddCommand"), "choose a command", [
+    ["run", "one command per combination"],
+    ["grid", "one call per method and ontology"],
+    ["aggregate", "rebuild tables, no API calls"],
+    ["generate-synthetic", "one time synthetic ontology (GET)"],
+  ], () => build());
+  const ddMethod = Dropdown($("ddMethod"), "Methods",
+    ["ts-guessing", "guided-prompting", "min-k"], () => build(), true);
+  const ddPreset = Dropdown($("ddPreset"), "Ontologies", PRESETS, () => build(), true);
+  const ddTask = Dropdown($("ddTask"), "Tasks", TASKS, () => build(), true);
+  const ddModel = Dropdown($("ddModel"), "Models", ALL_MODELS, () => build(), true);
+  const ddFormat = Dropdown($("ddFormat"), "Formats", FORMATS, () => build(), true);
+
+  // per-method constraints, applied line by line
+  const tasksFor = m => m === "min-k" ? MINK_TASKS : TASKS;
+  const modelsFor = m => m === "min-k" ? MAKI_MODELS : ALL_MODELS;
+
+  function build() {
+    const cmd = ddCommand.value;
+    const methods = ddMethod.list, presets = ddPreset.list;
+    const tasks = ddTask.list, models = ddModel.list, formats = ddFormat.list;
+
+    // generate-synthetic is a separate script without method, ontology or axes
+    const synthetic = cmd === "generate-synthetic";
+    $("extrasRuns").hidden = synthetic;
+    $("extrasSynthetic").hidden = !synthetic;
+    if (synthetic) {
+      for (const id of ["stepMethod", "stepPreset", "stepAxes"]) $(id).classList.add("disabled");
+      $("stepExtras").classList.remove("disabled");
+      $("axesHint").textContent = "";
+      const line = "uv run generate_synthetic.py" + ($("dryRun").checked ? " --dry-run" : "");
+      $("output").textContent = line;
+      $("copyBtn").disabled = false;
+      return;
+    }
+
+    $("stepMethod").classList.toggle("disabled", !cmd);
+    $("stepPreset").classList.toggle("disabled", !(cmd && methods.length && cmd !== "aggregate"));
+    $("stepAxes").classList.toggle("disabled", !(cmd && cmd !== "aggregate" && methods.length && presets.length));
+    $("stepExtras").classList.toggle("disabled", !(cmd && methods.length && (cmd === "aggregate" || presets.length)));
+
+    const hints = [];
+    if (cmd === "run") hints.push("multiple selections produce one command per combination");
+    if (cmd === "grid") hints.push("empty selection = flag omitted, the CLI then uses its defaults");
+    if (cmd === "grid" && models.some(m => OPENAI_MODELS.includes(m)) && models.some(m => MAKI_MODELS.includes(m)))
+      hints.push("mixed model families are split into separate grid calls");
+    if (methods.includes("min-k")) hints.push("min-k lines automatically skip property and OpenAI models");
+    $("axesHint").textContent = hints.join(" · ");
+
+    $("limit").disabled = cmd === "aggregate";  // aggregate has no --limit flag
+    const limit = cmd === "aggregate" ? "" : $("limit").value;
+    const dir = $("resultsDir").value.trim();
+    let extras = "";
+    if (limit) extras += " --limit " + limit;
+    if (dir) extras += " --results-dir " + dir;
+
+    const lines = [];
+    if (cmd === "aggregate") {
+      for (const method of methods)
+        lines.push(`uv run main.py aggregate --method ${method}` + (dir ? " --results-dir " + dir : ""));
+    } else if (cmd === "run" && methods.length && presets.length && tasks.length && models.length && formats.length) {
+      for (const method of methods) {
+        const mt = tasks.filter(t => tasksFor(method).includes(t));
+        const mm = models.filter(m => modelsFor(method).includes(m));
+        for (const preset of presets) for (const t of mt) for (const m of mm) for (const f of formats)
+          lines.push(`uv run main.py run --method ${method} --ontology-preset ${preset} --task ${t} --model ${m} --format ${f}${extras}`);
+      }
+    } else if (cmd === "grid" && methods.length && presets.length) {
+      for (const method of methods) {
+        const mt = tasks.filter(t => tasksFor(method).includes(t));
+        if (tasks.length && !mt.length) continue;  // selection exists but nothing valid for this method
+        const mm = models.filter(m => modelsFor(method).includes(m));
+        if (models.length && !mm.length) continue;
+        // OpenAI and MAKI models cannot share one grid call, split into families
+        const families = models.length
+          ? [mm.filter(m => MAKI_MODELS.includes(m)), mm.filter(m => OPENAI_MODELS.includes(m))].filter(g => g.length)
+          : [[]];
+        for (const preset of presets) for (const group of families) {
+          let line = `uv run main.py grid --method ${method} --ontology-preset ${preset}`;
+          if (mt.length) line += " --tasks " + mt.join(" ");
+          if (group.length) line += " --models " + group.join(" ");
+          if (formats.length) line += " --formats " + formats.join(" ");
+          lines.push(line + extras);
+        }
+      }
+    }
+
+    const ready = lines.length > 0;
+    $("output").textContent = ready ? lines.join("\n") : "uv run main.py ...";
+    $("copyBtn").disabled = !ready;
+  }
+
+  for (const id of ["limit", "resultsDir"]) $(id).addEventListener("input", build);
+  $("dryRun").addEventListener("change", build);
+
+  $("copyBtn").addEventListener("click", async () => {
+    const text = $("output").textContent;
+    try { await navigator.clipboard.writeText(text); }
+    catch { const ta = document.createElement("textarea"); ta.value = text;
+            document.body.append(ta); ta.select(); document.execCommand("copy"); ta.remove(); }
+    const btn = $("copyBtn");
+    btn.textContent = "Copied!"; btn.classList.add("copied");
+    setTimeout(() => { btn.textContent = "Copy"; btn.classList.remove("copied"); }, 1500);
+  });
+
+  build();
+</script>
+</body>
+</html>
