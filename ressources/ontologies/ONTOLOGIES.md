@@ -1,4 +1,8 @@
-# Pinned ontologies
+# Ontologies
+
+Ontology occurrence counts come from a query against Linked Open Vocabularies
+(https://lov.linkeddata.es), run on 2026-07-02 15:30 (the raw result can be found in
+`lov_query.csv`)
 
 ## popular
 
