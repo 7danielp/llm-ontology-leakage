@@ -1,4 +1,4 @@
-"""Runner for the Min-K% method (Shi et al.)"""
+"""Runner for the Min-K% method (Shi et al. 2024)"""
 
 import json
 from dataclasses import asdict, dataclass
@@ -13,7 +13,7 @@ from ..core.runs import run_dir_for, write_meta
 
 METHOD = "min-k"
 BLOCK_SIZE = 10  # axioms per block, single axioms are too short for the method
-PRIMARY_RATIO = 0.2  # suggested in reference paper (Shi et al.)
+PRIMARY_RATIO = 0.2  # suggested in reference paper (Shi et al. 2024)
 RATIO_SWEEP = (0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6)  # additional ratios
 
 # no property task, its axioms are the domain triples (the blocks would be identical)
