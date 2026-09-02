@@ -50,16 +50,28 @@ def deprecated_entities(graph: Graph) -> set[URIRef]:
     return deprecated
 
 
+def union_members(graph: Graph, node) -> list[URIRef]:
+    """IRIs of an owl:unionOf class expression"""
+    for head in graph.objects(node, OWL.unionOf):
+        return [m for m in graph.items(head) if isinstance(m, URIRef)]
+    return []
+
+
 def axiom_pairs(graph: Graph, cfg: RunConfig, task: TaskName) -> list[tuple[URIRef, URIRef]]:
     """Extract all (subject, object) pairs of the task's predicate"""
     predicate = URIRef(cfg.axiom_predicates[task])  # mapped via preset (e.g. schema:domainIncludes instead of rdfs:domain)
     deprecated = deprecated_entities(graph)  # drop axioms with deprecated/superseded entities
-    return [
-        (s, o)
-        for s, o in graph.subject_objects(predicate)
-        if isinstance(s, URIRef) and isinstance(o, URIRef)  # IRI to IRI only, complex structures (e.g. owl:unionOf, owl:Restriction) dropped
-        and s not in deprecated and o not in deprecated
-    ]
+    pairs = []
+    for s, o in graph.subject_objects(predicate):
+        if not isinstance(s, URIRef) or s in deprecated:
+            continue
+        if isinstance(o, URIRef):
+            objects = [o]
+        else:
+            # unionOf members are (disjunctive) golds, other complex structures are dropped
+            objects = union_members(graph, o)
+        pairs.extend((s, m) for m in objects if m not in deprecated)
+    return pairs
 
 
 def _grouped_by_subject(pairs: list[tuple[URIRef, URIRef]]) -> list[TaskItem]:
