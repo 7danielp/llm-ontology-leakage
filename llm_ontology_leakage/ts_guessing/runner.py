@@ -1,4 +1,4 @@
-"""Runner for the TS-Guessing method (Deng et al.)"""
+"""Runner for the TS-Guessing method (Deng et al. 2024)"""
 
 import json
 from dataclasses import asdict, dataclass
@@ -10,6 +10,7 @@ from rdflib import URIRef
 from ..core.config import RunConfig
 from ..core.clients import CompletionClient
 from ..core.ontology import load_graph, render_identifier
+from ..core.parsing import matches_format
 from ..core.runs import run_dir_for, write_meta
 from .scoring import confusion_counts, metrics_table, score
 from ..core.tasks import TASKS, TaskSpec
@@ -54,6 +55,7 @@ class Record:
     raw_output: str
     finish_reason: str | None  # "length" = truncated at max_tokens
     gold_in_ontology_namespace: bool  # basis for the internal/external gold segments
+    format_match: bool  # check if answer written in the run's id_format
     parsed: list[str]
     strict_match: bool
 
@@ -88,6 +90,7 @@ def _summarize(records: list[dict], cfg: RunConfig, spec: TaskSpec) -> dict:
         "ontology_name": cfg.ontology_name,
         "temperature": cfg.temperature,
         "n_records": len(records),
+        "n_format_match": sum(r["format_match"] for r in records),
         "metrics": metrics_table(scored),  # EM and pooled precision/recall/F1 per segment
     }
 
@@ -109,6 +112,7 @@ def run_ts_guessing(cfg: RunConfig, client: CompletionClient) -> dict[str, Any]:
 
     example_iris = cfg.format_examples[cfg.task]
     example_ids = [render_identifier(URIRef(iri), graph, cfg.id_format) for iri in example_iris]
+
     predicate_key = "domain" if spec.name == "property" else spec.name  # property task asks for subjects of domain axioms
     predicate_label = render_identifier(
         URIRef(cfg.axiom_predicates[predicate_key]), graph, "prefix"
@@ -126,6 +130,7 @@ def run_ts_guessing(cfg: RunConfig, client: CompletionClient) -> dict[str, Any]:
 
     run_dir = run_dir_for(cfg, method_prefix="TS")
     run_dir.mkdir(parents=True, exist_ok=True)
+    (run_dir / "summary.json").unlink(missing_ok=True)  # drop a stale summary so a crashed rerun cannot look complete
     write_meta(run_dir, cfg, method=METHOD, client_name=type(client).__name__)
 
     max_tokens = cfg.max_tokens if cfg.max_tokens is not None else spec.default_max_tokens
@@ -161,6 +166,7 @@ def run_ts_guessing(cfg: RunConfig, client: CompletionClient) -> dict[str, Any]:
                     if spec.match == "any_of"
                     else str(item.given).startswith(ns)
                 ),
+                format_match=matches_format(raw, spec.list_valued, cfg.id_format),
                 parsed=parsed,
                 strict_match=strict,
             )

@@ -1,4 +1,4 @@
-"""Semantic similarity of classes and properties, following Meng, Huang & Gu (2013)"""
+"""Semantic similarity of classes and properties, following Meng et al. (2013)"""
 
 # Path Length Formula: sim = 2*deep_max - len(c1, c2)
 # Wu & Palmer Formula: sim = 2*depth(lso) / (len(c1, c2) + 2*depth(lso))
@@ -17,7 +17,7 @@ MEASURES = ("path", "wup")
 
 
 class ClassSimilarity:
-    """Similarity of two classes over the subclass hierarchy (Path Length and Wu & Palmer, Meng et al.)"""
+    """Similarity of two classes over the subclass hierarchy (Path Length and Wu & Palmer, Meng et al. 2013)"""
 
     def __init__(self, graph: Graph, subclass_predicate: URIRef = RDFS.subClassOf) -> None:
         """Read the subclass edges from the graph and precompute all depths"""
@@ -79,8 +79,7 @@ class ClassSimilarity:
         return length, lso
 
     def path(self, c1: str, c2: str) -> float:
-        """Path Length, Formula: 2*deep_max - len (Meng et al.)"""
-        # identical IRIs are maximally similar even outside the hierarchy (e.g. rdfs:Literal), anything else outside scores 0
+        """Path Length, Formula: 2*deep_max - len (Meng et al. 2013)"""
         if c1 == c2:
             return 2.0 * self.deep_max
         if not (self.in_hierarchy(c1) and self.in_hierarchy(c2)):
@@ -89,7 +88,7 @@ class ClassSimilarity:
         return 2.0 * self.deep_max - length
 
     def wup(self, c1: str, c2: str) -> float:
-        """Wu & Palmer, Formula: 2*depth(lso) / (len + 2*depth(lso)) (Meng et al.)"""
+        """Wu & Palmer, Formula: 2*depth(lso) / (len + 2*depth(lso)) (Meng et al. 2013)"""
         if c1 == c2:
             return 1.0
         if not (self.in_hierarchy(c1) and self.in_hierarchy(c2)):

@@ -1,4 +1,4 @@
-"""Runner for the Guided Prompting method (Golchin & Surdeanu)"""
+"""Runner for the Guided Prompting method (Golchin & Surdeanu 2024)"""
 
 import json
 from dataclasses import asdict, dataclass
@@ -180,6 +180,7 @@ def run_guided_prompting(cfg: RunConfig, client: CompletionClient) -> dict[str, 
 
     run_dir = run_dir_for(cfg, method_prefix="GP")
     run_dir.mkdir(parents=True, exist_ok=True)
+    (run_dir / "summary.json").unlink(missing_ok=True)  # drop stale summary so crashed rerun cannot look complete
     write_meta(run_dir, cfg, method=METHOD, client_name=type(client).__name__)
 
     max_tokens = cfg.max_tokens if cfg.max_tokens is not None else spec.default_max_tokens

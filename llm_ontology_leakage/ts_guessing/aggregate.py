@@ -76,7 +76,7 @@ def aggregate_ts(results_dir: Path) -> dict[str, Path]:
     # row and column order follows the grid configuration
     onto_tasks = ordered(
         {r["ontology"] + "/" + r["task"] for r in long_rows},
-        [f"{o}/{t}" for o in ONTOLOGY_PRESETS for t in GRID_TASKS],
+        [f"{p['ontology_name']}/{t}" for p in ONTOLOGY_PRESETS.values() for t in GRID_TASKS],
     )
     models = ordered({r["model"] for r in long_rows}, GRID_MODELS)
     formats = ordered({r["id_format"] for r in long_rows}, list(GRID_FORMATS))
