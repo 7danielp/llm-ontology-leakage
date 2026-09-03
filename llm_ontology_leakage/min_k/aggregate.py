@@ -3,7 +3,7 @@
 import csv
 from pathlib import Path
 
-from ..core.config import GRID_FORMATS, GRID_MODELS
+from ..core.config import GRID_FORMATS, GRID_MODELS, ONTOLOGY_PRESETS
 from ..core.reporting import fmt_cell, latex_matrix, ordered
 from ..core.runs import load_runs
 from .runner import METHOD, MINK_TASKS, PRIMARY_RATIO, RATIO_SWEEP, min_k_score
@@ -62,13 +62,16 @@ def aggregate_mink(results_dir: Path) -> dict[str, Path]:
             primary = [min_k_score(r["token_logprobs"], PRIMARY_RATIO) for r in rs]
             cells[key] = sum(primary) / len(primary)
 
-    onto_tasks = sorted({r["ontology"] + "/" + r["task"] for r in rows})
+    # row and column order follows the grid configuration
+    onto_tasks = ordered(
+        {r["ontology"] + "/" + r["task"] for r in rows},
+        [f"{p['ontology_name']}/{t}" for p in ONTOLOGY_PRESETS.values() for t in task_order],
+    )
     models = ordered({r["model"] for r in rows}, GRID_MODELS)
     formats = ordered({r["id_format"] for r in rows}, list(GRID_FORMATS))
     rows.sort(
         key=lambda r: (
-            r["ontology"],
-            task_order.index(r["task"]),
+            onto_tasks.index(r["ontology"] + "/" + r["task"]),
             models.index(r["model"]),
             formats.index(r["id_format"]),
         )
