@@ -64,6 +64,9 @@ class GPRecord:
     # check if answer written in the run's id_format (similarity ignores the format and checks for semantics)
     format_match_normal: bool
     format_match_guided: bool
+    # check if the answer is the given entity itself
+    self_echo_normal: bool
+    self_echo_guided: bool
     # completions are scored with ontology similarity from similarity.py
     sim_normal: dict[str, float]
     sim_guided: dict[str, float]
@@ -80,6 +83,11 @@ def build_gp_prompts(
         NORMAL_TEMPLATE.format(reply_clause=reply, axiom=axiom),
         GUIDED_TEMPLATE.format(ontology=ontology_name, reply_clause=reply, axiom=axiom),
     )
+
+
+def echoes_given(raw: str, given_iri: str, spec: TaskSpec, resolver: EntityResolver) -> bool:
+    """Check if the answer contains the given entity itself"""
+    return given_iri in {resolver.resolve(e) for e in parse_elements(raw, spec.list_valued)}
 
 
 def gp_score(
@@ -134,6 +142,8 @@ def _summarize_gp(records, cfg, spec, resolver, class_sim, prop_sim) -> dict:
         "n_records": len(records),
         "n_format_match_normal": sum(r["format_match_normal"] for r in records),
         "n_format_match_guided": sum(r["format_match_guided"] for r in records),
+        "n_self_echo_normal": sum(r["self_echo_normal"] for r in records),
+        "n_self_echo_guided": sum(r["self_echo_guided"] for r in records),
         "gap": gap,
     }
 
@@ -227,6 +237,8 @@ def run_guided_prompting(cfg: RunConfig, client: CompletionClient) -> dict[str, 
                 ),
                 format_match_normal=matches_format(completion_normal.text, spec.list_valued, cfg.id_format),
                 format_match_guided=matches_format(completion_guided.text, spec.list_valued, cfg.id_format),
+                self_echo_normal=echoes_given(completion_normal.text, str(item.given), spec, resolver),
+                self_echo_guided=echoes_given(completion_guided.text, str(item.given), spec, resolver),
                 sim_normal=sim_normal,
                 sim_guided=sim_guided,
             )
