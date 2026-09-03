@@ -13,6 +13,9 @@ SUPERSEDED_BY = (
     URIRef("http://schema.org/supersededBy"),
     URIRef("https://schema.org/supersededBy"),
 )
+# schema.org retires terms into its attic section (not all of them carry supersededBy), those count as deprecated too
+IS_PART_OF = (URIRef("http://schema.org/isPartOf"), URIRef("https://schema.org/isPartOf"))
+ATTIC = (URIRef("http://attic.schema.org"), URIRef("https://attic.schema.org"))
 
 
 @dataclass(frozen=True)
@@ -39,7 +42,7 @@ def load_graph(source: str, prefix_map: dict[str, str]) -> Graph:
 
 
 def deprecated_entities(graph: Graph) -> set[URIRef]:
-    """Set of deprecated/superseded entities (owl:deprecated or schema:supersededBy)"""
+    """Set of deprecated/superseded entities (owl:deprecated/schema:supersededBy/schema.org attic)"""
     deprecated = {
         s
         for s, o in graph.subject_objects(OWL.deprecated)
@@ -47,6 +50,9 @@ def deprecated_entities(graph: Graph) -> set[URIRef]:
     }
     for predicate in SUPERSEDED_BY:
         deprecated |= {s for s in graph.subjects(predicate, None) if isinstance(s, URIRef)}
+    for predicate in IS_PART_OF:
+        for attic in ATTIC:
+            deprecated |= {s for s in graph.subjects(predicate, attic) if isinstance(s, URIRef)}
     return deprecated
 
 
@@ -139,8 +145,9 @@ class EntityResolver:
     """Resolve model-written identifier to an IRI (used by Guided Prompting for similarity calculations)"""
 
     def __init__(self, graph: Graph, ontology_namespace: str) -> None:
-        """Two dicts: prefix to namespace and local name to full IRIs"""
+        """Collect the ontology's prefixes, local names and deprecated entities"""
         self._namespace = ontology_namespace
+        self._deprecated = {str(d) for d in deprecated_entities(graph)}  # not part of the ontology
         self._prefixes = {prefix: str(ns) for prefix, ns in graph.namespaces()}
         self._by_local: dict[str, set[str]] = defaultdict(set)
         for triple in graph.triples((None, None, None)):
@@ -151,16 +158,18 @@ class EntityResolver:
     def resolve(self, identifier: str) -> str | None:
         """Resolve identifier to an IRI"""
         if "://" in identifier:  # full format, already an IRI
-            return identifier
-        if ":" in identifier:  # prefix format to IRI
+            iri = identifier
+        elif ":" in identifier:  # prefix format to IRI
             prefix, _, local = identifier.partition(":")
             namespace = self._prefixes.get(prefix)
-            return namespace + local if namespace else None
-        # plain format to IRI
-        candidates = self._by_local.get(identifier, set())
-        in_target = {c for c in candidates if c.startswith(self._namespace)}
-        if len(in_target) == 1:
-            return next(iter(in_target))  # internal ontology entity
-        if len(candidates) == 1:
-            return next(iter(candidates))  # external ontology entity
-        return None
+            iri = namespace + local if namespace else None
+        else:  # plain format to IRI
+            candidates = self._by_local.get(identifier, set())
+            in_target = {c for c in candidates if c.startswith(self._namespace)}
+            if len(in_target) == 1:
+                iri = next(iter(in_target))  # internal ontology entity
+            elif len(candidates) == 1:
+                iri = next(iter(candidates))  # external ontology entity
+            else:
+                iri = None  # unknown
+        return None if iri in self._deprecated else iri  # deprecated counts as unknown
