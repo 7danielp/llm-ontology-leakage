@@ -97,8 +97,8 @@ class OpenAIClient:
             )
         self._client = OpenAI(
             api_key=api_key,
-            timeout=httpx.Timeout(120.0, connect=10.0),
-            max_retries=0,
+            timeout=httpx.Timeout(300.0, connect=10.0),
+            max_retries=2,
         )
 
     def complete(
