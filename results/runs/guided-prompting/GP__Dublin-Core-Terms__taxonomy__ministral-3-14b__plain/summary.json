@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "taxonomy",
+  "model": "ministral-3-14b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/popular/dublin_core_terms.ttl",
+  "ontology_name": "Dublin Core Terms",
+  "temperature": 0.0,
+  "n_records": 9,
+  "n_format_match_normal": 9,
+  "n_format_match_guided": 4,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 2,
+  "gap": {
+    "path": {
+      "n": 9,
+      "mean_normal": 0.0,
+      "mean_guided": 1.5555555555555556,
+      "gap": 1.5555555555555556
+    },
+    "wup": {
+      "n": 9,
+      "mean_normal": 0.0,
+      "mean_guided": 0.1841269841269841,
+      "gap": 0.1841269841269841
+    }
+  }
+}

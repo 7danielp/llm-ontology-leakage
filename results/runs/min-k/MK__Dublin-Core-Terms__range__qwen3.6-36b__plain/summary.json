@@ -1,0 +1,12 @@
+{
+  "method": "min-k",
+  "task": "range",
+  "model": "qwen3.6-36b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/popular/dublin_core_terms.ttl",
+  "ontology_name": "Dublin Core Terms",
+  "block_size": 10,
+  "n_blocks": 3,
+  "n_axioms": 26,
+  "mean_min_20": -7.2304314301872905
+}

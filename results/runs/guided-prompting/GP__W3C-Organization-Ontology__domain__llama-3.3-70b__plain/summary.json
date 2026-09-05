@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "domain",
+  "model": "llama-3.3-70b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/medium/org.ttl",
+  "ontology_name": "W3C Organization Ontology",
+  "temperature": 0.0,
+  "n_records": 35,
+  "n_format_match_normal": 23,
+  "n_format_match_guided": 34,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 35,
+      "mean_normal": 2.257142857142857,
+      "mean_guided": 4.2,
+      "gap": 1.9428571428571428
+    },
+    "wup": {
+      "n": 35,
+      "mean_normal": 0.26666666666666666,
+      "mean_guided": 0.50421768707483,
+      "gap": 0.23755102040816328
+    }
+  }
+}

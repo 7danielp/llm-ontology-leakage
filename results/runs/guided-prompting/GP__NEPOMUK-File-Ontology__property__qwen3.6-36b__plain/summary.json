@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "property",
+  "model": "qwen3.6-36b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/medium/nfo.rdf",
+  "ontology_name": "NEPOMUK File Ontology",
+  "temperature": 0.0,
+  "n_records": 25,
+  "n_format_match_normal": 24,
+  "n_format_match_guided": 24,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 25,
+      "mean_normal": 0.0,
+      "mean_guided": 0.7092753623188406,
+      "gap": 0.7092753623188406
+    },
+    "wup": {
+      "n": 25,
+      "mean_normal": 0.0,
+      "mean_guided": 0.04978053830227744,
+      "gap": 0.04978053830227744
+    }
+  }
+}

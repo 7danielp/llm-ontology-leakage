@@ -1,0 +1,25 @@
+{
+  "method": "guided-prompting",
+  "client": "MakiClient",
+  "identity": {
+    "task": "taxonomy",
+    "model": "qwen3.6-36b",
+    "id_format": "prefix",
+    "ontology_source": "ressources/ontologies/medium/goodrelations.rdf",
+    "ontology_name": "GoodRelations",
+    "ontology_namespace": "http://purl.org/goodrelations/v1#",
+    "temperature": 0.0
+  },
+  "prefix_map": {
+    "schema": "http://schema.org/"
+  },
+  "format_example_iris": [
+    "http://purl.org/goodrelations/v1#ExampleClass"
+  ],
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://www.w3.org/2000/01/rdf-schema#domain",
+    "range": "http://www.w3.org/2000/01/rdf-schema#range"
+  },
+  "limit": null
+}

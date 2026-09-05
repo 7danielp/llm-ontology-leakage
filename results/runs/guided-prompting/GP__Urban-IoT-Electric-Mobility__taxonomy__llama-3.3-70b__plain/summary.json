@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "taxonomy",
+  "model": "llama-3.3-70b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/unpopular/urban-iot_electric.rdf",
+  "ontology_name": "Urban IoT Electric Mobility",
+  "temperature": 0.0,
+  "n_records": 8,
+  "n_format_match_normal": 3,
+  "n_format_match_guided": 5,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 8,
+      "mean_normal": 1.0,
+      "mean_guided": 1.125,
+      "gap": 0.125
+    },
+    "wup": {
+      "n": 8,
+      "mean_normal": 0.13333333333333333,
+      "mean_guided": 0.175,
+      "gap": 0.04166666666666666
+    }
+  }
+}

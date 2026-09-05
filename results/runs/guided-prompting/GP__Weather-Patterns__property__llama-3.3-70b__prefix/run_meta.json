@@ -1,0 +1,26 @@
+{
+  "method": "guided-prompting",
+  "client": "MakiClient",
+  "identity": {
+    "task": "property",
+    "model": "llama-3.3-70b",
+    "id_format": "prefix",
+    "ontology_source": "ressources/ontologies/synthetic/weather-patterns/weather-patterns.ttl",
+    "ontology_name": "Weather Patterns",
+    "ontology_namespace": "http://example.org/weather-patterns#",
+    "temperature": 0.0
+  },
+  "prefix_map": {
+    "weather-patterns": "http://example.org/weather-patterns#"
+  },
+  "format_example_iris": [
+    "http://example.org/weather-patterns#exampleProperty",
+    "http://example.org/weather-patterns#otherExampleProperty"
+  ],
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://www.w3.org/2000/01/rdf-schema#domain",
+    "range": "http://www.w3.org/2000/01/rdf-schema#range"
+  },
+  "limit": null
+}

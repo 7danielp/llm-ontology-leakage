@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "range",
+  "model": "qwen3.5-122b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/medium/org.ttl",
+  "ontology_name": "W3C Organization Ontology",
+  "temperature": 0.0,
+  "n_records": 30,
+  "n_format_match_normal": 15,
+  "n_format_match_guided": 0,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 30,
+      "mean_normal": 2.6,
+      "mean_guided": 4.533333333333333,
+      "gap": 1.9333333333333333
+    },
+    "wup": {
+      "n": 30,
+      "mean_normal": 0.31666666666666665,
+      "mean_guided": 0.5555555555555556,
+      "gap": 0.23888888888888893
+    }
+  }
+}

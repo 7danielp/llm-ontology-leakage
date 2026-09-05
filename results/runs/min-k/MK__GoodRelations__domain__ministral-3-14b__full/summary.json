@@ -1,0 +1,12 @@
+{
+  "method": "min-k",
+  "task": "domain",
+  "model": "ministral-3-14b",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/medium/goodrelations.rdf",
+  "ontology_name": "GoodRelations",
+  "block_size": 10,
+  "n_blocks": 25,
+  "n_axioms": 244,
+  "mean_min_20": -2.216478815865723
+}

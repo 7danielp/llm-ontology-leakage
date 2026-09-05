@@ -1,0 +1,12 @@
+{
+  "method": "min-k",
+  "task": "domain",
+  "model": "llama-3.3-70b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/medium/org.ttl",
+  "ontology_name": "W3C Organization Ontology",
+  "block_size": 10,
+  "n_blocks": 4,
+  "n_axioms": 37,
+  "mean_min_20": -7.477097378174464
+}

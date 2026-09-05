@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "range",
+  "model": "llama-3.3-70b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/popular/dublin_core_terms.ttl",
+  "ontology_name": "Dublin Core Terms",
+  "temperature": 0.0,
+  "n_records": 23,
+  "n_format_match_normal": 17,
+  "n_format_match_guided": 15,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 23,
+      "mean_normal": 0.0,
+      "mean_guided": 2.0869565217391304,
+      "gap": 2.0869565217391304
+    },
+    "wup": {
+      "n": 23,
+      "mean_normal": 0.0,
+      "mean_guided": 0.2608695652173913,
+      "gap": 0.2608695652173913
+    }
+  }
+}

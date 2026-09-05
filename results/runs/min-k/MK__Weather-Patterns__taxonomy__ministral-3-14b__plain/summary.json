@@ -1,0 +1,12 @@
+{
+  "method": "min-k",
+  "task": "taxonomy",
+  "model": "ministral-3-14b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/synthetic/weather-patterns/weather-patterns.ttl",
+  "ontology_name": "Weather Patterns",
+  "block_size": 10,
+  "n_blocks": 3,
+  "n_axioms": 24,
+  "mean_min_20": -5.534856977857355
+}

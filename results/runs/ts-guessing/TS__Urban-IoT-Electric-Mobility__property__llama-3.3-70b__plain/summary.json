@@ -1,0 +1,48 @@
+{
+  "method": "ts-guessing",
+  "task": "property",
+  "model": "llama-3.3-70b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/unpopular/urban-iot_electric.rdf",
+  "ontology_name": "Urban IoT Electric Mobility",
+  "temperature": 0.0,
+  "n_records": 10,
+  "n_format_match": 10,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 10,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 0,
+        "fp": 79,
+        "fn": 48,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "gold_in_ns": {
+        "n": 9,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 0,
+        "fp": 72,
+        "fn": 47,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "gold_external": {
+        "n": 1,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 0,
+        "fp": 7,
+        "fn": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    }
+  }
+}

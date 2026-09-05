@@ -1,0 +1,48 @@
+{
+  "method": "ts-guessing",
+  "task": "property",
+  "model": "llama-3.3-70b",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/medium/org.ttl",
+  "ontology_name": "W3C Organization Ontology",
+  "temperature": 0.0,
+  "n_records": 10,
+  "n_format_match": 9,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 10,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 16,
+        "fp": 700,
+        "fn": 21,
+        "precision": 0.0223463687150838,
+        "recall": 0.43243243243243246,
+        "f1": 0.042496679946879154
+      },
+      "gold_in_ns": {
+        "n": 8,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 13,
+        "fp": 392,
+        "fn": 17,
+        "precision": 0.03209876543209877,
+        "recall": 0.43333333333333335,
+        "f1": 0.05977011494252874
+      },
+      "gold_external": {
+        "n": 2,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 3,
+        "fp": 308,
+        "fn": 4,
+        "precision": 0.00964630225080386,
+        "recall": 0.42857142857142855,
+        "f1": 0.018867924528301886
+      }
+    }
+  }
+}

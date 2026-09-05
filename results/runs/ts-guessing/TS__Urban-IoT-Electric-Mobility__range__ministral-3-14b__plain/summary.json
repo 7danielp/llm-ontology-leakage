@@ -1,0 +1,48 @@
+{
+  "method": "ts-guessing",
+  "task": "range",
+  "model": "ministral-3-14b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/unpopular/urban-iot_electric.rdf",
+  "ontology_name": "Urban IoT Electric Mobility",
+  "temperature": 0.0,
+  "n_records": 43,
+  "n_format_match": 39,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 43,
+        "n_match": 7,
+        "em": 0.16279069767441862,
+        "tp": 7,
+        "fp": 36,
+        "fn": 36,
+        "precision": 0.16279069767441862,
+        "recall": 0.16279069767441862,
+        "f1": 0.16279069767441862
+      },
+      "gold_in_ns": {
+        "n": 19,
+        "n_match": 6,
+        "em": 0.3157894736842105,
+        "tp": 6,
+        "fp": 13,
+        "fn": 13,
+        "precision": 0.3157894736842105,
+        "recall": 0.3157894736842105,
+        "f1": 0.3157894736842105
+      },
+      "gold_external": {
+        "n": 24,
+        "n_match": 1,
+        "em": 0.041666666666666664,
+        "tp": 1,
+        "fp": 23,
+        "fn": 23,
+        "precision": 0.041666666666666664,
+        "recall": 0.041666666666666664,
+        "f1": 0.041666666666666664
+      }
+    }
+  }
+}

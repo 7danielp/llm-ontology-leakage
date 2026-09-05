@@ -1,0 +1,48 @@
+{
+  "method": "ts-guessing",
+  "task": "domain",
+  "model": "ministral-3-14b",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/medium/goodrelations.rdf",
+  "ontology_name": "GoodRelations",
+  "temperature": 0.0,
+  "n_records": 95,
+  "n_format_match": 95,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 95,
+        "n_match": 27,
+        "em": 0.28421052631578947,
+        "tp": 27,
+        "fp": 68,
+        "fn": 68,
+        "precision": 0.28421052631578947,
+        "recall": 0.28421052631578947,
+        "f1": 0.28421052631578947
+      },
+      "gold_in_ns": {
+        "n": 95,
+        "n_match": 27,
+        "em": 0.28421052631578947,
+        "tp": 27,
+        "fp": 68,
+        "fn": 68,
+        "precision": 0.28421052631578947,
+        "recall": 0.28421052631578947,
+        "f1": 0.28421052631578947
+      },
+      "gold_external": {
+        "n": 0,
+        "n_match": 0,
+        "em": null,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      }
+    }
+  }
+}

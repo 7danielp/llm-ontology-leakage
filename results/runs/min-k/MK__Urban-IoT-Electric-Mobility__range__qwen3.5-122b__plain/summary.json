@@ -1,0 +1,12 @@
+{
+  "method": "min-k",
+  "task": "range",
+  "model": "qwen3.5-122b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/unpopular/urban-iot_electric.rdf",
+  "ontology_name": "Urban IoT Electric Mobility",
+  "block_size": 10,
+  "n_blocks": 5,
+  "n_axioms": 43,
+  "mean_min_20": -7.629692233236213
+}

@@ -1,0 +1,12 @@
+{
+  "method": "min-k",
+  "task": "range",
+  "model": "qwen3.6-36b",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/medium/goodrelations.rdf",
+  "ontology_name": "GoodRelations",
+  "block_size": 10,
+  "n_blocks": 10,
+  "n_axioms": 97,
+  "mean_min_20": -1.9272750849795721
+}

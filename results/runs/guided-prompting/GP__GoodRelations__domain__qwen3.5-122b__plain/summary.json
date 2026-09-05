@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "domain",
+  "model": "qwen3.5-122b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/medium/goodrelations.rdf",
+  "ontology_name": "GoodRelations",
+  "temperature": 0.0,
+  "n_records": 95,
+  "n_format_match_normal": 71,
+  "n_format_match_guided": 33,
+  "n_self_echo_normal": 2,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 95,
+      "mean_normal": 1.4210526315789473,
+      "mean_guided": 4.410526315789474,
+      "gap": 2.9894736842105263
+    },
+    "wup": {
+      "n": 95,
+      "mean_normal": 0.2217543859649123,
+      "mean_guided": 0.7042105263157895,
+      "gap": 0.4824561403508773
+    }
+  }
+}

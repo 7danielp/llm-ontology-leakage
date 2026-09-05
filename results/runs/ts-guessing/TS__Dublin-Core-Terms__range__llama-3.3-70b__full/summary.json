@@ -1,0 +1,48 @@
+{
+  "method": "ts-guessing",
+  "task": "range",
+  "model": "llama-3.3-70b",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/popular/dublin_core_terms.ttl",
+  "ontology_name": "Dublin Core Terms",
+  "temperature": 0.0,
+  "n_records": 23,
+  "n_format_match": 23,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 23,
+        "n_match": 15,
+        "em": 0.6521739130434783,
+        "tp": 15,
+        "fp": 8,
+        "fn": 8,
+        "precision": 0.6521739130434783,
+        "recall": 0.6521739130434783,
+        "f1": 0.6521739130434783
+      },
+      "gold_in_ns": {
+        "n": 23,
+        "n_match": 15,
+        "em": 0.6521739130434783,
+        "tp": 15,
+        "fp": 8,
+        "fn": 8,
+        "precision": 0.6521739130434783,
+        "recall": 0.6521739130434783,
+        "f1": 0.6521739130434783
+      },
+      "gold_external": {
+        "n": 0,
+        "n_match": 0,
+        "em": null,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      }
+    }
+  }
+}

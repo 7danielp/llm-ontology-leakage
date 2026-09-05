@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "property",
+  "model": "llama-3.3-70b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/popular/foaf.rdf",
+  "ontology_name": "FOAF",
+  "temperature": 0.0,
+  "n_records": 9,
+  "n_format_match_normal": 6,
+  "n_format_match_guided": 6,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 9,
+      "mean_normal": 0.4166666666666667,
+      "mean_guided": 4.243889066641982,
+      "gap": 3.8272223999753154
+    },
+    "wup": {
+      "n": 9,
+      "mean_normal": 0.06666666666666668,
+      "mean_guided": 0.6839859482266726,
+      "gap": 0.6173192815600059
+    }
+  }
+}

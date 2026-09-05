@@ -1,0 +1,12 @@
+{
+  "method": "min-k",
+  "task": "range",
+  "model": "ministral-3-14b",
+  "id_format": "prefix",
+  "ontology_source": "ressources/ontologies/medium/nfo.rdf",
+  "ontology_name": "NEPOMUK File Ontology",
+  "block_size": 10,
+  "n_blocks": 8,
+  "n_axioms": 74,
+  "mean_min_20": -5.211607963203992
+}

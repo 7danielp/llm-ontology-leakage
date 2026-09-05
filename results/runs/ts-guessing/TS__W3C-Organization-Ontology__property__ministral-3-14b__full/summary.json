@@ -1,0 +1,48 @@
+{
+  "method": "ts-guessing",
+  "task": "property",
+  "model": "ministral-3-14b",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/medium/org.ttl",
+  "ontology_name": "W3C Organization Ontology",
+  "temperature": 0.0,
+  "n_records": 10,
+  "n_format_match": 10,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 10,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 4,
+        "fp": 198,
+        "fn": 33,
+        "precision": 0.019801980198019802,
+        "recall": 0.10810810810810811,
+        "f1": 0.03347280334728033
+      },
+      "gold_in_ns": {
+        "n": 8,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 3,
+        "fp": 169,
+        "fn": 27,
+        "precision": 0.01744186046511628,
+        "recall": 0.1,
+        "f1": 0.0297029702970297
+      },
+      "gold_external": {
+        "n": 2,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 1,
+        "fp": 29,
+        "fn": 6,
+        "precision": 0.03333333333333333,
+        "recall": 0.14285714285714285,
+        "f1": 0.05405405405405406
+      }
+    }
+  }
+}

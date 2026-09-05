@@ -1,0 +1,25 @@
+{
+  "method": "ts-guessing",
+  "client": "MakiClient",
+  "identity": {
+    "task": "domain",
+    "model": "qwen3.5-122b",
+    "id_format": "full",
+    "ontology_source": "ressources/ontologies/unpopular/cinelab.ttl",
+    "ontology_name": "Cinelab",
+    "ontology_namespace": "http://advene.org/ns/cinelab/ld#",
+    "temperature": 0.0
+  },
+  "prefix_map": {
+    "cl": "http://advene.org/ns/cinelab/ld#"
+  },
+  "format_example_iris": [
+    "http://advene.org/ns/cinelab/ld#ExampleClass"
+  ],
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://www.w3.org/2000/01/rdf-schema#domain",
+    "range": "http://www.w3.org/2000/01/rdf-schema#range"
+  },
+  "limit": null
+}

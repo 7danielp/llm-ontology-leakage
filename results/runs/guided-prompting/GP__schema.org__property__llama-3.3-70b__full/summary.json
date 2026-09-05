@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "property",
+  "model": "llama-3.3-70b",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/popular/schemaorg-all-http.ttl",
+  "ontology_name": "schema.org",
+  "temperature": 0.0,
+  "n_records": 382,
+  "n_format_match_normal": 382,
+  "n_format_match_guided": 379,
+  "n_self_echo_normal": 1,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 382,
+      "mean_normal": 9.742067215870497,
+      "mean_guided": 10.878314157624027,
+      "gap": 1.1362469417535297
+    },
+    "wup": {
+      "n": 382,
+      "mean_normal": 0.6329478761515426,
+      "mean_guided": 0.7082761219512913,
+      "gap": 0.07532824579974867
+    }
+  }
+}

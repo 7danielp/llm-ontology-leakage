@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "taxonomy",
+  "model": "llama-3.3-70b",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/unpopular/cinelab.ttl",
+  "ontology_name": "Cinelab",
+  "temperature": 0.0,
+  "n_records": 16,
+  "n_format_match_normal": 16,
+  "n_format_match_guided": 16,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 16,
+      "mean_normal": 0.8125,
+      "mean_guided": 2.125,
+      "gap": 1.3125
+    },
+    "wup": {
+      "n": 16,
+      "mean_normal": 0.09166666666666667,
+      "mean_guided": 0.24583333333333335,
+      "gap": 0.15416666666666667
+    }
+  }
+}

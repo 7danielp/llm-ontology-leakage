@@ -1,0 +1,48 @@
+{
+  "method": "ts-guessing",
+  "task": "property",
+  "model": "llama-3.3-70b",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/unpopular/cinelab.ttl",
+  "ontology_name": "Cinelab",
+  "temperature": 0.0,
+  "n_records": 10,
+  "n_format_match": 10,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 10,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 1,
+        "fp": 932,
+        "fn": 23,
+        "precision": 0.0010718113612004287,
+        "recall": 0.041666666666666664,
+        "f1": 0.002089864158829676
+      },
+      "gold_in_ns": {
+        "n": 9,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 1,
+        "fp": 899,
+        "fn": 20,
+        "precision": 0.0011111111111111111,
+        "recall": 0.047619047619047616,
+        "f1": 0.002171552660152009
+      },
+      "gold_external": {
+        "n": 1,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 0,
+        "fp": 33,
+        "fn": 3,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    }
+  }
+}

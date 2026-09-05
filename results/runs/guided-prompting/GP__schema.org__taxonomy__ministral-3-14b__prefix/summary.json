@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "taxonomy",
+  "model": "ministral-3-14b",
+  "id_format": "prefix",
+  "ontology_source": "ressources/ontologies/popular/schemaorg-all-http.ttl",
+  "ontology_name": "schema.org",
+  "temperature": 0.0,
+  "n_records": 931,
+  "n_format_match_normal": 931,
+  "n_format_match_guided": 931,
+  "n_self_echo_normal": 2,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 931,
+      "mean_normal": 8.920515574650913,
+      "mean_guided": 9.605800214822771,
+      "gap": 0.6852846401718582
+    },
+    "wup": {
+      "n": 931,
+      "mean_normal": 0.5862642847068196,
+      "mean_guided": 0.636753126334222,
+      "gap": 0.050488841627402394
+    }
+  }
+}

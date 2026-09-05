@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "domain",
+  "model": "ministral-3-14b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/medium/nfo.rdf",
+  "ontology_name": "NEPOMUK File Ontology",
+  "temperature": 0.0,
+  "n_records": 70,
+  "n_format_match_normal": 70,
+  "n_format_match_guided": 64,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 70,
+      "mean_normal": 0.3,
+      "mean_guided": 0.14285714285714285,
+      "gap": -0.15714285714285714
+    },
+    "wup": {
+      "n": 70,
+      "mean_normal": 0.010476190476190477,
+      "mean_guided": 0.0047619047619047615,
+      "gap": -0.005714285714285715
+    }
+  }
+}

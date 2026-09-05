@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "property",
+  "model": "llama-3.3-70b",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/medium/nfo.rdf",
+  "ontology_name": "NEPOMUK File Ontology",
+  "temperature": 0.0,
+  "n_records": 25,
+  "n_format_match_normal": 25,
+  "n_format_match_guided": 25,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 25,
+      "mean_normal": 6.158111111111111,
+      "mean_guided": 6.076861989134461,
+      "gap": -0.08124912197665025
+    },
+    "wup": {
+      "n": 25,
+      "mean_normal": 0.3996904761904762,
+      "mean_guided": 0.4037238982563421,
+      "gap": 0.004033422065865864
+    }
+  }
+}

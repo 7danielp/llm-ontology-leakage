@@ -1,0 +1,48 @@
+{
+  "method": "ts-guessing",
+  "task": "domain",
+  "model": "qwen3.6-36b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/popular/schemaorg-all-http.ttl",
+  "ontology_name": "schema.org",
+  "temperature": 0.0,
+  "n_records": 1450,
+  "n_format_match": 1446,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 1450,
+        "n_match": 507,
+        "em": 0.3496551724137931,
+        "tp": 507,
+        "fp": 943,
+        "fn": 943,
+        "precision": 0.3496551724137931,
+        "recall": 0.3496551724137931,
+        "f1": 0.3496551724137931
+      },
+      "gold_in_ns": {
+        "n": 1450,
+        "n_match": 507,
+        "em": 0.3496551724137931,
+        "tp": 507,
+        "fp": 943,
+        "fn": 943,
+        "precision": 0.3496551724137931,
+        "recall": 0.3496551724137931,
+        "f1": 0.3496551724137931
+      },
+      "gold_external": {
+        "n": 0,
+        "n_match": 0,
+        "em": null,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      }
+    }
+  }
+}

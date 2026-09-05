@@ -1,0 +1,24 @@
+{
+  "method": "min-k",
+  "client": "MakiClient",
+  "identity": {
+    "task": "domain",
+    "model": "qwen3.6-36b",
+    "id_format": "prefix",
+    "ontology_source": "ressources/ontologies/unpopular/ep-plan.ttl",
+    "ontology_name": "EP-Plan",
+    "ontology_namespace": "https://w3id.org/ep-plan#",
+    "temperature": 0.0
+  },
+  "prefix_map": {
+    "ep-plan": "https://w3id.org/ep-plan#",
+    "prov": "http://www.w3.org/ns/prov#"
+  },
+  "format_example_iris": null,
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://www.w3.org/2000/01/rdf-schema#domain",
+    "range": "http://www.w3.org/2000/01/rdf-schema#range"
+  },
+  "limit": null
+}

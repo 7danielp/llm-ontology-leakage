@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "taxonomy",
+  "model": "ministral-3-14b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/medium/goodrelations.rdf",
+  "ontology_name": "GoodRelations",
+  "temperature": 0.0,
+  "n_records": 14,
+  "n_format_match_normal": 9,
+  "n_format_match_guided": 4,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 2,
+  "gap": {
+    "path": {
+      "n": 14,
+      "mean_normal": 0.42857142857142855,
+      "mean_guided": 1.1428571428571428,
+      "gap": 0.7142857142857143
+    },
+    "wup": {
+      "n": 14,
+      "mean_normal": 0.07142857142857142,
+      "mean_guided": 0.18571428571428572,
+      "gap": 0.1142857142857143
+    }
+  }
+}

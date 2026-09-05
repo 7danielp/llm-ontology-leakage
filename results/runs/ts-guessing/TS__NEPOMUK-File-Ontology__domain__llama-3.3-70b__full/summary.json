@@ -1,0 +1,48 @@
+{
+  "method": "ts-guessing",
+  "task": "domain",
+  "model": "llama-3.3-70b",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/medium/nfo.rdf",
+  "ontology_name": "NEPOMUK File Ontology",
+  "temperature": 0.0,
+  "n_records": 70,
+  "n_format_match": 70,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 70,
+        "n_match": 24,
+        "em": 0.34285714285714286,
+        "tp": 24,
+        "fp": 46,
+        "fn": 46,
+        "precision": 0.34285714285714286,
+        "recall": 0.34285714285714286,
+        "f1": 0.34285714285714286
+      },
+      "gold_in_ns": {
+        "n": 69,
+        "n_match": 24,
+        "em": 0.34782608695652173,
+        "tp": 24,
+        "fp": 45,
+        "fn": 45,
+        "precision": 0.34782608695652173,
+        "recall": 0.34782608695652173,
+        "f1": 0.34782608695652173
+      },
+      "gold_external": {
+        "n": 1,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "method": "ts-guessing",
+  "task": "property",
+  "model": "ministral-3-14b",
+  "id_format": "prefix",
+  "ontology_source": "ressources/ontologies/popular/foaf.rdf",
+  "ontology_name": "FOAF",
+  "temperature": 0.0,
+  "n_records": 9,
+  "n_format_match": 8,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 9,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 19,
+        "fp": 426,
+        "fn": 36,
+        "precision": 0.04269662921348315,
+        "recall": 0.34545454545454546,
+        "f1": 0.076
+      },
+      "gold_in_ns": {
+        "n": 6,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 13,
+        "fp": 356,
+        "fn": 31,
+        "precision": 0.03523035230352303,
+        "recall": 0.29545454545454547,
+        "f1": 0.06295399515738498
+      },
+      "gold_external": {
+        "n": 3,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 6,
+        "fp": 70,
+        "fn": 5,
+        "precision": 0.07894736842105263,
+        "recall": 0.5454545454545454,
+        "f1": 0.13793103448275862
+      }
+    }
+  }
+}
