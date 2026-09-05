@@ -20,10 +20,13 @@ RUN_IDENTITY_FIELDS = (
 )
 
 
+METHOD_DIRS = {"TS": "ts-guessing", "GP": "guided-prompting", "MK": "min-k"}
+
+
 def run_dir_for(cfg: RunConfig, method_prefix: str) -> Path:
     """Build the path to the run directory (stores records.jsonl, run_meta.json, summary.json)"""
     name = f"{cfg.ontology_name.replace(' ', '-')}__{cfg.task}__{cfg.model}__{cfg.id_format}"
-    return cfg.results_dir / "runs" / f"{method_prefix}__{name}"
+    return cfg.results_dir / "runs" / METHOD_DIRS[method_prefix] / f"{method_prefix}__{name}"
 
 
 def write_meta(run_dir: Path, cfg: RunConfig, method: str, client_name: str) -> None:
@@ -45,10 +48,10 @@ def write_meta(run_dir: Path, cfg: RunConfig, method: str, client_name: str) -> 
 def load_runs(results_dir: Path) -> list[dict]:
     """Load all completed runs under results/runs (one dict per run with dir, meta and records)"""
     runs = []
-    for run_dir in sorted((results_dir / "runs").glob("*")):
-        meta_file = run_dir / "run_meta.json"
+    for meta_file in sorted((results_dir / "runs").rglob("run_meta.json")):
+        run_dir = meta_file.parent
         records_file = run_dir / "records.jsonl"
-        if not (meta_file.is_file() and records_file.is_file()):
+        if not records_file.is_file():
             continue
         # summary.json is written last (crashed or still running directories are skipped with a notice)
         if not (run_dir / "summary.json").is_file():
