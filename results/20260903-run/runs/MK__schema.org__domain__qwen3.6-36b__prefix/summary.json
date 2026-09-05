@@ -1,0 +1,12 @@
+{
+  "method": "min-k",
+  "task": "domain",
+  "model": "qwen3.6-36b",
+  "id_format": "prefix",
+  "ontology_source": "ressources/ontologies/popular/schemaorg-all-http.ttl",
+  "ontology_name": "schema.org",
+  "block_size": 10,
+  "n_blocks": 220,
+  "n_axioms": 2191,
+  "mean_min_20": -4.794299660508961
+}

@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "property",
+  "model": "gpt-5.6-luna",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/popular/foaf.rdf",
+  "ontology_name": "FOAF",
+  "temperature": 0.0,
+  "n_records": 9,
+  "n_format_match_normal": 9,
+  "n_format_match_guided": 9,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 9,
+      "mean_normal": 3.0944444444444446,
+      "mean_guided": 4.941436329082873,
+      "gap": 1.846991884638429
+    },
+    "wup": {
+      "n": 9,
+      "mean_normal": 0.5054398148148148,
+      "mean_guided": 0.8114492879342919,
+      "gap": 0.3060094731194771
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "property",
+  "model": "qwen3.5-122b",
+  "id_format": "prefix",
+  "ontology_source": "ressources/ontologies/unpopular/ep-plan.ttl",
+  "ontology_name": "EP-Plan",
+  "temperature": 0.0,
+  "n_records": 18,
+  "n_format_match_normal": 18,
+  "n_format_match_guided": 17,
+  "n_self_echo_normal": 3,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 18,
+      "mean_normal": 0.0,
+      "mean_guided": 0.32630112285878204,
+      "gap": 0.32630112285878204
+    },
+    "wup": {
+      "n": 18,
+      "mean_normal": 0.0,
+      "mean_guided": 0.037655110236865824,
+      "gap": 0.037655110236865824
+    }
+  }
+}

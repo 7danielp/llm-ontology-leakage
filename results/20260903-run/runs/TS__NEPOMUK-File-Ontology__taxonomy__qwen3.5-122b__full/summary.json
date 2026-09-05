@@ -1,0 +1,48 @@
+{
+  "method": "ts-guessing",
+  "task": "taxonomy",
+  "model": "qwen3.5-122b",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/medium/nfo.rdf",
+  "ontology_name": "NEPOMUK File Ontology",
+  "temperature": 0.0,
+  "n_records": 51,
+  "n_format_match": 51,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 51,
+        "n_match": 9,
+        "em": 0.17647058823529413,
+        "tp": 9,
+        "fp": 42,
+        "fn": 42,
+        "precision": 0.17647058823529413,
+        "recall": 0.17647058823529413,
+        "f1": 0.17647058823529413
+      },
+      "gold_in_ns": {
+        "n": 48,
+        "n_match": 9,
+        "em": 0.1875,
+        "tp": 9,
+        "fp": 39,
+        "fn": 39,
+        "precision": 0.1875,
+        "recall": 0.1875,
+        "f1": 0.1875
+      },
+      "gold_external": {
+        "n": 3,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 0,
+        "fp": 3,
+        "fn": 3,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    }
+  }
+}

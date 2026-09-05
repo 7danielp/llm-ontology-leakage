@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "domain",
+  "model": "ministral-3-14b",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/synthetic/weather-patterns/weather-patterns.ttl",
+  "ontology_name": "Weather Patterns",
+  "temperature": 0.0,
+  "n_records": 62,
+  "n_format_match_normal": 62,
+  "n_format_match_guided": 62,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 62,
+      "mean_normal": 0.43548387096774194,
+      "mean_guided": 0.5967741935483871,
+      "gap": 0.16129032258064516
+    },
+    "wup": {
+      "n": 62,
+      "mean_normal": 0.04301075268817204,
+      "mean_guided": 0.059139784946236555,
+      "gap": 0.016129032258064516
+    }
+  }
+}

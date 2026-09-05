@@ -1,0 +1,48 @@
+{
+  "method": "ts-guessing",
+  "task": "property",
+  "model": "llama-3.3-70b",
+  "id_format": "prefix",
+  "ontology_source": "ressources/ontologies/unpopular/ep-plan.ttl",
+  "ontology_name": "EP-Plan",
+  "temperature": 0.0,
+  "n_records": 18,
+  "n_format_match": 18,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 18,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 2,
+        "fp": 126,
+        "fn": 87,
+        "precision": 0.015625,
+        "recall": 0.02247191011235955,
+        "f1": 0.018433179723502304
+      },
+      "gold_in_ns": {
+        "n": 17,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 2,
+        "fp": 118,
+        "fn": 86,
+        "precision": 0.016666666666666666,
+        "recall": 0.022727272727272728,
+        "f1": 0.01923076923076923
+      },
+      "gold_external": {
+        "n": 1,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 0,
+        "fp": 8,
+        "fn": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "domain",
+  "model": "ministral-3-14b",
+  "id_format": "prefix",
+  "ontology_source": "ressources/ontologies/medium/org.ttl",
+  "ontology_name": "W3C Organization Ontology",
+  "temperature": 0.0,
+  "n_records": 35,
+  "n_format_match_normal": 35,
+  "n_format_match_guided": 35,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 35,
+      "mean_normal": 2.257142857142857,
+      "mean_guided": 4.171428571428572,
+      "gap": 1.9142857142857144
+    },
+    "wup": {
+      "n": 35,
+      "mean_normal": 0.272108843537415,
+      "mean_guided": 0.5023129251700681,
+      "gap": 0.2302040816326531
+    }
+  }
+}

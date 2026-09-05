@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "property",
+  "model": "llama-3.3-70b",
+  "id_format": "prefix",
+  "ontology_source": "ressources/ontologies/synthetic/weather-patterns/weather-patterns.ttl",
+  "ontology_name": "Weather Patterns",
+  "temperature": 0.0,
+  "n_records": 14,
+  "n_format_match_normal": 14,
+  "n_format_match_guided": 14,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 14,
+      "mean_normal": 2.3110119047619047,
+      "mean_guided": 4.091577380952381,
+      "gap": 1.7805654761904763
+    },
+    "wup": {
+      "n": 14,
+      "mean_normal": 0.21458333333333332,
+      "mean_guided": 0.3723015873015873,
+      "gap": 0.157718253968254
+    }
+  }
+}

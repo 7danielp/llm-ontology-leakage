@@ -1,0 +1,48 @@
+{
+  "method": "ts-guessing",
+  "task": "range",
+  "model": "ministral-3-14b",
+  "id_format": "prefix",
+  "ontology_source": "ressources/ontologies/popular/dublin_core_terms.ttl",
+  "ontology_name": "Dublin Core Terms",
+  "temperature": 0.0,
+  "n_records": 23,
+  "n_format_match": 23,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 23,
+        "n_match": 11,
+        "em": 0.4782608695652174,
+        "tp": 11,
+        "fp": 12,
+        "fn": 12,
+        "precision": 0.4782608695652174,
+        "recall": 0.4782608695652174,
+        "f1": 0.4782608695652174
+      },
+      "gold_in_ns": {
+        "n": 23,
+        "n_match": 11,
+        "em": 0.4782608695652174,
+        "tp": 11,
+        "fp": 12,
+        "fn": 12,
+        "precision": 0.4782608695652174,
+        "recall": 0.4782608695652174,
+        "f1": 0.4782608695652174
+      },
+      "gold_external": {
+        "n": 0,
+        "n_match": 0,
+        "em": null,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      }
+    }
+  }
+}

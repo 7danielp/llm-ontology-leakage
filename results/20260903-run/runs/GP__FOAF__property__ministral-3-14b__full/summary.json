@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "property",
+  "model": "ministral-3-14b",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/popular/foaf.rdf",
+  "ontology_name": "FOAF",
+  "temperature": 0.0,
+  "n_records": 9,
+  "n_format_match_normal": 9,
+  "n_format_match_guided": 8,
+  "n_self_echo_normal": 1,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 9,
+      "mean_normal": 3.2732638888888888,
+      "mean_guided": 3.3953762133508376,
+      "gap": 0.1221123244619488
+    },
+    "wup": {
+      "n": 9,
+      "mean_normal": 0.5242592592592593,
+      "mean_guided": 0.5441799687711342,
+      "gap": 0.01992070951187487
+    }
+  }
+}

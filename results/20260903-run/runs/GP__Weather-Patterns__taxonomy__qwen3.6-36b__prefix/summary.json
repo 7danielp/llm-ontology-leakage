@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "taxonomy",
+  "model": "qwen3.6-36b",
+  "id_format": "prefix",
+  "ontology_source": "ressources/ontologies/synthetic/weather-patterns/weather-patterns.ttl",
+  "ontology_name": "Weather Patterns",
+  "temperature": 0.0,
+  "n_records": 24,
+  "n_format_match_normal": 24,
+  "n_format_match_guided": 24,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 24,
+      "mean_normal": 1.25,
+      "mean_guided": 0.3333333333333333,
+      "gap": -0.9166666666666666
+    },
+    "wup": {
+      "n": 24,
+      "mean_normal": 0.125,
+      "mean_guided": 0.020833333333333332,
+      "gap": -0.10416666666666667
+    }
+  }
+}

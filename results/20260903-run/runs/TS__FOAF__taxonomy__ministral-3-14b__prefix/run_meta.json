@@ -1,0 +1,26 @@
+{
+  "method": "ts-guessing",
+  "client": "MakiClient",
+  "identity": {
+    "task": "taxonomy",
+    "model": "ministral-3-14b",
+    "id_format": "prefix",
+    "ontology_source": "ressources/ontologies/popular/foaf.rdf",
+    "ontology_name": "FOAF",
+    "ontology_namespace": "http://xmlns.com/foaf/0.1/",
+    "temperature": 0.0
+  },
+  "prefix_map": {
+    "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+    "skos": "http://www.w3.org/2004/02/skos/core#"
+  },
+  "format_example_iris": [
+    "http://xmlns.com/foaf/0.1/ExampleClass"
+  ],
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://www.w3.org/2000/01/rdf-schema#domain",
+    "range": "http://www.w3.org/2000/01/rdf-schema#range"
+  },
+  "limit": null
+}

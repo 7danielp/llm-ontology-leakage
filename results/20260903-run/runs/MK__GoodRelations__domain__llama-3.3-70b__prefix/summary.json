@@ -1,0 +1,12 @@
+{
+  "method": "min-k",
+  "task": "domain",
+  "model": "llama-3.3-70b",
+  "id_format": "prefix",
+  "ontology_source": "ressources/ontologies/medium/goodrelations.rdf",
+  "ontology_name": "GoodRelations",
+  "block_size": 10,
+  "n_blocks": 25,
+  "n_axioms": 244,
+  "mean_min_20": -4.265176825419896
+}

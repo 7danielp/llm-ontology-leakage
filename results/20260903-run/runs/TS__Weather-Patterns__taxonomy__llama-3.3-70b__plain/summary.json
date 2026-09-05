@@ -1,0 +1,48 @@
+{
+  "method": "ts-guessing",
+  "task": "taxonomy",
+  "model": "llama-3.3-70b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/synthetic/weather-patterns/weather-patterns.ttl",
+  "ontology_name": "Weather Patterns",
+  "temperature": 0.0,
+  "n_records": 24,
+  "n_format_match": 24,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 24,
+        "n_match": 4,
+        "em": 0.16666666666666666,
+        "tp": 4,
+        "fp": 20,
+        "fn": 20,
+        "precision": 0.16666666666666666,
+        "recall": 0.16666666666666666,
+        "f1": 0.16666666666666666
+      },
+      "gold_in_ns": {
+        "n": 24,
+        "n_match": 4,
+        "em": 0.16666666666666666,
+        "tp": 4,
+        "fp": 20,
+        "fn": 20,
+        "precision": 0.16666666666666666,
+        "recall": 0.16666666666666666,
+        "f1": 0.16666666666666666
+      },
+      "gold_external": {
+        "n": 0,
+        "n_match": 0,
+        "em": null,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      }
+    }
+  }
+}

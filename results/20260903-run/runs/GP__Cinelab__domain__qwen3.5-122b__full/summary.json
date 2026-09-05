@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "domain",
+  "model": "qwen3.5-122b",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/unpopular/cinelab.ttl",
+  "ontology_name": "Cinelab",
+  "temperature": 0.0,
+  "n_records": 24,
+  "n_format_match_normal": 24,
+  "n_format_match_guided": 24,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 24,
+      "mean_normal": 0.9583333333333334,
+      "mean_guided": 0.75,
+      "gap": -0.20833333333333334
+    },
+    "wup": {
+      "n": 24,
+      "mean_normal": 0.09999999999999999,
+      "mean_guided": 0.08333333333333333,
+      "gap": -0.016666666666666663
+    }
+  }
+}

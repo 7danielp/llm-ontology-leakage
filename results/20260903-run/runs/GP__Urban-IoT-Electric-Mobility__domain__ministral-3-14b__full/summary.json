@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "domain",
+  "model": "ministral-3-14b",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/unpopular/urban-iot_electric.rdf",
+  "ontology_name": "Urban IoT Electric Mobility",
+  "temperature": 0.0,
+  "n_records": 48,
+  "n_format_match_normal": 48,
+  "n_format_match_guided": 48,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 48,
+      "mean_normal": 0.9583333333333334,
+      "mean_guided": 0.9166666666666666,
+      "gap": -0.041666666666666664
+    },
+    "wup": {
+      "n": 48,
+      "mean_normal": 0.15972222222222224,
+      "mean_guided": 0.15277777777777776,
+      "gap": -0.006944444444444457
+    }
+  }
+}

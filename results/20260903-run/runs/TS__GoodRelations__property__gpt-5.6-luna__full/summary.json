@@ -1,0 +1,48 @@
+{
+  "method": "ts-guessing",
+  "task": "property",
+  "model": "gpt-5.6-luna",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/medium/goodrelations.rdf",
+  "ontology_name": "GoodRelations",
+  "temperature": 0.0,
+  "n_records": 34,
+  "n_format_match": 34,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 34,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 132,
+        "fp": 560,
+        "fn": 112,
+        "precision": 0.1907514450867052,
+        "recall": 0.5409836065573771,
+        "f1": 0.28205128205128205
+      },
+      "gold_in_ns": {
+        "n": 28,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 99,
+        "fp": 373,
+        "fn": 78,
+        "precision": 0.2097457627118644,
+        "recall": 0.559322033898305,
+        "f1": 0.3050847457627119
+      },
+      "gold_external": {
+        "n": 6,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 33,
+        "fp": 187,
+        "fn": 34,
+        "precision": 0.15,
+        "recall": 0.4925373134328358,
+        "f1": 0.22996515679442509
+      }
+    }
+  }
+}

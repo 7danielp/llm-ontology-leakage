@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "domain",
+  "model": "ministral-3-14b",
+  "id_format": "prefix",
+  "ontology_source": "ressources/ontologies/unpopular/ep-plan.ttl",
+  "ontology_name": "EP-Plan",
+  "temperature": 0.0,
+  "n_records": 62,
+  "n_format_match_normal": 62,
+  "n_format_match_guided": 62,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 62,
+      "mean_normal": 2.4193548387096775,
+      "mean_guided": 1.7419354838709677,
+      "gap": -0.6774193548387096
+    },
+    "wup": {
+      "n": 62,
+      "mean_normal": 0.25268817204301075,
+      "mean_guided": 0.18602150537634407,
+      "gap": -0.06666666666666667
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "range",
+  "model": "gpt-5.6-luna",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/medium/goodrelations.rdf",
+  "ontology_name": "GoodRelations",
+  "temperature": 0.0,
+  "n_records": 95,
+  "n_format_match_normal": 69,
+  "n_format_match_guided": 77,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 95,
+      "mean_normal": 1.4,
+      "mean_guided": 2.3157894736842106,
+      "gap": 0.9157894736842105
+    },
+    "wup": {
+      "n": 95,
+      "mean_normal": 0.22947368421052633,
+      "mean_guided": 0.37578947368421056,
+      "gap": 0.14631578947368423
+    }
+  }
+}

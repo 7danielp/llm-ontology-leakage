@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "property",
+  "model": "qwen3.6-36b",
+  "id_format": "prefix",
+  "ontology_source": "ressources/ontologies/unpopular/urban-iot_electric.rdf",
+  "ontology_name": "Urban IoT Electric Mobility",
+  "temperature": 0.0,
+  "n_records": 10,
+  "n_format_match_normal": 10,
+  "n_format_match_guided": 10,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 10,
+      "mean_normal": 0.5,
+      "mean_guided": 0.2833333333333333,
+      "gap": -0.21666666666666665
+    },
+    "wup": {
+      "n": 10,
+      "mean_normal": 0.08333333333333334,
+      "mean_guided": 0.04722222222222222,
+      "gap": -0.036111111111111115
+    }
+  }
+}

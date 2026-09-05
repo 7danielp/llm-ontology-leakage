@@ -1,0 +1,48 @@
+{
+  "method": "ts-guessing",
+  "task": "range",
+  "model": "qwen3.5-122b",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/unpopular/urban-iot_electric.rdf",
+  "ontology_name": "Urban IoT Electric Mobility",
+  "temperature": 0.0,
+  "n_records": 43,
+  "n_format_match": 43,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 43,
+        "n_match": 9,
+        "em": 0.20930232558139536,
+        "tp": 9,
+        "fp": 34,
+        "fn": 34,
+        "precision": 0.20930232558139536,
+        "recall": 0.20930232558139536,
+        "f1": 0.20930232558139536
+      },
+      "gold_in_ns": {
+        "n": 19,
+        "n_match": 9,
+        "em": 0.47368421052631576,
+        "tp": 9,
+        "fp": 10,
+        "fn": 10,
+        "precision": 0.47368421052631576,
+        "recall": 0.47368421052631576,
+        "f1": 0.47368421052631576
+      },
+      "gold_external": {
+        "n": 24,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 0,
+        "fp": 24,
+        "fn": 24,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    }
+  }
+}

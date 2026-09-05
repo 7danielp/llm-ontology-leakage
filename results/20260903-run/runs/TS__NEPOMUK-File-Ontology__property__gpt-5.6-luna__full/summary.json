@@ -1,0 +1,48 @@
+{
+  "method": "ts-guessing",
+  "task": "property",
+  "model": "gpt-5.6-luna",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/medium/nfo.rdf",
+  "ontology_name": "NEPOMUK File Ontology",
+  "temperature": 0.0,
+  "n_records": 25,
+  "n_format_match": 25,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 25,
+        "n_match": 2,
+        "em": 0.08,
+        "tp": 26,
+        "fp": 176,
+        "fn": 44,
+        "precision": 0.12871287128712872,
+        "recall": 0.37142857142857144,
+        "f1": 0.1911764705882353
+      },
+      "gold_in_ns": {
+        "n": 24,
+        "n_match": 2,
+        "em": 0.08333333333333333,
+        "tp": 26,
+        "fp": 174,
+        "fn": 43,
+        "precision": 0.13,
+        "recall": 0.37681159420289856,
+        "f1": 0.19330855018587362
+      },
+      "gold_external": {
+        "n": 1,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 0,
+        "fp": 2,
+        "fn": 1,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    }
+  }
+}
