@@ -55,6 +55,8 @@ def median_characteristics() -> tuple[int, int, list[dict]]:
     """Extract N (classes) and M (properties) as the median over the nine evaluated ontologies"""
     rows = []
     for name, preset in ONTOLOGY_PRESETS.items():
+        if name.startswith("SYNTH"):
+            continue  # earlier synthetic ontologies ignored
         graph = load_graph(preset["ontology_source"], preset["prefix_map"])
         classes = {s for t in (OWL.Class, RDFS.Class) for s in graph.subjects(RDF.type, t)
                    if isinstance(s, URIRef)}  # all IRIs typed as OWL or RDFS class
