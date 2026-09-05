@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "domain",
+  "model": "gpt-5.6-luna",
+  "id_format": "prefix",
+  "ontology_source": "ressources/ontologies/unpopular/ep-plan.ttl",
+  "ontology_name": "EP-Plan",
+  "temperature": 0.0,
+  "n_records": 62,
+  "n_format_match_normal": 62,
+  "n_format_match_guided": 62,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 62,
+      "mean_normal": 2.7580645161290325,
+      "mean_guided": 3.3870967741935485,
+      "gap": 0.6290322580645161
+    },
+    "wup": {
+      "n": 62,
+      "mean_normal": 0.30737327188940095,
+      "mean_guided": 0.33533026113671277,
+      "gap": 0.027956989247311843
+    }
+  }
+}

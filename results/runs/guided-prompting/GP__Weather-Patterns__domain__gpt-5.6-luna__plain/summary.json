@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "domain",
+  "model": "gpt-5.6-luna",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/synthetic/weather-patterns/weather-patterns.ttl",
+  "ontology_name": "Weather Patterns",
+  "temperature": 0.0,
+  "n_records": 62,
+  "n_format_match_normal": 60,
+  "n_format_match_guided": 62,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 62,
+      "mean_normal": 0.12903225806451613,
+      "mean_guided": 0.7258064516129032,
+      "gap": 0.5967741935483871
+    },
+    "wup": {
+      "n": 62,
+      "mean_normal": 0.008064516129032258,
+      "mean_guided": 0.06651305683563748,
+      "gap": 0.05844854070660522
+    }
+  }
+}
