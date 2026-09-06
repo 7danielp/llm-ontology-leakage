@@ -14,15 +14,15 @@
   "gap": {
     "path": {
       "n": 10,
-      "mean_normal": 0.625,
+      "mean_normal": 0.375,
       "mean_guided": 0.0,
-      "gap": -0.625
+      "gap": -0.375
     },
     "wup": {
       "n": 10,
-      "mean_normal": 0.07619047619047618,
+      "mean_normal": 0.045,
       "mean_guided": 0.0,
-      "gap": -0.07619047619047618
+      "gap": -0.045
     }
   }
 }
