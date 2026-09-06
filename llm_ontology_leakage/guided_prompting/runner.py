@@ -102,7 +102,7 @@ def gp_score(
     parsed = parse_elements(raw, spec.list_valued)
     if spec.name == "property":
         predicted = [resolver.resolve(e) for e in parsed]
-        return {m: set_similarity(m, predicted, gold_iris, prop_sim) for m in MEASURES}  # symmetric best match mean of the two sets
+        return {m: set_similarity(m, predicted, gold_iris, prop_sim) for m in MEASURES}  # one to one matching of answers and golds
     predicted_iri = resolver.resolve(parsed[0]) if parsed else None
     if predicted_iri is None:
         return {m: 0.0 for m in MEASURES}

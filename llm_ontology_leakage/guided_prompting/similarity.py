@@ -6,8 +6,11 @@
 from collections import defaultdict, deque
 from statistics import mean
 
+import numpy as np
+from scipy.optimize import linear_sum_assignment
+
 from rdflib import Graph, URIRef
-from rdflib.namespace import RDFS
+from rdflib.namespace import OWL, RDF, RDFS
 
 from ..core.ontology import union_members
 
@@ -20,7 +23,7 @@ class ClassSimilarity:
     """Similarity of two classes over the subclass hierarchy (Path Length and Wu & Palmer, Meng et al. 2013)"""
 
     def __init__(self, graph: Graph, subclass_predicate: URIRef = RDFS.subClassOf) -> None:
-        """Read the subclass edges from the graph and precompute all depths"""
+        """Read the subclass edges and the declared classes from the graph and precompute all depths"""
         self._parents: dict[str, set[str]] = defaultdict(set)
         nodes: set[str] = set()
         for s, o in graph.subject_objects(subclass_predicate):
@@ -33,6 +36,11 @@ class ClassSimilarity:
             if str(o) != OWL_THING:
                 nodes.add(str(o))
             self._parents[str(s)].add(str(o))
+        # every declared class is a node, a class without a superclass axiom hangs directly below the root
+        for class_type in (OWL.Class, RDFS.Class):
+            for c in graph.subjects(RDF.type, class_type):
+                if isinstance(c, URIRef) and str(c) != OWL_THING:
+                    nodes.add(str(c))
         self._nodes = nodes
         self._depth: dict[str, int] = {OWL_THING: 1}  # universal root has depth 1
         for c in nodes:
@@ -143,19 +151,16 @@ def set_similarity(
     gold: list[str],
     prop_sim: PropertySimilarity,
 ) -> float:
-    """Symmetric best match mean between prediction and gold (property task)"""
+    """Similarity of the predicted set to the gold set (property task)"""
     if not predicted or not gold:
         return 0.0  # empty answer scores 0
     resolved = [p for p in predicted if p is not None]
-
-    # each gold takes its best answer, missing golds lower the score
-    per_gold = [
-        max((prop_sim.sim(measure, g, p) for p in resolved), default=0.0) for g in gold
-    ]
-    # each answer takes its best gold, invented answers lower the score (not in the ontology counts 0)
-    per_pred = [
-        0.0 if p is None else max(prop_sim.sim(measure, p, g) for g in gold)
-        for p in predicted
-    ]
-    # average of both directions (too little and too much answered both lower the score)
-    return (mean(per_gold) + mean(per_pred)) / 2.0
+    if not resolved:
+        return 0.0  # invented answers (not in the ontology)
+    # similarity of every gold with every answer
+    matrix = np.array([[prop_sim.sim(measure, g, p) for p in resolved] for g in gold])
+    # pair each answer with one gold so that the total similarity is highest
+    rows, cols = linear_sum_assignment(matrix, maximize=True)
+    matched = float(matrix[rows, cols].sum())
+    # share of the golds that got a partner and share of the answers that got one, averaged
+    return (matched / len(gold) + matched / len(predicted)) / 2.0
