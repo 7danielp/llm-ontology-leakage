@@ -22,18 +22,8 @@ TEMPERATURE = 0.5
 SYSTEM_PROMPT = "You are an ontology engineer"
 OUT_DIR = Path("ressources/ontologies/synthetic")
 
-# domains of the nine benchmark ontologies, the generator must pick a different one
-BENCHMARK_DOMAINS = [
-    "people and social networks (FOAF)",
-    "general web content markup (schema.org)",
-    "document and resource metadata (Dublin Core Terms)",
-    "e-commerce offers and products (GoodRelations)",
-    "desktop files and documents (NEPOMUK File Ontology)",
-    "organizational structures (W3C Organization Ontology)",
-    "film and video annotation (Cinelab)",
-    "scientific workflow plans (EP-Plan)",
-    "electric mobility and charging infrastructure (Urban IoT)",
-]
+# domains of current benchmark ontologies, the generator must pick a different one
+BENCHMARK_DOMAINS = [f"{p['ontology_domain']} ({p['ontology_name']})" for p in ONTOLOGY_PRESETS.values()]
 
 DOMAIN_PROMPT = (
     "We are building a benchmark of ontologies covering the following domains:\n"

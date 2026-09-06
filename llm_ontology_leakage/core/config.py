@@ -24,10 +24,12 @@ DEFAULT_AXIOM_PREDICATES: dict[TaskName, str] = {
 # One preset per ontology
 # prefix_map covers namespaces the file leaves undeclared (else prefix rendering falls back to e.g. "ns1:")
 # ontology_namespace is the boundary for the internal/external gold flag
+# ontology_domain is a short topic description, generate_synthetic.py uses it to pick an unrelated domain
 ONTOLOGY_PRESETS: dict[str, dict] = {
     "FOAF": {
         "ontology_source": "ressources/ontologies/popular/foaf.rdf",
         "ontology_name": "FOAF",
+        "ontology_domain": "people and social networks",
         "ontology_namespace": "http://xmlns.com/foaf/0.1/",
         "prefix_map": {
             "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
@@ -44,6 +46,7 @@ ONTOLOGY_PRESETS: dict[str, dict] = {
     "SCHEMA": {
         "ontology_source": "ressources/ontologies/popular/schemaorg-all-http.ttl",
         "ontology_name": "schema.org",
+        "ontology_domain": "general web content markup",
         "ontology_namespace": "http://schema.org/",
         "prefix_map": {},
         # schema.org words domain and range as domainIncludes and rangeIncludes
@@ -62,6 +65,7 @@ ONTOLOGY_PRESETS: dict[str, dict] = {
     "DCTERMS": {
         "ontology_source": "ressources/ontologies/popular/dublin_core_terms.ttl",
         "ontology_name": "Dublin Core Terms",
+        "ontology_domain": "document and resource metadata",
         "ontology_namespace": "http://purl.org/dc/terms/",
         "prefix_map": {"dcmitype": "http://purl.org/dc/dcmitype/"},
         # dcterms words range as rangeIncludes
@@ -77,6 +81,7 @@ ONTOLOGY_PRESETS: dict[str, dict] = {
     "GOODRELATIONS": {
         "ontology_source": "ressources/ontologies/medium/goodrelations.rdf",
         "ontology_name": "GoodRelations",
+        "ontology_domain": "e-commerce offers and products",
         "ontology_namespace": "http://purl.org/goodrelations/v1#",
         "prefix_map": {"schema": "http://schema.org/"},
         "format_examples": {
@@ -90,6 +95,7 @@ ONTOLOGY_PRESETS: dict[str, dict] = {
     "NFO": {
         "ontology_source": "ressources/ontologies/medium/nfo.rdf",
         "ontology_name": "NEPOMUK File Ontology",
+        "ontology_domain": "desktop files and documents",
         # NEPOMUK sibling modules (nie, nco) also count as internal
         "ontology_namespace": "http://www.semanticdesktop.org/ontologies/",
         "prefix_map": {},
@@ -104,6 +110,7 @@ ONTOLOGY_PRESETS: dict[str, dict] = {
     "ORG": {
         "ontology_source": "ressources/ontologies/medium/org.ttl",
         "ontology_name": "W3C Organization Ontology",
+        "ontology_domain": "organizational structures",
         "ontology_namespace": "http://www.w3.org/ns/org#",
         "prefix_map": {"org": "http://www.w3.org/ns/org#"},
         "format_examples": {
@@ -117,6 +124,7 @@ ONTOLOGY_PRESETS: dict[str, dict] = {
     "CINELAB": {
         "ontology_source": "ressources/ontologies/unpopular/cinelab.ttl",
         "ontology_name": "Cinelab",
+        "ontology_domain": "film and video annotation",
         "ontology_namespace": "http://advene.org/ns/cinelab/ld#",
         "prefix_map": {"cl": "http://advene.org/ns/cinelab/ld#"},
         "format_examples": {
@@ -130,6 +138,7 @@ ONTOLOGY_PRESETS: dict[str, dict] = {
     "EPPLAN": {
         "ontology_source": "ressources/ontologies/unpopular/ep-plan.ttl",
         "ontology_name": "EP-Plan",
+        "ontology_domain": "scientific workflow plans",
         "ontology_namespace": "https://w3id.org/ep-plan#",
         "prefix_map": {
             "ep-plan": "https://w3id.org/ep-plan#",
@@ -146,6 +155,7 @@ ONTOLOGY_PRESETS: dict[str, dict] = {
     "URBANIOT": {
         "ontology_source": "ressources/ontologies/unpopular/urban-iot_electric.rdf",
         "ontology_name": "Urban IoT Electric Mobility",
+        "ontology_domain": "electric mobility and charging infrastructure",
         "ontology_namespace": "http://www.w3id.org/urban-iot/electric#",
         "prefix_map": {
             "uiote": "http://www.w3id.org/urban-iot/electric#",
@@ -165,6 +175,7 @@ ONTOLOGY_PRESETS: dict[str, dict] = {
     "SYNTH-1": {
         "ontology_source": "ressources/ontologies/synthetic/weather-patterns/weather-patterns.ttl",
         "ontology_name": "Weather Patterns",
+        "ontology_domain": "weather patterns",
         "ontology_namespace": "http://example.org/weather-patterns#",
         "prefix_map": {"weather-patterns": "http://example.org/weather-patterns#"},
         "format_examples": {
