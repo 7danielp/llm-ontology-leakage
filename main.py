@@ -105,7 +105,7 @@ def main() -> None:
     sub = parser.add_subparsers(dest="command", required=True)
 
     run_p = sub.add_parser("run", help="one run (task x model x format)")
-    run_p.add_argument("--task", choices=list(TASKS), help="the axiom task for this run")
+    run_p.add_argument("--task", choices=list(TASKS), required=True, help="the axiom task for this run")
     run_p.add_argument("--model", required=True, help="model name (MAKI or OpenAI)")
     run_p.add_argument("--format", choices=list(GRID_FORMATS), required=True)
     _add_common_args(run_p)
@@ -128,7 +128,7 @@ def main() -> None:
 
     if args.command == "run":  # run: task, model and format come straight from the arguments
         cfg = _base_config(
-            args, task=args.task or GRID_TASKS[0], model=args.model, id_format=args.format,
+            args, task=args.task, model=args.model, id_format=args.format,
         )
     else:  # grid: the first value of each list only seeds the config, run_grid replaces them per combination
         cfg = _base_config(
@@ -142,8 +142,6 @@ def main() -> None:
 
     # run (call the runner once)
     if args.command == "run":
-        if not args.task:
-            parser.error(f"--task is required for {args.method}")
         if args.method == "min-k" and args.task not in MINK_TASKS:
             parser.error("min-k has no property task: its axioms are the domain triples")
         result = RUNNERS[args.method](cfg, client)
