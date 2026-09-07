@@ -1,0 +1,326 @@
+@prefix coffee-brewing: <http://example.org/coffee-brewing#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+coffee-brewing:affects a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingParameter ;
+    rdfs:range coffee-brewing:SensoryExperience .
+
+coffee-brewing:characterizedBy a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:CoffeeBeverage ;
+    rdfs:range coffee-brewing:RoastProfile .
+
+coffee-brewing:consistsOf a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:CoffeeBeverage ;
+    rdfs:range coffee-brewing:SolubleCompound .
+
+coffee-brewing:contains a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:CoffeeBeverage ;
+    rdfs:range coffee-brewing:SolubleCompound .
+
+coffee-brewing:controls a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingParameter ;
+    rdfs:range coffee-brewing:ExtractionProcess .
+
+coffee-brewing:creates a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:ExtractionProcess ;
+    rdfs:range coffee-brewing:CoffeeBeverage .
+
+coffee-brewing:defines a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:RoastProfile ;
+    rdfs:range coffee-brewing:BrewingMethod .
+
+coffee-brewing:determines a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:ExtractionProcess ;
+    rdfs:range coffee-brewing:CoffeeBeverage .
+
+coffee-brewing:enhances a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:FlavorCompound ;
+    rdfs:range coffee-brewing:AromaCompound .
+
+coffee-brewing:extractedFrom a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:SolubleCompound ;
+    rdfs:range coffee-brewing:CoffeeBean .
+
+coffee-brewing:follows a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingMethod ;
+    rdfs:range coffee-brewing:BrewingMethod .
+
+coffee-brewing:hasAcidity a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:SensoryExperience ;
+    rdfs:range coffee-brewing:AcidityComponent .
+
+coffee-brewing:hasAroma a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:SensoryExperience ;
+    rdfs:range coffee-brewing:AromaCompound .
+
+coffee-brewing:hasBean a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:CoffeeBean ;
+    rdfs:range coffee-brewing:CoffeeBean .
+
+coffee-brewing:hasBitterness a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:SensoryExperience ;
+    rdfs:range coffee-brewing:BitternessComponent .
+
+coffee-brewing:hasBody a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:SensoryExperience ;
+    rdfs:range coffee-brewing:BodyComponent .
+
+coffee-brewing:hasDevice a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingMethod ;
+    rdfs:range coffee-brewing:BrewingDevice .
+
+coffee-brewing:hasDuration a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingParameter ;
+    rdfs:range coffee-brewing:TimeInterval .
+
+coffee-brewing:hasExtraction a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingMethod ;
+    rdfs:range coffee-brewing:ExtractionProcess .
+
+coffee-brewing:hasFilter a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingDevice ;
+    rdfs:range coffee-brewing:FilterMedia .
+
+coffee-brewing:hasFlavor a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:SensoryExperience ;
+    rdfs:range coffee-brewing:FlavorCompound .
+
+coffee-brewing:hasGrindSize a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:CoffeeBean ;
+    rdfs:range coffee-brewing:GrindSize .
+
+coffee-brewing:hasMethod a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:CoffeeBeverage ;
+    rdfs:range coffee-brewing:BrewingMethod .
+
+coffee-brewing:hasParameter a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingMethod ;
+    rdfs:range coffee-brewing:BrewingParameter .
+
+coffee-brewing:hasRatio a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingMethod ;
+    rdfs:range coffee-brewing:BrewingRatio .
+
+coffee-brewing:hasRoast a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:CoffeeBean ;
+    rdfs:range coffee-brewing:RoastProfile .
+
+coffee-brewing:hasSensoryResult a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:CoffeeBeverage ;
+    rdfs:range coffee-brewing:SensoryExperience .
+
+coffee-brewing:hasSolubleCompound a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:ExtractionProcess ;
+    rdfs:range coffee-brewing:SolubleCompound .
+
+coffee-brewing:hasTemperature a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingParameter ;
+    rdfs:range coffee-brewing:TemperatureProfile .
+
+coffee-brewing:hasWaterProfile a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:WaterSource ;
+    rdfs:range coffee-brewing:WaterMineralProfile .
+
+coffee-brewing:hasWaterSource a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingMethod ;
+    rdfs:range coffee-brewing:WaterSource .
+
+coffee-brewing:imparts a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:SolubleCompound ;
+    rdfs:range coffee-brewing:FlavorCompound .
+
+coffee-brewing:influences a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingParameter ;
+    rdfs:range coffee-brewing:ExtractionProcess .
+
+coffee-brewing:isAssociatedWith a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:SensoryExperience ;
+    rdfs:range coffee-brewing:SensoryExperience .
+
+coffee-brewing:isCategorizedAs a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:RoastProfile ;
+    rdfs:range coffee-brewing:RoastProfile .
+
+coffee-brewing:isComponentOf a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingDevice ;
+    rdfs:range coffee-brewing:BrewingDevice .
+
+coffee-brewing:isComposedOf a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:CoffeeBeverage ;
+    rdfs:range coffee-brewing:SolubleCompound .
+
+coffee-brewing:isDerivedFrom a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:CoffeeBean ;
+    rdfs:range coffee-brewing:CoffeeBean .
+
+coffee-brewing:isDescribedBy a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:SensoryExperience ;
+    rdfs:range coffee-brewing:SensoryExperience .
+
+coffee-brewing:isDrivenBy a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:ExtractionProcess ;
+    rdfs:range coffee-brewing:BrewingParameter .
+
+coffee-brewing:isExhibitedBy a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:CoffeeBeverage ;
+    rdfs:range coffee-brewing:CoffeeBeverage .
+
+coffee-brewing:isInfluencedBy a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingParameter ;
+    rdfs:range coffee-brewing:BrewingParameter .
+
+coffee-brewing:isLinkedTo a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingParameter ;
+    rdfs:range coffee-brewing:BrewingParameter .
+
+coffee-brewing:isMeasuredIn a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:TimeInterval ;
+    rdfs:range coffee-brewing:TimeInterval .
+
+coffee-brewing:isPartof a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingDevice ;
+    rdfs:range coffee-brewing:BrewingDevice .
+
+coffee-brewing:isProducedBy a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:ExtractionProcess ;
+    rdfs:range coffee-brewing:ExtractionProcess .
+
+coffee-brewing:isRegulatedBy a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingParameter ;
+    rdfs:range coffee-brewing:BrewingParameter .
+
+coffee-brewing:isRelatedTo a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:SensoryExperience ;
+    rdfs:range coffee-brewing:SensoryExperience .
+
+coffee-brewing:isRepresentedBy a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:RoastProfile ;
+    rdfs:range coffee-brewing:RoastProfile .
+
+coffee-brewing:isSubtypeOf a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingMethod ;
+    rdfs:range coffee-brewing:BrewingMethod .
+
+coffee-brewing:isUsedIn a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:FilterMedia ;
+    rdfs:range coffee-brewing:BrewingMethod .
+
+coffee-brewing:matches a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:WaterMineralProfile ;
+    rdfs:range coffee-brewing:WaterMineralProfile .
+
+coffee-brewing:measuredBy a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingParameter ;
+    rdfs:range coffee-brewing:BrewingParameter .
+
+coffee-brewing:modifies a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:ExtractionProcess ;
+    rdfs:range coffee-brewing:SolubleCompound .
+
+coffee-brewing:operatesAt a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingDevice ;
+    rdfs:range coffee-brewing:TemperatureProfile .
+
+coffee-brewing:originatesFrom a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:CoffeeBean ;
+    rdfs:range coffee-brewing:CoffeeBean .
+
+coffee-brewing:produces a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:ExtractionProcess ;
+    rdfs:range coffee-brewing:CoffeeBeverage .
+
+coffee-brewing:reduces a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BitternessComponent ;
+    rdfs:range coffee-brewing:BitternessComponent .
+
+coffee-brewing:requires a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingMethod ;
+    rdfs:range coffee-brewing:BrewingParameter .
+
+coffee-brewing:resultsIn a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:ExtractionProcess ;
+    rdfs:range coffee-brewing:SensoryExperience .
+
+coffee-brewing:sets a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingParameter ;
+    rdfs:range coffee-brewing:BrewingParameter .
+
+coffee-brewing:simulates a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:TemperatureProfile ;
+    rdfs:range coffee-brewing:TemperatureProfile .
+
+coffee-brewing:uses a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:BrewingMethod ;
+    rdfs:range coffee-brewing:Grinder .
+
+coffee-brewing:yields a owl:ObjectProperty ;
+    rdfs:domain coffee-brewing:ExtractionProcess ;
+    rdfs:range coffee-brewing:SolubleCompound .
+
+coffee-brewing:AcidityComponent a owl:Class ;
+    rdfs:subClassOf coffee-brewing:SensoryExperience,
+        coffee-brewing:SolubleCompound .
+
+coffee-brewing:BodyComponent a owl:Class ;
+    rdfs:subClassOf coffee-brewing:SensoryExperience,
+        coffee-brewing:SolubleCompound .
+
+coffee-brewing:BrewingRatio a owl:Class ;
+    rdfs:subClassOf coffee-brewing:BrewingParameter .
+
+coffee-brewing:GrindSize a owl:Class ;
+    rdfs:subClassOf coffee-brewing:BrewingParameter .
+
+coffee-brewing:Grinder a owl:Class ;
+    rdfs:subClassOf coffee-brewing:BrewingDevice .
+
+coffee-brewing:AromaCompound a owl:Class ;
+    rdfs:subClassOf coffee-brewing:SensoryExperience,
+        coffee-brewing:SolubleCompound .
+
+coffee-brewing:FilterMedia a owl:Class ;
+    rdfs:subClassOf coffee-brewing:BrewingDevice .
+
+coffee-brewing:WaterSource a owl:Class ;
+    rdfs:subClassOf coffee-brewing:WaterMineralProfile .
+
+coffee-brewing:BitternessComponent a owl:Class ;
+    rdfs:subClassOf coffee-brewing:SensoryExperience,
+        coffee-brewing:SolubleCompound .
+
+coffee-brewing:FlavorCompound a owl:Class ;
+    rdfs:subClassOf coffee-brewing:SensoryExperience,
+        coffee-brewing:SolubleCompound .
+
+coffee-brewing:TimeInterval a owl:Class ;
+    rdfs:subClassOf coffee-brewing:BrewingParameter .
+
+coffee-brewing:TemperatureProfile a owl:Class ;
+    rdfs:subClassOf coffee-brewing:BrewingParameter .
+
+coffee-brewing:WaterMineralProfile a owl:Class .
+
+coffee-brewing:RoastProfile a owl:Class .
+
+coffee-brewing:BrewingDevice a owl:Class ;
+    rdfs:subClassOf coffee-brewing:ExtractionProcess .
+
+coffee-brewing:CoffeeBean a owl:Class ;
+    rdfs:subClassOf coffee-brewing:RoastProfile .
+
+coffee-brewing:CoffeeBeverage a owl:Class .
+
+coffee-brewing:SolubleCompound a owl:Class ;
+    rdfs:subClassOf coffee-brewing:ExtractionProcess .
+
+coffee-brewing:BrewingMethod a owl:Class ;
+    rdfs:subClassOf coffee-brewing:ExtractionProcess .
+
+coffee-brewing:ExtractionProcess a owl:Class .
+
+coffee-brewing:SensoryExperience a owl:Class ;
+    rdfs:subClassOf coffee-brewing:CoffeeBeverage .
+
+coffee-brewing:BrewingParameter a owl:Class .
+

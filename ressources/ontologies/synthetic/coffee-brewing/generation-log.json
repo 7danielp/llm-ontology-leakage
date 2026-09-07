@@ -1,0 +1,120 @@
+{
+  "generated_at": "2026-09-07T14:20:43",
+  "generator_model": "gemma4-26b",
+  "temperature": 0.5,
+  "system_prompt": "You are an ontology engineer",
+  "requested": {
+    "N_classes": 22,
+    "M_properties": 62
+  },
+  "characteristics_table": [
+    {
+      "ontology": "FOAF",
+      "classes": 15,
+      "properties": 62
+    },
+    {
+      "ontology": "SCHEMA",
+      "classes": 1014,
+      "properties": 1684
+    },
+    {
+      "ontology": "DCTERMS",
+      "classes": 22,
+      "properties": 55
+    },
+    {
+      "ontology": "GOODRELATIONS",
+      "classes": 37,
+      "properties": 102
+    },
+    {
+      "ontology": "NFO",
+      "classes": 52,
+      "properties": 74
+    },
+    {
+      "ontology": "ORG",
+      "classes": 9,
+      "properties": 35
+    },
+    {
+      "ontology": "CINELAB",
+      "classes": 22,
+      "properties": 24
+    },
+    {
+      "ontology": "EPPLAN",
+      "classes": 35,
+      "properties": 73
+    },
+    {
+      "ontology": "URBANIOT",
+      "classes": 13,
+      "properties": 50
+    }
+  ],
+  "domain_prompt": "We are building a benchmark of ontologies covering the following domains:\n- people and social networks (FOAF)\n- general web content markup (schema.org)\n- document and resource metadata (Dublin Core Terms)\n- e-commerce offers and products (GoodRelations)\n- desktop files and documents (NEPOMUK File Ontology)\n- organizational structures (W3C Organization Ontology)\n- film and video annotation (Cinelab)\n- scientific workflow plans (EP-Plan)\n- electric mobility and charging infrastructure (Urban IoT Electric Mobility)\n- weather patterns (Weather Patterns)\n\nName ONE everyday domain for a new ontology that is unrelated to all of the domains above. Reply with the domain name only (one or two words).",
+  "domain_answer_raw": "Coffee brewing",
+  "domain": "Coffee brewing",
+  "generation_prompt": "Build me an ontology of Coffee brewing with 22 Classes and 62 ObjectProperties, please. Provide the result as\n1. List of Classes (one per line)\n2. List of ObjectProperties (one per line)\n3. List of subclass axioms in the format \"A,B\" (one per line, where A is a subclass of B)\n4. List of domain axioms in the format P,D (one per line, where P is a property, D is its domain - leave empty if there is no suitable class)\n5. List of range axioms in the format P,R (one per line, where P is a property, R is its range - leave empty if there is no suitable class)",
+  "generation_answer_raw": "This ontology is designed to model the complex ecosystem of coffee brewing, covering the physical components, the chemical processes, the methods, and the sensory outcomes.\n\n### 1. List of Classes\nCoffeeBean\nRoastProfile\nBrewingMethod\nBrewingDevice\nFilterMedia\nWaterSource\nWaterMineralProfile\nGrindSize\nGrinder\nBrewingParameter\nTemperatureProfile\nExtractionProcess\nSolubleCompound\nAromaCompound\nFlavorCompound\nAcidityComponent\nBodyComponent\nBitternessComponent\nBrewingRatio\nTimeInterval\nSensoryExperience\nCoffeeBeverage\n\n### 2. List of ObjectProperties\nhasBean\nhasRoast\nhasGrindSize\nhasWaterSource\nhasWaterProfile\nhasMethod\nhasDevice\nhasFilter\nhasParameter\nhasTemperature\nhasExtraction\nhasSolubleCompound\nhasAroma\nhasFlavor\nhasAcidity\nhasBody\nhasBitterness\nhasRatio\nhasDuration\nhasSensoryResult\nisUsedIn\nisComponentOf\nisSubtypeOf\nproduces\nrequires\ninfluences\nmodifies\ncontains\nextractedFrom\nmeasuredBy\naffects\nresultsIn\ncharacterizedBy\nconsistsOf\nfollows\nuses\noperatesAt\nyields\nimparts\nenhances\nreduces\ndefines\nsets\ncontrols\ndetermines\nsimulates\nmatches\ncreates\noriginatesFrom\nisPartof\nisAssociatedWith\nisMeasuredIn\nisDrivenBy\nisRegulatedBy\nisLinkedTo\nisRepresentedBy\nisDerivedFrom\nisRelatedTo\nisCategorizedAs\nisInfluencedBy\nisProducedBy\nisDescribedBy\nisExhibitedBy\nisComposedOf\n\n### 3. List of subclass axioms\nCoffeeBean,RoastProfile\nBrewingMethod,ExtractionProcess\nBrewingDevice,ExtractionProcess\nGrinder,BrewingDevice\nFilterMedia,BrewingDevice\nWaterSource,WaterMineralProfile\nGrindSize,BrewingParameter\nTemperatureProfile,BrewingParameter\nBrewingRatio,BrewingParameter\nTimeInterval,BrewingParameter\nSolubleCompound,ExtractionProcess\nAromaCompound,SolubleCompound\nFlavorCompound,SolubleCompound\nAcidityComponent,SolubleCompound\nBodyComponent,SolubleCompound\nBitternessComponent,SolubleCompound\nSensoryExperience,CoffeeBeverage\nAromaCompound,SensoryExperience\nFlavorCompound,SensoryExperience\nAcidityComponent,SensoryExperience\nBodyComponent,SensoryExperience\nBitternessComponent,SensoryExperience\n\n### 4. List of domain axioms\nhasBean,CoffeeBean\nhasRoast,CoffeeBean\nhasGrindSize,CoffeeBean\nhasWaterSource,BrewingMethod\nhasWaterProfile,WaterSource\nhasMethod,CoffeeBeverage\nhasDevice,BrewingMethod\nhasFilter,BrewingDevice\nhasParameter,BrewingMethod\nhasTemperature,BrewingParameter\nhasExtraction,BrewingMethod\nhasSolubleCompound,ExtractionProcess\nhasAroma,SensoryExperience\nhasFlavor,SensoryExperience\nhasAcidity,SensoryExperience\nhasBody,SensoryExperience\nhasBitterness,SensoryExperience\nhasRatio,BrewingMethod\nhasDuration,BrewingParameter\nhasSensoryResult,CoffeeBeverage\nisUsedIn,FilterMedia\nisComponentOf,BrewingDevice\nisSubtypeOf,BrewingMethod\nproduces,ExtractionProcess\nrequires,BrewingMethod\ninfluences,BrewingParameter\nmodifies,ExtractionProcess\ncontains,CoffeeBeverage\nextractedFrom,SolubleCompound\nmeasuredBy,BrewingParameter\naffects,BrewingParameter\nresultsIn,ExtractionProcess\ncharacterizedBy,CoffeeBeverage\nconsistsOf,CoffeeBeverage\nfollows,BrewingMethod\nuses,BrewingMethod\noperatesAt,BrewingDevice\nyields,ExtractionProcess\nimparts,SolubleCompound\nenhances,FlavorCompound\nreduces,BitternessComponent\ndefines,RoastProfile\nsets,BrewingParameter\ncontrols,BrewingParameter\ndetermines,ExtractionProcess\nsimulates,TemperatureProfile\nmatches,WaterMineralProfile\ncreates,ExtractionProcess\noriginatesFrom,CoffeeBean\nisPartof,BrewingDevice\nisAssociatedWith,SensoryExperience\nisMeasuredIn,TimeInterval\nisDrivenBy,ExtractionProcess\nisRegulatedBy,BrewingParameter\nisLinkedTo,BrewingParameter\nisRepresentedBy,RoastProfile\nisDerivedFrom,CoffeeBean\nisRelatedTo,SensoryExperience\nisCategorizedAs,RoastProfile\nisInfluencedBy,BrewingParameter\nisProducedBy,ExtractionProcess\nisDescribedBy,SensoryExperience\nisExhibitedBy,CoffeeBeverage\nisComposedOf,CoffeeBeverage\n\n### 5. List of range axioms\nhasBean,CoffeeBean\nhasRoast,RoastProfile\nhasGrindSize,GrindSize\nhasWaterSource,WaterSource\nhasWaterProfile,WaterMineralProfile\nhasMethod,BrewingMethod\nhasDevice,BrewingDevice\nhasFilter,FilterMedia\nhasParameter,BrewingParameter\nhasTemperature,TemperatureProfile\nhasExtraction,ExtractionProcess\nhasSolubleCompound,SolubleCompound\nhasAroma,AromaCompound\nhasFlavor,FlavorCompound\nhasAcidity,AcidityComponent\nhasBody,BodyComponent\nhasBitterness,BitternessComponent\nhasRatio,BrewingRatio\nhasDuration,TimeInterval\nhasSensoryResult,SensoryExperience\nisUsedIn,BrewingMethod\nisComponentOf,BrewingDevice\nisSubtypeOf,BrewingMethod\nproduces,CoffeeBeverage\nrequires,BrewingParameter\ninfluences,ExtractionProcess\nmodifies,SolubleCompound\ncontains,SolubleCompound\nextractedFrom,CoffeeBean\nmeasuredBy,BrewingParameter\naffects,SensoryExperience\nresultsIn,SensoryExperience\ncharacterizedBy,RoastProfile\nconsistsOf,SolubleCompound\nfollows,BrewingMethod\nuses,Grinder\noperatesAt,TemperatureProfile\nyields,SolubleCompound\nimparts,FlavorCompound\nenhances,AromaCompound\nreduces,BitternessComponent\ndefines,BrewingMethod\nsets,BrewingParameter\ncontrols,ExtractionProcess\ndetermines,CoffeeBeverage\nsimulates,TemperatureProfile\nmatches,WaterMineralProfile\ncreates,CoffeeBeverage\noriginatesFrom,CoffeeBean\nisPartof,BrewingDevice\nisAssociatedWith,SensoryExperience\nisMeasuredIn,TimeInterval\nisDrivenBy,BrewingParameter\nisRegulatedBy,BrewingParameter\nisLinkedTo,BrewingParameter\nisRepresentedBy,RoastProfile\nisDerivedFrom,CoffeeBean\nisRelatedTo,SensoryExperience\nisCategorizedAs,RoastProfile\nisInfluencedBy,BrewingParameter\nisProducedBy,ExtractionProcess\nisDescribedBy,SensoryExperience\nisExhibitedBy,CoffeeBeverage\nisComposedOf,SolubleCompound",
+  "generation_finish_reason": "stop",
+  "namespace": "http://example.org/coffee-brewing#",
+  "parse_stats": {
+    "dropped": [],
+    "empty": 0,
+    "subclass": 22,
+    "domain": 64,
+    "range": 64,
+    "classes": 22,
+    "properties": 64
+  },
+  "jaccard_freshness": [
+    {
+      "ontology": "FOAF",
+      "jaccard_classes": 0.0,
+      "jaccard_properties": 0.0
+    },
+    {
+      "ontology": "SCHEMA",
+      "jaccard_classes": 0.0,
+      "jaccard_properties": 0.003
+    },
+    {
+      "ontology": "DCTERMS",
+      "jaccard_classes": 0.0,
+      "jaccard_properties": 0.017
+    },
+    {
+      "ontology": "GOODRELATIONS",
+      "jaccard_classes": 0.0,
+      "jaccard_properties": 0.0
+    },
+    {
+      "ontology": "NFO",
+      "jaccard_classes": 0.0,
+      "jaccard_properties": 0.0
+    },
+    {
+      "ontology": "ORG",
+      "jaccard_classes": 0.0,
+      "jaccard_properties": 0.0
+    },
+    {
+      "ontology": "CINELAB",
+      "jaccard_classes": 0.0,
+      "jaccard_properties": 0.0
+    },
+    {
+      "ontology": "EPPLAN",
+      "jaccard_classes": 0.0,
+      "jaccard_properties": 0.008
+    },
+    {
+      "ontology": "URBANIOT",
+      "jaccard_classes": 0.0,
+      "jaccard_properties": 0.0
+    }
+  ]
+}

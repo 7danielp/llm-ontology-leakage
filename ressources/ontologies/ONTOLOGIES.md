@@ -2,7 +2,7 @@
 
 Ontology occurrence counts come from a query against Linked Open Vocabularies
 (https://lov.linkeddata.es), run on 2026-07-02 15:30 (the raw result can be found in
-`lov_query.csv`)
+`lov_query.csv`)[^lov]
 
 ## popular
 
@@ -33,3 +33,16 @@ Ontology occurrence counts come from a query against Linked Open Vocabularies
 | File | Ontology | LOV occ. | Namespace | Generated | Topic |
 |---|---|---|---|---|---|
 | `weather-patterns/weather-patterns.ttl` | Weather Patterns (LLM-generated, GET) | — | http://example.org/weather-patterns# | 2026-08-04 11:08 | weather patterns |
+| `coffee-brewing/coffee-brewing.ttl` | Coffee Brewing (LLM-generated, GET) | — | http://example.org/coffee-brewing# | 2026-09-07 14:20 | coffee brewing |
+| `waste-management/waste-management.ttl` | Waste Management (LLM-generated, GET) | — | http://example.org/waste-management# | 2026-09-07 14:36 | waste management |
+
+[^lov]: The query, run on the LOV SPARQL endpoint (all vocabularies ordered by usage in descending order):
+
+    ```sparql
+    PREFIX voaf: <http://purl.org/vocommons/voaf#>
+
+    SELECT ?s ?c WHERE {
+      ?s a voaf:Vocabulary .
+      ?s voaf:occurrencesInDatasets ?c .
+    } ORDER BY DESC(?c)
+    ```

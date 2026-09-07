@@ -186,6 +186,34 @@ ONTOLOGY_PRESETS: dict[str, dict] = {
         },
         "tasks": GRID_TASKS,
     },
+    "SYNTH-2": {
+        "ontology_source": "ressources/ontologies/synthetic/coffee-brewing/coffee-brewing.ttl",
+        "ontology_name": "Coffee Brewing",
+        "ontology_domain": "coffee brewing",
+        "ontology_namespace": "http://example.org/coffee-brewing#",
+        "prefix_map": {"coffee-brewing": "http://example.org/coffee-brewing#"},
+        "format_examples": {
+            "taxonomy": ["http://example.org/coffee-brewing#ExampleClass"],
+            "domain": ["http://example.org/coffee-brewing#ExampleClass"],
+            "range": ["http://example.org/coffee-brewing#ExampleClass"],
+            "property": ["http://example.org/coffee-brewing#exampleProperty", "http://example.org/coffee-brewing#otherExampleProperty"],
+        },
+        "tasks": GRID_TASKS,
+    },
+    "SYNTH-3": {
+        "ontology_source": "ressources/ontologies/synthetic/waste-management/waste-management.ttl",
+        "ontology_name": "Waste Management",
+        "ontology_domain": "waste management",
+        "ontology_namespace": "http://example.org/waste-management#",
+        "prefix_map": {"waste-management": "http://example.org/waste-management#"},
+        "format_examples": {
+            "taxonomy": ["http://example.org/waste-management#ExampleClass"],
+            "domain": ["http://example.org/waste-management#ExampleClass"],
+            "range": ["http://example.org/waste-management#ExampleClass"],
+            "property": ["http://example.org/waste-management#exampleProperty", "http://example.org/waste-management#otherExampleProperty"],
+        },
+        "tasks": GRID_TASKS,
+    },
 }
 
 

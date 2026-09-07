@@ -1,0 +1,317 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix waste-management: <http://example.org/waste-management#> .
+
+waste-management:ElectronicWaste a owl:Class ;
+    rdfs:subClassOf waste-management:HazardousWaste .
+
+waste-management:IndustrialWaste a owl:Class ;
+    rdfs:subClassOf waste-management:WasteMaterial .
+
+waste-management:MedicalWaste a owl:Class ;
+    rdfs:subClassOf waste-management:HazardousWaste .
+
+waste-management:MunicipalSolidWaste a owl:Class ;
+    rdfs:subClassOf waste-management:WasteMaterial .
+
+waste-management:OrganicWaste a owl:Class ;
+    rdfs:subClassOf waste-management:WasteMaterial .
+
+waste-management:RecyclableWaste a owl:Class ;
+    rdfs:subClassOf waste-management:WasteMaterial .
+
+waste-management:buries a owl:ObjectProperty ;
+    rdfs:domain waste-management:Landfill ;
+    rdfs:range waste-management:WasteMaterial .
+
+waste-management:collectedBy a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteManagementService ;
+    rdfs:range waste-management:WasteManagementService .
+
+waste-management:collects a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteManagementService ;
+    rdfs:range waste-management:WasteMaterial .
+
+waste-management:composts a owl:ObjectProperty ;
+    rdfs:domain waste-management:CompostingFacility ;
+    rdfs:range waste-management:WasteMaterial .
+
+waste-management:contains a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteContainer ;
+    rdfs:range waste-management:WasteMaterial .
+
+waste-management:disposedIn a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteProcessingFacility ;
+    rdfs:range waste-management:WasteProcessingFacility .
+
+waste-management:emits a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteProcessingFacility ;
+    rdfs:range waste-management:WasteMaterial .
+
+waste-management:generates a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteGenerator ;
+    rdfs:range waste-management:WasteMaterial .
+
+waste-management:hasCapacity a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteProcessingFacility ;
+    rdfs:range waste-management:WasteProcessingFacility .
+
+waste-management:hasCompliance a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteManagementService ;
+    rdfs:range waste-management:EnvironmentalRegulation .
+
+waste-management:hasComplianceLevel a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteManagementService ;
+    rdfs:range waste-management:EnvironmentalRegulation .
+
+waste-management:hasContainer a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteMaterial ;
+    rdfs:range waste-management:WasteContainer .
+
+waste-management:hasContract a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteManagementService ;
+    rdfs:range waste-management:WasteManagementService .
+
+waste-management:hasDestination a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteMaterial ;
+    rdfs:range waste-management:WasteProcessingFacility .
+
+waste-management:hasEfficiency a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteProcessingFacility ;
+    rdfs:range waste-management:WasteProcessingFacility .
+
+waste-management:hasEmission a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteProcessingFacility ;
+    rdfs:range waste-management:WasteMaterial .
+
+waste-management:hasEquipment a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteProcessingFacility ;
+    rdfs:range waste-management:WasteProcessingFacility .
+
+waste-management:hasFacility a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteManagementService ;
+    rdfs:range waste-management:WasteProcessingFacility .
+
+waste-management:hasHazardLevel a owl:ObjectProperty ;
+    rdfs:domain waste-management:HazardousWaste ;
+    rdfs:range waste-management:HazardousWaste .
+
+waste-management:hasImpact a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteProcessingFacility ;
+    rdfs:range waste-management:WasteMaterial .
+
+waste-management:hasInspection a owl:ObjectProperty ;
+    rdfs:domain waste-management:RegulatoryBody ;
+    rdfs:range waste-management:RegulatoryBody .
+
+waste-management:hasLocation a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteProcessingFacility ;
+    rdfs:range waste-management:WasteCollectionPoint .
+
+waste-management:hasMaterial a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteManagementService ;
+    rdfs:range waste-management:WasteMaterial .
+
+waste-management:hasMethod a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteProcessingFacility ;
+    rdfs:range waste-management:WasteProcessingFacility .
+
+waste-management:hasOrigin a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteMaterial ;
+    rdfs:range waste-management:WasteGenerator .
+
+waste-management:hasOwner a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteManagementService ;
+    rdfs:range waste-management:WasteManagementService .
+
+waste-management:hasPenalty a owl:ObjectProperty ;
+    rdfs:domain waste-management:RegulatoryBody ;
+    rdfs:range waste-management:RegulatoryBody .
+
+waste-management:hasPermit a owl:ObjectProperty ;
+    rdfs:domain waste-management:RegulatoryBody ;
+    rdfs:range waste-management:EnvironmentalRegulation .
+
+waste-management:hasPoint a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteManagementService ;
+    rdfs:range waste-management:WasteCollectionPoint .
+
+waste-management:hasPolicy a owl:ObjectProperty ;
+    rdfs:domain waste-management:RegulatoryBody ;
+    rdfs:range waste-management:WasteManagementPolicy .
+
+waste-management:hasProcess a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteProcessingFacility ;
+    rdfs:range waste-management:WasteProcessingFacility .
+
+waste-management:hasRegulation a owl:ObjectProperty ;
+    rdfs:domain waste-management:RegulatoryBody ;
+    rdfs:range waste-management:EnvironmentalRegulation .
+
+waste-management:hasRegulator a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteManagementService ;
+    rdfs:range waste-management:RegulatoryBody .
+
+waste-management:hasRiskLevel a owl:ObjectProperty ;
+    rdfs:domain waste-management:HazardousWaste ;
+    rdfs:range waste-management:HazardousWaste .
+
+waste-management:hasRoute a owl:ObjectProperty ;
+    rdfs:domain waste-management:CollectionVehicle ;
+    rdfs:range waste-management:WasteCollectionPoint .
+
+waste-management:hasSafetyProtocol a owl:ObjectProperty ;
+    rdfs:domain waste-management:HazardousWaste ;
+    rdfs:range waste-management:HazardousWaste .
+
+waste-management:hasSchedule a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteManagementService ;
+    rdfs:range waste-management:WasteManagementService .
+
+waste-management:hasService a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteGenerator ;
+    rdfs:range waste-management:WasteManagementService .
+
+waste-management:hasStandard a owl:ObjectProperty ;
+    rdfs:domain waste-management:EnvironmentalRegulation ;
+    rdfs:range waste-management:EnvironmentalRegulation .
+
+waste-management:hasStatus a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteMaterial ;
+    rdfs:range waste-management:WasteMaterial .
+
+waste-management:hasType a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteMaterial ;
+    rdfs:range waste-management:WasteMaterial .
+
+waste-management:hasVehicle a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteManagementService ;
+    rdfs:range waste-management:CollectionVehicle .
+
+waste-management:hasVolume a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteMaterial ;
+    rdfs:range waste-management:WasteMaterial .
+
+waste-management:hasWaste a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteManagementService ;
+    rdfs:range waste-management:WasteMaterial .
+
+waste-management:hasWorker a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteManagementService ;
+    rdfs:range waste-management:WasteWorker .
+
+waste-management:incinerates a owl:ObjectProperty ;
+    rdfs:domain waste-management:IncinerationPlant ;
+    rdfs:range waste-management:WasteMaterial .
+
+waste-management:locatedIn a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteProcessingFacility ;
+    rdfs:range waste-management:WasteProcessingFacility .
+
+waste-management:managedBy a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteManagementService ;
+    rdfs:range waste-management:WasteManagementService .
+
+waste-management:manages a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteManagementService ;
+    rdfs:range waste-management:WasteManagementService .
+
+waste-management:monitoredBy a owl:ObjectProperty ;
+    rdfs:domain waste-management:RegulatoryBody ;
+    rdfs:range waste-management:RegulatoryBody .
+
+waste-management:operatesAt a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteProcessingFacility ;
+    rdfs:range waste-management:WasteProcessingFacility .
+
+waste-management:operatesEquipment a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteWorker ;
+    rdfs:range waste-management:WasteMaterial .
+
+waste-management:operatesVehicle a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteWorker ;
+    rdfs:range waste-management:WasteMaterial .
+
+waste-management:processedAt a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteMaterial ;
+    rdfs:range waste-management:WasteProcessingFacility .
+
+waste-management:produces a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteProcessingFacility ;
+    rdfs:range waste-management:WasteMaterial .
+
+waste-management:recycles a owl:ObjectProperty ;
+    rdfs:domain waste-management:RecyclingCenter ;
+    rdfs:range waste-management:WasteMaterial .
+
+waste-management:regulatedBy a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteMaterial ;
+    rdfs:range waste-management:EnvironmentalRegulation .
+
+waste-management:requiresHandlingBy a owl:ObjectProperty ;
+    rdfs:domain waste-management:HazardousWaste ;
+    rdfs:range waste-management:WasteWorker .
+
+waste-management:storedIn a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteMaterial ;
+    rdfs:range waste-management:WasteContainer .
+
+waste-management:transportedBy a owl:ObjectProperty ;
+    rdfs:domain waste-management:CollectionVehicle ;
+    rdfs:range waste-management:CollectionVehicle .
+
+waste-management:transports a owl:ObjectProperty ;
+    rdfs:domain waste-management:CollectionVehicle ;
+    rdfs:range waste-management:WasteMaterial .
+
+waste-management:treats a owl:ObjectProperty ;
+    rdfs:domain waste-management:WasteProcessingFacility ;
+    rdfs:range waste-management:WasteMaterial .
+
+waste-management:CompostingFacility a owl:Class ;
+    rdfs:subClassOf waste-management:WasteProcessingFacility .
+
+waste-management:IncinerationPlant a owl:Class ;
+    rdfs:subClassOf waste-management:WasteProcessingFacility .
+
+waste-management:Landfill a owl:Class ;
+    rdfs:subClassOf waste-management:WasteProcessingFacility .
+
+waste-management:RecyclingCenter a owl:Class ;
+    rdfs:subClassOf waste-management:WasteProcessingFacility .
+
+waste-management:WasteManagementPolicy a owl:Class ;
+    rdfs:subClassOf waste-management:WasteMaterial .
+
+waste-management:WasteCollectionPoint a owl:Class ;
+    rdfs:subClassOf waste-management:WasteMaterial .
+
+waste-management:WasteContainer a owl:Class ;
+    rdfs:subClassOf waste-management:WasteMaterial .
+
+waste-management:WasteGenerator a owl:Class ;
+    rdfs:subClassOf waste-management:WasteMaterial .
+
+waste-management:WasteWorker a owl:Class ;
+    rdfs:subClassOf waste-management:WasteMaterial .
+
+waste-management:CollectionVehicle a owl:Class ;
+    rdfs:subClassOf waste-management:WasteMaterial .
+
+waste-management:EnvironmentalRegulation a owl:Class ;
+    rdfs:subClassOf waste-management:WasteMaterial .
+
+waste-management:HazardousWaste a owl:Class ;
+    rdfs:subClassOf waste-management:WasteMaterial .
+
+waste-management:RegulatoryBody a owl:Class ;
+    rdfs:subClassOf waste-management:WasteMaterial .
+
+waste-management:WasteManagementService a owl:Class ;
+    rdfs:subClassOf waste-management:WasteMaterial .
+
+waste-management:WasteProcessingFacility a owl:Class ;
+    rdfs:subClassOf waste-management:WasteMaterial .
+
+waste-management:WasteMaterial a owl:Class .
+
