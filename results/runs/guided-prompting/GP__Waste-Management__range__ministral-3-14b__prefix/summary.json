@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "range",
+  "model": "ministral-3-14b",
+  "id_format": "prefix",
+  "ontology_source": "ressources/ontologies/synthetic/waste-management/waste-management.ttl",
+  "ontology_name": "Waste Management",
+  "temperature": 0.0,
+  "n_records": 62,
+  "n_format_match_normal": 62,
+  "n_format_match_guided": 62,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 62,
+      "mean_normal": 0.9032258064516129,
+      "mean_guided": 0.7580645161290323,
+      "gap": -0.14516129032258066
+    },
+    "wup": {
+      "n": 62,
+      "mean_normal": 0.11290322580645161,
+      "mean_guided": 0.0935483870967742,
+      "gap": -0.019354838709677424
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "method": "min-k",
+  "client": "MakiClient",
+  "identity": {
+    "task": "taxonomy",
+    "model": "ministral-3-14b",
+    "id_format": "full",
+    "ontology_source": "ressources/ontologies/synthetic/coffee-brewing/coffee-brewing.ttl",
+    "ontology_name": "Coffee Brewing",
+    "ontology_namespace": "http://example.org/coffee-brewing#",
+    "temperature": 0.0
+  },
+  "prefix_map": {
+    "coffee-brewing": "http://example.org/coffee-brewing#"
+  },
+  "format_example_iris": null,
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://www.w3.org/2000/01/rdf-schema#domain",
+    "range": "http://www.w3.org/2000/01/rdf-schema#range"
+  },
+  "limit": null
+}

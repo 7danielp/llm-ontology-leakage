@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "taxonomy",
+  "model": "ministral-3-14b",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/synthetic/coffee-brewing/coffee-brewing.ttl",
+  "ontology_name": "Coffee Brewing",
+  "temperature": 0.0,
+  "n_records": 17,
+  "n_format_match_normal": 17,
+  "n_format_match_guided": 17,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 17,
+      "mean_normal": 0.9411764705882353,
+      "mean_guided": 0.9411764705882353,
+      "gap": 0.0
+    },
+    "wup": {
+      "n": 17,
+      "mean_normal": 0.11764705882352941,
+      "mean_guided": 0.11764705882352941,
+      "gap": 0.0
+    }
+  }
+}

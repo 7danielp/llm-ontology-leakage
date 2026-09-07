@@ -1,0 +1,48 @@
+{
+  "method": "ts-guessing",
+  "task": "taxonomy",
+  "model": "qwen3.6-36b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/synthetic/coffee-brewing/coffee-brewing.ttl",
+  "ontology_name": "Coffee Brewing",
+  "temperature": 0.0,
+  "n_records": 17,
+  "n_format_match": 17,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 17,
+        "n_match": 1,
+        "em": 0.058823529411764705,
+        "tp": 1,
+        "fp": 16,
+        "fn": 16,
+        "precision": 0.058823529411764705,
+        "recall": 0.058823529411764705,
+        "f1": 0.058823529411764705
+      },
+      "gold_in_ns": {
+        "n": 17,
+        "n_match": 1,
+        "em": 0.058823529411764705,
+        "tp": 1,
+        "fp": 16,
+        "fn": 16,
+        "precision": 0.058823529411764705,
+        "recall": 0.058823529411764705,
+        "f1": 0.058823529411764705
+      },
+      "gold_external": {
+        "n": 0,
+        "n_match": 0,
+        "em": null,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      }
+    }
+  }
+}

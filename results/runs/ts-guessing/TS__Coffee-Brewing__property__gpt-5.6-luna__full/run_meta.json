@@ -1,0 +1,26 @@
+{
+  "method": "ts-guessing",
+  "client": "OpenAIClient",
+  "identity": {
+    "task": "property",
+    "model": "gpt-5.6-luna",
+    "id_format": "full",
+    "ontology_source": "ressources/ontologies/synthetic/coffee-brewing/coffee-brewing.ttl",
+    "ontology_name": "Coffee Brewing",
+    "ontology_namespace": "http://example.org/coffee-brewing#",
+    "temperature": 0.0
+  },
+  "prefix_map": {
+    "coffee-brewing": "http://example.org/coffee-brewing#"
+  },
+  "format_example_iris": [
+    "http://example.org/coffee-brewing#exampleProperty",
+    "http://example.org/coffee-brewing#otherExampleProperty"
+  ],
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://www.w3.org/2000/01/rdf-schema#domain",
+    "range": "http://www.w3.org/2000/01/rdf-schema#range"
+  },
+  "limit": null
+}

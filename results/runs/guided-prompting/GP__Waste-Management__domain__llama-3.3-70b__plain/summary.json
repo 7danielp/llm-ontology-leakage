@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "domain",
+  "model": "llama-3.3-70b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/synthetic/waste-management/waste-management.ttl",
+  "ontology_name": "Waste Management",
+  "temperature": 0.0,
+  "n_records": 62,
+  "n_format_match_normal": 45,
+  "n_format_match_guided": 61,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 62,
+      "mean_normal": 0.3870967741935484,
+      "mean_guided": 0.8225806451612904,
+      "gap": 0.43548387096774194
+    },
+    "wup": {
+      "n": 62,
+      "mean_normal": 0.03494623655913978,
+      "mean_guided": 0.0935483870967742,
+      "gap": 0.05860215053763441
+    }
+  }
+}

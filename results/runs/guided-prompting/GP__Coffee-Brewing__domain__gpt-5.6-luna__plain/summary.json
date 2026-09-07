@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "domain",
+  "model": "gpt-5.6-luna",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/synthetic/coffee-brewing/coffee-brewing.ttl",
+  "ontology_name": "Coffee Brewing",
+  "temperature": 0.0,
+  "n_records": 64,
+  "n_format_match_normal": 62,
+  "n_format_match_guided": 63,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 64,
+      "mean_normal": 0.234375,
+      "mean_guided": 1.515625,
+      "gap": 1.28125
+    },
+    "wup": {
+      "n": 64,
+      "mean_normal": 0.028125,
+      "mean_guided": 0.15989583333333335,
+      "gap": 0.13177083333333334
+    }
+  }
+}

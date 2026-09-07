@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "property",
+  "model": "qwen3.5-122b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/synthetic/waste-management/waste-management.ttl",
+  "ontology_name": "Waste Management",
+  "temperature": 0.0,
+  "n_records": 14,
+  "n_format_match_normal": 12,
+  "n_format_match_guided": 6,
+  "n_self_echo_normal": 2,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 14,
+      "mean_normal": 2.0029761904761907,
+      "mean_guided": 0.5833333333333334,
+      "gap": -1.4196428571428572
+    },
+    "wup": {
+      "n": 14,
+      "mean_normal": 0.2373015873015873,
+      "mean_guided": 0.06944444444444445,
+      "gap": -0.16785714285714284
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "method": "ts-guessing",
+  "task": "range",
+  "model": "llama-3.3-70b",
+  "id_format": "prefix",
+  "ontology_source": "ressources/ontologies/synthetic/waste-management/waste-management.ttl",
+  "ontology_name": "Waste Management",
+  "temperature": 0.0,
+  "n_records": 62,
+  "n_format_match": 62,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 62,
+        "n_match": 9,
+        "em": 0.14516129032258066,
+        "tp": 9,
+        "fp": 53,
+        "fn": 53,
+        "precision": 0.14516129032258066,
+        "recall": 0.14516129032258066,
+        "f1": 0.14516129032258066
+      },
+      "gold_in_ns": {
+        "n": 62,
+        "n_match": 9,
+        "em": 0.14516129032258066,
+        "tp": 9,
+        "fp": 53,
+        "fn": 53,
+        "precision": 0.14516129032258066,
+        "recall": 0.14516129032258066,
+        "f1": 0.14516129032258066
+      },
+      "gold_external": {
+        "n": 0,
+        "n_match": 0,
+        "em": null,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      }
+    }
+  }
+}

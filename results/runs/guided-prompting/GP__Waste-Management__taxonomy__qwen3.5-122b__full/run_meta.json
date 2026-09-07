@@ -1,0 +1,25 @@
+{
+  "method": "guided-prompting",
+  "client": "MakiClient",
+  "identity": {
+    "task": "taxonomy",
+    "model": "qwen3.5-122b",
+    "id_format": "full",
+    "ontology_source": "ressources/ontologies/synthetic/waste-management/waste-management.ttl",
+    "ontology_name": "Waste Management",
+    "ontology_namespace": "http://example.org/waste-management#",
+    "temperature": 0.0
+  },
+  "prefix_map": {
+    "waste-management": "http://example.org/waste-management#"
+  },
+  "format_example_iris": [
+    "http://example.org/waste-management#ExampleClass"
+  ],
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://www.w3.org/2000/01/rdf-schema#domain",
+    "range": "http://www.w3.org/2000/01/rdf-schema#range"
+  },
+  "limit": null
+}

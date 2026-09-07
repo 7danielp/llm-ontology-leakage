@@ -1,0 +1,12 @@
+{
+  "method": "min-k",
+  "task": "range",
+  "model": "qwen3.6-36b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/synthetic/waste-management/waste-management.ttl",
+  "ontology_name": "Waste Management",
+  "block_size": 10,
+  "n_blocks": 7,
+  "n_axioms": 62,
+  "mean_min_20": -7.1238773897733045
+}

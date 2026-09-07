@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "property",
+  "model": "qwen3.6-36b",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/synthetic/coffee-brewing/coffee-brewing.ttl",
+  "ontology_name": "Coffee Brewing",
+  "temperature": 0.0,
+  "n_records": 16,
+  "n_format_match_normal": 16,
+  "n_format_match_guided": 16,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 16,
+      "mean_normal": 1.8396577380952381,
+      "mean_guided": 2.015625,
+      "gap": 0.17596726190476186
+    },
+    "wup": {
+      "n": 16,
+      "mean_normal": 0.2128720238095238,
+      "mean_guided": 0.23876488095238096,
+      "gap": 0.025892857142857162
+    }
+  }
+}

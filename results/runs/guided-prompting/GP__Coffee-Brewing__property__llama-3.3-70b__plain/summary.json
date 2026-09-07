@@ -1,0 +1,28 @@
+{
+  "method": "guided-prompting",
+  "task": "property",
+  "model": "llama-3.3-70b",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/synthetic/coffee-brewing/coffee-brewing.ttl",
+  "ontology_name": "Coffee Brewing",
+  "temperature": 0.0,
+  "n_records": 16,
+  "n_format_match_normal": 16,
+  "n_format_match_guided": 16,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "gap": {
+    "path": {
+      "n": 16,
+      "mean_normal": 0.3125,
+      "mean_guided": 1.0821180555555556,
+      "gap": 0.7696180555555556
+    },
+    "wup": {
+      "n": 16,
+      "mean_normal": 0.03869047619047619,
+      "mean_guided": 0.12357597552910053,
+      "gap": 0.08488549933862434
+    }
+  }
+}
