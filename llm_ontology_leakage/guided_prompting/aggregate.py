@@ -1,6 +1,7 @@
 """Aggregation of the Guided Prompting runs into CSV and LaTeX tables"""
 
 import csv
+import json
 import random
 from pathlib import Path
 
@@ -45,14 +46,14 @@ def aggregate_gp(results_dir: Path) -> dict[str, Path]:
     if not runs:
         raise RuntimeError(f"No guided-prompting runs found under {results_dir / 'runs'}")
 
-    context: dict[tuple, tuple] = {}  # (source, ns) -> (resolver, class_sim, prop_sim)
+    context: dict[tuple, tuple] = {}  # (source, ns, prefix_map, predicates) -> (resolver, class_sim, prop_sim)
     rows: list[dict] = []
     cells: dict[str, dict[tuple[str, str, str], float | None]] = {m: {} for m in MEASURES}
 
     for run in runs:
         ident = run["meta"]["identity"]
         spec = TASKS[ident["task"]]
-        key = (ident["ontology_source"], ident["ontology_namespace"])
+        key = (ident["ontology_source"], ident["ontology_namespace"], json.dumps(run["meta"].get("prefix_map", {}), sort_keys=True), json.dumps(run["meta"].get("axiom_predicates") or {}, sort_keys=True))
         if key not in context:
             graph = load_graph(
                 ident["ontology_source"], run["meta"].get("prefix_map", {})
@@ -75,6 +76,8 @@ def aggregate_gp(results_dir: Path) -> dict[str, Path]:
             scored.append(
                 {
                     "gold_in_ns": r["gold_in_ontology_namespace"],
+                    "truncated_normal": r["finish_reason_normal"] == "length",
+                    "truncated_guided": r["finish_reason_guided"] == "length",
                     "normal": gp_score(
                         r["raw_normal"], r["gold_iris"], spec, resolver, class_sim, prop_sim
                     ),
@@ -116,6 +119,8 @@ def aggregate_gp(results_dir: Path) -> dict[str, Path]:
                         "measure": measure,
                         "segment": segment,
                         "n": n,
+                        "n_truncated_normal": sum(s["truncated_normal"] for s in sel),
+                        "n_truncated_guided": sum(s["truncated_guided"] for s in sel),
                         "mean_normal": fmt_cell(mean_normal),
                         "mean_guided": fmt_cell(mean_guided),
                         "gap": fmt_cell(gap),
@@ -142,7 +147,7 @@ def aggregate_gp(results_dir: Path) -> dict[str, Path]:
     agg_path = results_dir / "gp_aggregate.csv"
     fieldnames = [
         "method", "ontology", "task", "model", "id_format", "measure", "segment",
-        "n", "mean_normal", "mean_guided", "gap", "p_value", "significant",
+        "n", "n_truncated_normal", "n_truncated_guided", "mean_normal", "mean_guided", "gap", "p_value", "significant",
     ]
     rows.sort(
         key=lambda r: (

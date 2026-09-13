@@ -89,7 +89,7 @@ def aggregate_mink(results_dir: Path) -> dict[str, Path]:
         writer.writerows(rows)
     outputs["mink_aggregate"] = agg_path
 
-    # compact overview matrix, where each cell is the mean min-20 of one cell (rows include the "all" row)
+    # compact overview matrix: one entry per ontology/task row and model x format column, the mean min-20 over its blocks
     matrix_path = results_dir / "mink_matrix.csv"
     with open(matrix_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)

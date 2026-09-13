@@ -38,6 +38,7 @@ def aggregate_ts(results_dir: Path) -> dict[str, Path]:
             scored.append(
                 {
                     "gold_in_ns": r["gold_in_ontology_namespace"],
+                    "truncated": r["finish_reason"] == "length",
                     "strict": strict,
                     "tp": tp,
                     "fp": fp,
@@ -52,6 +53,7 @@ def aggregate_ts(results_dir: Path) -> dict[str, Path]:
             cells[scoring][key] = table[scoring]["all"]["em"]
             for segment in SEGMENTS:
                 cell = table[scoring][segment]
+                in_segment = [s for s in scored if segment == "all" or s["gold_in_ns"] == (segment == "gold_in_ns")]
                 long_rows.append(
                     {
                         "method": run["meta"]["method"],
@@ -63,6 +65,7 @@ def aggregate_ts(results_dir: Path) -> dict[str, Path]:
                         "segment": segment,
                         "n": cell["n"],
                         "n_match": cell["n_match"],
+                        "n_truncated": sum(s["truncated"] for s in in_segment),
                         "em": fmt_cell(cell["em"]),
                         "tp": cell["tp"],
                         "fp": cell["fp"],
@@ -102,7 +105,7 @@ def aggregate_ts(results_dir: Path) -> dict[str, Path]:
             f,
             fieldnames=[
                 "method", "ontology", "task", "model", "id_format", "scoring", "segment",
-                "n", "n_match", "em", "tp", "fp", "fn", "precision", "recall", "f1",
+                "n", "n_match", "n_truncated", "em", "tp", "fp", "fn", "precision", "recall", "f1",
             ],
         )
         writer.writeheader()
