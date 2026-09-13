@@ -8,6 +8,7 @@
   "temperature": 0.0,
   "n_records": 3,
   "n_format_match": 2,
+  "n_truncated": 0,
   "metrics": {
     "strict": {
       "all": {
@@ -22,17 +23,6 @@
         "f1": 0.0
       },
       "gold_in_ns": {
-        "n": 0,
-        "n_match": 0,
-        "em": null,
-        "tp": 0,
-        "fp": 0,
-        "fn": 0,
-        "precision": null,
-        "recall": null,
-        "f1": null
-      },
-      "gold_external": {
         "n": 3,
         "n_match": 0,
         "em": 0.0,
@@ -42,6 +32,17 @@
         "precision": 0.0,
         "recall": 0.0,
         "f1": 0.0
+      },
+      "gold_external": {
+        "n": 0,
+        "n_match": 0,
+        "em": null,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
       }
     }
   }
