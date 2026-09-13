@@ -22,7 +22,7 @@ DEFAULT_AXIOM_PREDICATES: dict[TaskName, str] = {
 }
 
 # One preset per ontology
-# prefix_map covers namespaces the file leaves undeclared (else prefix rendering falls back to e.g. "ns1:")
+# prefix_map covers namespaces the file leaves undeclared (else prefix rendering raises a ValueError that names the missing namespace)
 # ontology_namespace is the boundary for the internal/external gold flag
 # ontology_domain is a short topic description, generate_synthetic.py uses it to pick an unrelated domain
 ONTOLOGY_PRESETS: dict[str, dict] = {
@@ -66,7 +66,8 @@ ONTOLOGY_PRESETS: dict[str, dict] = {
         "ontology_source": "ressources/ontologies/popular/dublin_core_terms.ttl",
         "ontology_name": "Dublin Core Terms",
         "ontology_domain": "document and resource metadata",
-        "ontology_namespace": "http://purl.org/dc/terms/",
+        # DCMI sibling vocabularies (dcmitype, dcam, elements) also count as internal
+        "ontology_namespace": "http://purl.org/dc/",
         "prefix_map": {"dcmitype": "http://purl.org/dc/dcmitype/"},
         # dcterms words range as rangeIncludes
         "axiom_predicates": {"range": "http://purl.org/dc/dcam/rangeIncludes"},
