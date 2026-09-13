@@ -144,6 +144,8 @@ def _summarize_gp(records, cfg, spec, resolver, class_sim, prop_sim) -> dict:
         "n_format_match_guided": sum(r["format_match_guided"] for r in records),
         "n_self_echo_normal": sum(r["self_echo_normal"] for r in records),
         "n_self_echo_guided": sum(r["self_echo_guided"] for r in records),
+        "n_truncated_normal": sum(r["finish_reason_normal"] == "length" for r in records),  # answers cut off at max_tokens
+        "n_truncated_guided": sum(r["finish_reason_guided"] == "length" for r in records),
         "gap": gap,
     }
 

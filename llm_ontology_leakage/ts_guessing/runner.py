@@ -91,6 +91,7 @@ def _summarize(records: list[dict], cfg: RunConfig, spec: TaskSpec) -> dict:
         "temperature": cfg.temperature,
         "n_records": len(records),
         "n_format_match": sum(r["format_match"] for r in records),
+        "n_truncated": sum(r["finish_reason"] == "length" for r in records),  # answers cut off at max_tokens
         "metrics": metrics_table(scored),  # EM and pooled precision/recall/F1 per segment
     }
 
