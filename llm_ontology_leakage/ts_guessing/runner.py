@@ -9,7 +9,7 @@ from rdflib import URIRef
 
 from ..core.config import RunConfig
 from ..core.clients import CompletionClient
-from ..core.ontology import load_graph, render_identifier
+from ..core.ontology import load_graph, render_identifier, sample_items
 from ..core.parsing import matches_format
 from ..core.runs import run_dir_for, write_meta
 from .scoring import confusion_counts, metrics_table, score
@@ -109,7 +109,11 @@ def run_ts_guessing(cfg: RunConfig, client: CompletionClient) -> dict[str, Any]:
             "Check the preset's axiom_predicates mapping."
         )
     if cfg.limit is not None:
-        items = items[: cfg.limit]
+        items = items[: cfg.limit]  # test runs: the first N questions
+    if cfg.sample is not None:
+        items = sample_items(items, cfg.sample, cfg.seed)  # experiments: random N per task, the same draw in every run of the cell
+        if cfg.model.endswith("+web"):
+            client.allow_web_search(len(items))  # one request per question
 
     example_iris = cfg.format_examples[cfg.task]
     example_ids = [render_identifier(URIRef(iri), graph, cfg.id_format) for iri in example_iris]
@@ -132,7 +136,8 @@ def run_ts_guessing(cfg: RunConfig, client: CompletionClient) -> dict[str, Any]:
     run_dir = run_dir_for(cfg, method_prefix="TS")
     run_dir.mkdir(parents=True, exist_ok=True)
     (run_dir / "summary.json").unlink(missing_ok=True)  # drop a stale summary so a crashed rerun cannot look complete
-    write_meta(run_dir, cfg, method=METHOD, client_name=type(client).__name__)
+    sampled_keys = [str(item.given) for item in items] if cfg.sample is not None else None
+    write_meta(run_dir, cfg, method=METHOD, client_name=type(client).__name__, sampled_keys=sampled_keys)
 
     max_tokens = cfg.max_tokens if cfg.max_tokens is not None else spec.default_max_tokens
     ns = cfg.ontology_namespace

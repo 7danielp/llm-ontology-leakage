@@ -8,7 +8,7 @@ from rdflib import URIRef
 
 from ..core.config import RunConfig
 from ..core.clients import CompletionClient
-from ..core.ontology import EntityResolver, load_graph, render_identifier
+from ..core.ontology import EntityResolver, load_graph, render_identifier, sample_items
 from ..core.parsing import matches_format, parse_elements
 from .similarity import MEASURES, ClassSimilarity, PropertySimilarity, set_similarity
 from ..core.tasks import TASKS, TaskSpec
@@ -170,7 +170,11 @@ def run_guided_prompting(cfg: RunConfig, client: CompletionClient) -> dict[str, 
             "Check the preset's axiom_predicates mapping."
         )
     if cfg.limit is not None:
-        items = items[: cfg.limit]
+        items = items[: cfg.limit]  # test runs: the first N questions
+    if cfg.sample is not None:
+        items = sample_items(items, cfg.sample, cfg.seed)  # experiments: random N per task, the same draw in every run of the cell
+        if cfg.model.endswith("+web"):
+            client.allow_web_search(2 * len(items))  # two requests per question (normal and guided)
 
     predicate_key = "domain" if spec.name == "property" else spec.name  # property task asks for subjects of domain axioms
     predicate_label = render_identifier(
@@ -193,7 +197,8 @@ def run_guided_prompting(cfg: RunConfig, client: CompletionClient) -> dict[str, 
     run_dir = run_dir_for(cfg, method_prefix="GP")
     run_dir.mkdir(parents=True, exist_ok=True)
     (run_dir / "summary.json").unlink(missing_ok=True)  # drop stale summary so crashed rerun cannot look complete
-    write_meta(run_dir, cfg, method=METHOD, client_name=type(client).__name__)
+    sampled_keys = [str(item.given) for item in items] if cfg.sample is not None else None
+    write_meta(run_dir, cfg, method=METHOD, client_name=type(client).__name__, sampled_keys=sampled_keys)
 
     max_tokens = cfg.max_tokens if cfg.max_tokens is not None else spec.default_max_tokens
     ns = cfg.ontology_namespace

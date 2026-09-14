@@ -29,8 +29,11 @@ def run_dir_for(cfg: RunConfig, method_prefix: str) -> Path:
     return cfg.results_dir / "runs" / METHOD_DIRS[method_prefix] / f"{method_prefix}__{name}"
 
 
-def write_meta(run_dir: Path, cfg: RunConfig, method: str, client_name: str) -> None:
-    """Write run_meta.json with the settings of the run"""
+def write_meta(
+    run_dir: Path, cfg: RunConfig, method: str, client_name: str,
+    sampled_keys: list[str] | None = None, sampled_from: str | None = None,
+) -> None:
+    """Write run_meta.json with the settings of the run, plus a sample block for sampled runs"""
     meta = {
         "method": method,
         "client": client_name,
@@ -40,9 +43,19 @@ def write_meta(run_dir: Path, cfg: RunConfig, method: str, client_name: str) -> 
         "axiom_predicates": cfg.axiom_predicates,
         "limit": cfg.limit,
     }
+    if cfg.sample is not None:
+        meta["sample"] = {"n": cfg.sample, "seed": cfg.seed, "keys": sampled_keys}
+        if sampled_from is not None:
+            meta["sample"]["from"] = sampled_from
     (run_dir / "run_meta.json").write_text(
         json.dumps(meta, indent=2, ensure_ascii=False), encoding="utf-8"
     )
+
+
+def read_records(run_dir: Path) -> list[dict]:
+    """Read the records.jsonl of a run"""
+    lines = (run_dir / "records.jsonl").read_text(encoding="utf-8").splitlines()
+    return [json.loads(line) for line in lines if line.strip()]
 
 
 def load_runs(results_dir: Path) -> list[dict]:
@@ -58,12 +71,7 @@ def load_runs(results_dir: Path) -> list[dict]:
             print(f"  (skipping incomplete run {run_dir.name}: no summary.json)")
             continue
         meta = json.loads(meta_file.read_text(encoding="utf-8"))
-        records = [
-            json.loads(line)
-            for line in records_file.read_text(encoding="utf-8").splitlines()
-            if line.strip()
-        ]
-        runs.append({"dir": run_dir, "meta": meta, "records": records})
+        runs.append({"dir": run_dir, "meta": meta, "records": read_records(run_dir)})
     clients = {r["meta"].get("client", "MakiClient") for r in runs}
     if "MockClient" in clients and len(clients) > 1:
         raise RuntimeError(

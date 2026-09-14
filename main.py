@@ -1,8 +1,8 @@
 """Start runs, grids and aggregations of the three leakage detection methods from the terminal"""
 
-# uv run main.py run --method {ts-guessing,guided-prompting,min-k} --ontology-preset {FOAF,SCHEMA,DCTERMS,...} --task {taxonomy,domain,range,property} --model <maki or openai model> --format {plain,prefix,full} [--mock]
-# uv run main.py grid --method {...} --ontology-preset {...} [--tasks ...] [--models ...] [--formats ...] [--mock]
-# uv run main.py aggregate --method {ts-guessing,guided-prompting,min-k}
+# uv run main.py run --method {ts-guessing,guided-prompting,min-k} --ontology-preset {FOAF,SCHEMA,DCTERMS,...} --task {taxonomy,domain,range,property} --model <maki or openai model> --format {plain,prefix,full} [--mock] [--sample N --seed S --results-dir <dir>]
+# uv run main.py grid --method {...} --ontology-preset {...} [--tasks ...] [--models ...] [--formats ...] [--mock] [--sample N --seed S --results-dir <dir>]
+# uv run main.py aggregate --method {ts-guessing,guided-prompting,min-k} [--results-dir <dir>]
 # {...} required choices, [...] optional (grid runs everything if left out)
 
 import argparse
@@ -41,7 +41,7 @@ RUNNERS = {"ts-guessing": run_ts_guessing, "guided-prompting": run_guided_prompt
 
 
 def _add_common_args(p: argparse.ArgumentParser) -> None:
-    """Attach the arguments shared by "run" and "grid" (method, preset, limit, results dir, mock)"""
+    """Attach the arguments shared by "run" and "grid" (method, preset, limit, sample, seed, results dir, mock)"""
     p.add_argument(
         "--method",
         choices=list(METHODS),
@@ -54,7 +54,9 @@ def _add_common_args(p: argparse.ArgumentParser) -> None:
         required=True,
         help="preconfigured ontology (source, namespace, prefixes, examples, tasks)",
     )
-    p.add_argument("--limit", type=int, help="only run the first N records per run")
+    p.add_argument("--limit", type=int, help="only run the first N questions (TS, GP) or blocks (Min-K) per run")
+    p.add_argument("--sample", type=int, help="random sample of at most N questions per task (TS, GP), identical across formats and methods, required for web search")
+    p.add_argument("--seed", type=int, default=42, help="seed of the sample draw (default 42)")
     p.add_argument("--results-dir", type=Path)
     p.add_argument("--mock", action="store_true", help="use a canned-answer client (no MAKI or OpenAI)")
 
@@ -68,6 +70,9 @@ def _base_config(
     )
     if args.limit is not None:
         cfg.limit = args.limit
+    if args.sample is not None:
+        cfg.sample = args.sample
+        cfg.seed = args.seed
     if args.results_dir is not None:
         cfg.results_dir = args.results_dir
     return cfg
@@ -125,6 +130,16 @@ def main() -> None:
     if args.command == "aggregate":
         _print_aggregation(args.results_dir, args.method)
         return
+
+    if args.sample is not None:
+        if args.sample < 1:
+            parser.error("--sample must be at least 1")
+        if args.limit is not None:
+            parser.error("--sample and --limit exclude each other")
+        if args.method == "min-k":
+            parser.error("min-k scores whole axiom blocks, it has no sampling")
+        if args.results_dir is None:
+            parser.error("--sample needs --results-dir, a sampled run has the same directory name as the full run")
 
     if args.command == "run":  # run: task, model and format come straight from the arguments
         cfg = _base_config(

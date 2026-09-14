@@ -1,5 +1,6 @@
 """Load ontology, extract per-task items, and render or resolve identifiers"""
 
+import random
 from collections import defaultdict
 from dataclasses import dataclass
 
@@ -89,6 +90,14 @@ def _grouped_by_subject(pairs: list[tuple[URIRef, URIRef]]) -> list[TaskItem]:
         (TaskItem(s, tuple(sorted(golds, key=str))) for s, golds in by_subject.items()),
         key=lambda item: str(item.given),
     )
+
+
+def sample_items(items: list[TaskItem], n: int, seed: int) -> list[TaskItem]:
+    """Random sample of at most n items, identical across formats and methods for the same seed"""
+    if n >= len(items):
+        return list(items)
+    drawn = random.Random(seed).sample(items, n)
+    return sorted(drawn, key=lambda item: str(item.given))  # keep the record order of the full runs
 
 
 def extract_taxonomy_items(graph: Graph, cfg: RunConfig) -> list[TaskItem]:

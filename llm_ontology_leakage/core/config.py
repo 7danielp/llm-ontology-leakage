@@ -235,6 +235,8 @@ class RunConfig:
     axiom_predicates: dict[str, str]
     limit: int | None # only the first N questions (used for test runs)
     results_dir: Path
+    sample: int | None = None  # random sample of at most N questions per task (TS and GP, made for the web search runs), None = all questions
+    seed: int = 42  # default seed (same seed = same sample)
 
 
 def build_run_config(

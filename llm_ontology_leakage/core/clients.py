@@ -38,6 +38,10 @@ class CompletionClient(Protocol):
         """Return the log probabilities of every token of the input text (used for Min-K%)"""
         ...
 
+    def allow_web_search(self, n: int) -> None:
+        """"Allow n more web search requests (a sampled run allows as many as it sends)"""
+        ...
+
 
 class MakiClient:
     """Inference via the MAKI API"""
@@ -84,8 +88,8 @@ class MakiClient:
         lp = response.choices[0].logprobs
         return TokenLogprobs(tokens=list(lp.tokens), logprobs=list(lp.token_logprobs))
 
-
-WEB_SEARCH_MAX_CALLS = 0
+    def allow_web_search(self, n: int) -> None:
+        """MAKI has no web search, nothing to allow"""
 
 
 class OpenAIClient:
@@ -93,7 +97,7 @@ class OpenAIClient:
 
     def __init__(self, api_key: str | None = None) -> None:
         """Set up OpenAI client"""
-        self._web_search_calls = 0  # counted against WEB_SEARCH_MAX_CALLS
+        self._web_search_left = 0  # web search requests left, only sampled run raises this
         api_key = api_key or os.environ.get("OPENAI_API_KEY")
         if not api_key:
             raise RuntimeError(
@@ -113,12 +117,9 @@ class OpenAIClient:
         """Send the prompt and return the model's answer"""
         web_search = model.endswith("+web")
         if web_search:
-            if self._web_search_calls >= WEB_SEARCH_MAX_CALLS:
-                raise RuntimeError(
-                    f"web search is limited to {WEB_SEARCH_MAX_CALLS} requests per client "
-                    "(WEB_SEARCH_MAX_CALLS in clients.py), raise it before a web search run"
-                )
-            self._web_search_calls += 1
+            if self._web_search_left <= 0:
+                raise RuntimeError("no web search requests left for this client, only sampled runs (--sample) allow them")
+            self._web_search_left -= 1
 
         response = self._client.responses.create(
             model=model.removesuffix("+web"),
@@ -146,6 +147,10 @@ class OpenAIClient:
             "cannot run against it. Use a MAKI model for Min-K%."
         )
 
+    def allow_web_search(self, n: int) -> None:
+        """Allow n more web search requests (a sampled run allows as many as it sends)"""
+        self._web_search_left += n
+
 
 class MockClient:
     """Test client"""
@@ -165,3 +170,6 @@ class MockClient:
             -0.5 - (sum(map(ord, tok)) % 80) / 10.0 for tok in tokens[1:]
         ]
         return TokenLogprobs(tokens=tokens, logprobs=logprobs)
+
+    def allow_web_search(self, n: int) -> None:
+        """The test client sends nothing, nothing to allow"""
