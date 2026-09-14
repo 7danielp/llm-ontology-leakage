@@ -28,9 +28,10 @@ class CompletionClient(Protocol):
     """Interface implemented by every inference client"""
 
     def complete(
-        self, prompt: str, *, model: str, temperature: float, max_tokens: int
+        self, prompt: str, *, model: str, temperature: float, max_tokens: int,
+        system: str | None = None,
     ) -> Completion:
-        """Return the model's raw output to the prompt"""
+        """Return the model's raw output to the prompt (system is only used by the synthetic generator)"""
         ...
 
     def token_logprobs(self, text: str, *, model: str) -> TokenLogprobs:
@@ -84,11 +85,15 @@ class MakiClient:
         return TokenLogprobs(tokens=list(lp.tokens), logprobs=list(lp.token_logprobs))
 
 
+WEB_SEARCH_MAX_CALLS = 0
+
+
 class OpenAIClient:
     """Inference via OpenAI"""
 
     def __init__(self, api_key: str | None = None) -> None:
         """Set up OpenAI client"""
+        self._web_search_calls = 0  # counted against WEB_SEARCH_MAX_CALLS
         api_key = api_key or os.environ.get("OPENAI_API_KEY")
         if not api_key:
             raise RuntimeError(
@@ -107,6 +112,13 @@ class OpenAIClient:
     ) -> Completion:
         """Send the prompt and return the model's answer"""
         web_search = model.endswith("+web")
+        if web_search:
+            if self._web_search_calls >= WEB_SEARCH_MAX_CALLS:
+                raise RuntimeError(
+                    f"web search is limited to {WEB_SEARCH_MAX_CALLS} requests per client "
+                    "(WEB_SEARCH_MAX_CALLS in clients.py), raise it before a web search run"
+                )
+            self._web_search_calls += 1
 
         response = self._client.responses.create(
             model=model.removesuffix("+web"),
@@ -142,7 +154,8 @@ class MockClient:
         self.answer = answer
 
     def complete(
-        self, prompt: str, *, model: str, temperature: float, max_tokens: int
+        self, prompt: str, *, model: str, temperature: float, max_tokens: int,
+        system: str | None = None,
     ) -> Completion:
         return Completion(text=self.answer, finish_reason="stop")
 
