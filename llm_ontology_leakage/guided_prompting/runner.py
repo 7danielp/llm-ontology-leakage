@@ -173,8 +173,7 @@ def run_guided_prompting(cfg: RunConfig, client: CompletionClient) -> dict[str, 
         items = items[: cfg.limit]  # test runs: the first N questions
     if cfg.sample is not None:
         items = sample_items(items, cfg.sample, cfg.seed)  # experiments: random N per task, the same draw in every run of the cell
-        if cfg.model.endswith("+web"):
-            client.allow_web_search(2 * len(items))  # two requests per question (normal and guided)
+        client.allow_web_search(2 * len(items))  # two web search requests per question (normal and guided)
 
     predicate_key = "domain" if spec.name == "property" else spec.name  # property task asks for subjects of domain axioms
     predicate_label = render_identifier(

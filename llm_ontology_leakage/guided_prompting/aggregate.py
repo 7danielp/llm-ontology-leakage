@@ -7,7 +7,7 @@ from pathlib import Path
 
 from rdflib import URIRef
 
-from ..core.reporting import SEGMENTS, fmt_cell, latex_matrix, ordered
+from ..core.reporting import SEGMENTS, fmt_cell, latex_matrix, ordered, model_label, with_run_column
 from ..core.runs import load_runs
 from ..core.config import (
     DEFAULT_AXIOM_PREDICATES,
@@ -88,7 +88,7 @@ def aggregate_gp(results_dir: Path) -> dict[str, Path]:
             )
 
         # matrix rows carry the ontology in their names so runs on different ontologies do not collide
-        run_key = (f"{ident['ontology_name']}/{ident['task']}", ident["model"], ident["id_format"])
+        run_key = (f"{ident['ontology_name']}/{ident['task']}", model_label(ident["model"], run["meta"]["run"]), ident["id_format"])
         for measure in MEASURES:
             for segment in SEGMENTS:
                 if segment == "all":
@@ -115,6 +115,7 @@ def aggregate_gp(results_dir: Path) -> dict[str, Path]:
                         "ontology": ident["ontology_name"],
                         "task": ident["task"],
                         "model": ident["model"],
+                        "run": run["meta"]["run"],
                         "id_format": ident["id_format"],
                         "measure": measure,
                         "segment": segment,
@@ -138,28 +139,28 @@ def aggregate_gp(results_dir: Path) -> dict[str, Path]:
         {r["ontology"] + "/" + r["task"] for r in rows},
         [f"{p['ontology_name']}/{t}" for p in ONTOLOGY_PRESETS.values() for t in GRID_TASKS],
     )
-    models = ordered({r["model"] for r in rows}, GRID_MODELS)
+    models = ordered({model_label(r["model"], r["run"]) for r in rows}, GRID_MODELS)
     formats = ordered({r["id_format"] for r in rows}, list(GRID_FORMATS))
 
     outputs: dict[str, Path] = {}
 
     # complete results in one CSV table (one row per run x measure x segment)
     agg_path = results_dir / "gp_aggregate.csv"
-    fieldnames = [
-        "method", "ontology", "task", "model", "id_format", "measure", "segment",
+    fieldnames = with_run_column([
+        "method", "ontology", "task", "model", "run", "id_format", "measure", "segment",
         "n", "n_truncated_normal", "n_truncated_guided", "mean_normal", "mean_guided", "gap", "p_value", "significant",
-    ]
+    ], rows)
     rows.sort(
         key=lambda r: (
             onto_tasks.index(r["ontology"] + "/" + r["task"]),
-            models.index(r["model"]),
+            models.index(model_label(r["model"], r["run"])),
             formats.index(r["id_format"]),
             MEASURES.index(r["measure"]),
             SEGMENTS.index(r["segment"]),
         )
     )
     with open(agg_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(rows)
     outputs["gp_aggregate"] = agg_path

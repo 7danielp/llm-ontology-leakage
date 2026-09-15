@@ -112,8 +112,7 @@ def run_ts_guessing(cfg: RunConfig, client: CompletionClient) -> dict[str, Any]:
         items = items[: cfg.limit]  # test runs: the first N questions
     if cfg.sample is not None:
         items = sample_items(items, cfg.sample, cfg.seed)  # experiments: random N per task, the same draw in every run of the cell
-        if cfg.model.endswith("+web"):
-            client.allow_web_search(len(items))  # one request per question
+        client.allow_web_search(len(items))  # one web search request per question
 
     example_iris = cfg.format_examples[cfg.task]
     example_ids = [render_identifier(URIRef(iri), graph, cfg.id_format) for iri in example_iris]

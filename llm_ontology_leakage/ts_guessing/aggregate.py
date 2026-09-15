@@ -4,7 +4,7 @@ import csv
 from pathlib import Path
 
 from ..core.config import GRID_FORMATS, GRID_MODELS, GRID_TASKS, ONTOLOGY_PRESETS
-from ..core.reporting import SEGMENTS, fmt_cell, latex_matrix, ordered
+from ..core.reporting import SEGMENTS, fmt_cell, latex_matrix, model_label, ordered, with_run_column
 from ..core.runs import load_runs
 from ..core.tasks import TASKS
 from .runner import METHOD
@@ -47,7 +47,8 @@ def aggregate_ts(results_dir: Path) -> dict[str, Path]:
             )
         table = metrics_table(scored)
         # matrix rows carry the ontology in their names so runs on different ontologies do not collide
-        key = (f"{ident['ontology_name']}/{ident['task']}", ident["model"], ident["id_format"])
+        label = model_label(ident["model"], run["meta"]["run"])
+        key = (f"{ident['ontology_name']}/{ident['task']}", label, ident["id_format"])
         f1_cells[key] = table["strict"]["all"]["f1"]
         for scoring in SCORINGS:
             cells[scoring][key] = table[scoring]["all"]["em"]
@@ -60,6 +61,7 @@ def aggregate_ts(results_dir: Path) -> dict[str, Path]:
                         "ontology": ident["ontology_name"],
                         "task": ident["task"],
                         "model": ident["model"],
+                        "run": run["meta"]["run"],
                         "id_format": ident["id_format"],
                         "scoring": scoring,
                         "segment": segment,
@@ -81,14 +83,14 @@ def aggregate_ts(results_dir: Path) -> dict[str, Path]:
         {r["ontology"] + "/" + r["task"] for r in long_rows},
         [f"{p['ontology_name']}/{t}" for p in ONTOLOGY_PRESETS.values() for t in GRID_TASKS],
     )
-    models = ordered({r["model"] for r in long_rows}, GRID_MODELS)
+    models = ordered({model_label(r["model"], r["run"]) for r in long_rows}, GRID_MODELS)
     formats = ordered({r["id_format"] for r in long_rows}, list(GRID_FORMATS))
 
     def sort_key(row: dict) -> tuple:
         """Sort by ontology/task, then model, format, scoring, segment"""
         return (
             onto_tasks.index(row["ontology"] + "/" + row["task"]),
-            models.index(row["model"]),
+            models.index(model_label(row["model"], row["run"])),
             formats.index(row["id_format"]),
             SCORINGS.index(row["scoring"]),
             SEGMENTS.index(row["segment"]),
@@ -101,13 +103,11 @@ def aggregate_ts(results_dir: Path) -> dict[str, Path]:
     # complete results in one CSV table (one row per run x scoring x segment)
     agg_path = results_dir / "ts_aggregate.csv"
     with open(agg_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(
-            f,
-            fieldnames=[
-                "method", "ontology", "task", "model", "id_format", "scoring", "segment",
-                "n", "n_match", "n_truncated", "em", "tp", "fp", "fn", "precision", "recall", "f1",
-            ],
-        )
+        fieldnames = with_run_column([
+            "method", "ontology", "task", "model", "run", "id_format", "scoring", "segment",
+            "n", "n_match", "n_truncated", "em", "tp", "fp", "fn", "precision", "recall", "f1",
+        ], long_rows)
+        writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(long_rows)
     outputs["ts_aggregate"] = agg_path

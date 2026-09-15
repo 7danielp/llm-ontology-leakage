@@ -55,7 +55,7 @@ def _add_common_args(p: argparse.ArgumentParser) -> None:
         help="preconfigured ontology (source, namespace, prefixes, examples, tasks)",
     )
     p.add_argument("--limit", type=int, help="only run the first N questions (TS, GP) or blocks (Min-K) per run")
-    p.add_argument("--sample", type=int, help="random sample of at most N questions per task (TS, GP), identical across formats and methods, required for web search")
+    p.add_argument("--sample", type=int, help="random sample of at most N questions per task (TS, GP), identical across formats and methods, only for web search runs")
     p.add_argument("--seed", type=int, default=42, help="seed of the sample draw (default 42)")
     p.add_argument("--results-dir", type=Path)
     p.add_argument("--mock", action="store_true", help="use a canned-answer client (no MAKI or OpenAI)")
@@ -140,6 +140,9 @@ def main() -> None:
             parser.error("min-k scores whole axiom blocks, it has no sampling")
         if args.results_dir is None:
             parser.error("--sample needs --results-dir, a sampled run has the same directory name as the full run")
+        models = [args.model] if args.command == "run" else list(args.models)
+        if not all(m.endswith("+web") for m in models):
+            parser.error("--sample is only for web search runs (a +web model)")
 
     if args.command == "run":  # run: task, model and format come straight from the arguments
         cfg = _base_config(

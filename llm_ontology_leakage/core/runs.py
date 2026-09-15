@@ -23,10 +23,14 @@ RUN_IDENTITY_FIELDS = (
 METHOD_DIRS = {"TS": "ts-guessing", "GP": "guided-prompting", "MK": "min-k"}
 
 
-def run_dir_for(cfg: RunConfig, method_prefix: str) -> Path:
+def run_dir_for(cfg: RunConfig, method_prefix: str, reference: bool = False) -> Path:
     """Build the path to the run directory (stores records.jsonl, run_meta.json, summary.json)"""
     name = f"{cfg.ontology_name.replace(' ', '-')}__{cfg.task}__{cfg.model}__{cfg.id_format}"
-    return cfg.results_dir / "runs" / METHOD_DIRS[method_prefix] / f"{method_prefix}__{name}"
+    method_dir = cfg.results_dir / "runs" / METHOD_DIRS[method_prefix]
+    # sampled runs get a subfolder: sample-web for the runs with web search, sample-reference for the cut of the full run
+    if cfg.sample is not None:
+        method_dir /= "sample-reference" if reference else "sample-web"
+    return method_dir / f"{method_prefix}__{name}"
 
 
 def write_meta(
@@ -71,7 +75,13 @@ def load_runs(results_dir: Path) -> list[dict]:
             print(f"  (skipping incomplete run {run_dir.name}: no summary.json)")
             continue
         meta = json.loads(meta_file.read_text(encoding="utf-8"))
+        # kind of run from the folder name: sample-web, sample-reference or full (the normal runs)
+        meta["run"] = run_dir.parent.name if run_dir.parent.name in ("sample-web", "sample-reference") else "full"
         runs.append({"dir": run_dir, "meta": meta, "records": read_records(run_dir)})
+    # results dir is either full runs or sampled runs (mixed: the sampled ones are dropped so they do not distort the tables)
+    if any("sample" in r["meta"] for r in runs) and any("sample" not in r["meta"] for r in runs):
+        print("  (skipping the sampled runs: they share the directory with full runs)")
+        runs = [r for r in runs if "sample" not in r["meta"]]
     clients = {r["meta"].get("client", "MakiClient") for r in runs}
     if "MockClient" in clients and len(clients) > 1:
         raise RuntimeError(

@@ -19,18 +19,16 @@ METHOD_PREFIX = {method: prefix for prefix, method in METHOD_DIRS.items()}
 
 
 def extract_sampled_runs(results_dir: Path, source_dir: Path) -> list[Path]:
-    """For every sampled run of a +web model under results_dir, the run of the plain model with exactly the sampled questions, taken from the full run under source_dir"""
+    """For every sampled run under results_dir, cut the same questions from the full run under source_dir into sample-reference"""
     written = []
     for meta_file in sorted((results_dir / "runs").rglob("run_meta.json")):
         meta = json.loads(meta_file.read_text(encoding="utf-8"))
-        if "sample" not in meta or not meta["identity"]["model"].endswith("+web"):
+        if "sample" not in meta or "from" in meta["sample"]:  # only sampled runs, not the extracted ones
             continue
         cfg = _config_from_meta(meta, results_dir)
         prefix = METHOD_PREFIX[meta["method"]]
-        source_run = run_dir_for(replace(cfg, results_dir=source_dir), prefix)
-        target = run_dir_for(cfg, prefix)
-        if target.resolve() == source_run.resolve():
-            raise ValueError(f"{target} is the full run itself, use a separate --results-dir for the sampled runs")
+        source_run = run_dir_for(replace(cfg, results_dir=source_dir, sample=None), prefix)  # the full run has no sample folder
+        target = run_dir_for(cfg, prefix, reference=True)
         if not (source_run / "summary.json").is_file():
             raise FileNotFoundError(f"no complete full run for {meta_file.parent.name} at {source_run}")
         keys = set(meta["sample"]["keys"])
@@ -53,7 +51,7 @@ def extract_sampled_runs(results_dir: Path, source_dir: Path) -> list[Path]:
         (target / "summary.json").write_text(json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8")
         written.append(target)
     if not written:
-        raise RuntimeError(f"No sampled +web runs found under {results_dir / 'runs'}")
+        raise RuntimeError(f"No sampled runs found under {results_dir / 'runs'}")
     return written
 
 
@@ -96,7 +94,7 @@ def _summarize(records: list[dict], cfg: RunConfig, method: str) -> dict:
 def main() -> None:
     """Parse the arguments and write the extracted runs"""
     parser = argparse.ArgumentParser(description="Cut the sampled questions out of the full runs")
-    parser.add_argument("--results-dir", type=Path, required=True, help="results dir of the sampled +web runs")
+    parser.add_argument("--results-dir", type=Path, required=True, help="results dir of the sampled runs")
     parser.add_argument("--source", type=Path, default=Path("results"), help="results dir of the full runs")
     args = parser.parse_args()
     for run_dir in extract_sampled_runs(args.results_dir, args.source):
