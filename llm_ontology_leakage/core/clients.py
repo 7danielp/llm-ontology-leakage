@@ -14,6 +14,7 @@ class Completion:
 
     text: str
     finish_reason: str | None
+    web_searches: int = 0
 
 
 @dataclass(frozen=True)
@@ -128,7 +129,7 @@ class OpenAIClient:
             reasoning={"effort": "none"},  # measuring memorization, so reasoning should have no big impact
             max_output_tokens=max_tokens,
             **({"instructions": system} if system else {}),
-            **({"tools": [{"type": "web_search"}]} if web_search else {}),
+            **({"tools": [{"type": "web_search"}], "max_tool_calls": 1} if web_search else {}),  # one search per request
         )
         if response.status == "completed":
             finish = "stop"
@@ -137,7 +138,8 @@ class OpenAIClient:
             finish = "length" if reason == "max_output_tokens" else reason
         else:
             finish = response.status
-        return Completion(text=response.output_text or "", finish_reason=finish)
+        searches = sum(1 for item in response.output if item.type == "web_search_call")
+        return Completion(text=response.output_text or "", finish_reason=finish, web_searches=searches)
 
     def token_logprobs(self, text: str, *, model: str) -> TokenLogprobs:
         """Min-K% needs prompt token logprobs, which OpenAI API does not offer"""

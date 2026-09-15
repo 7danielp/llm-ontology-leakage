@@ -202,6 +202,7 @@ def run_guided_prompting(cfg: RunConfig, client: CompletionClient) -> dict[str, 
     max_tokens = cfg.max_tokens if cfg.max_tokens is not None else spec.default_max_tokens
     ns = cfg.ontology_namespace
     records: list[dict] = []
+    web_searches = 0
     with open(run_dir / "records.jsonl", "w", encoding="utf-8") as records_file:
         for i, (item, given_id, gold_ids) in enumerate(prepared, start=1):
             prompt_normal, prompt_guided = build_gp_prompts(
@@ -216,6 +217,7 @@ def run_guided_prompting(cfg: RunConfig, client: CompletionClient) -> dict[str, 
                 prompt_guided,
                 model=cfg.model, temperature=cfg.temperature, max_tokens=max_tokens,
             )
+            web_searches += completion_normal.web_searches + completion_guided.web_searches
             gold_iris = [str(g) for g in item.gold]
             sim_normal = gp_score(
                 completion_normal.text, gold_iris, spec, resolver, class_sim, prop_sim
@@ -249,6 +251,9 @@ def run_guided_prompting(cfg: RunConfig, client: CompletionClient) -> dict[str, 
                 sim_guided=sim_guided,
             )
             records.append(asdict(record))
+            if cfg.model.endswith("+web"):
+                records[-1]["web_searches_normal"] = completion_normal.web_searches  # 0 or 1 (max_tool_calls)
+                records[-1]["web_searches_guided"] = completion_guided.web_searches
             records_file.write(json.dumps(records[-1], ensure_ascii=False) + "\n")
             gaps = ", ".join(
                 f"{m}: {sim_guided[m]:.2f}-{sim_normal[m]:.2f}" for m in MEASURES
@@ -256,6 +261,8 @@ def run_guided_prompting(cfg: RunConfig, client: CompletionClient) -> dict[str, 
             print(f"  [{i}/{len(prepared)}] {given_id} (guided-normal {gaps})")
 
     summary = _summarize_gp(records, cfg, spec, resolver, class_sim, prop_sim)
+    if cfg.model.endswith("+web"):
+        summary["n_web_searches"] = web_searches  # to check the cost: at most one search per request
     (run_dir / "summary.json").write_text(
         json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8"
     )

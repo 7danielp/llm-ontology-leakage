@@ -141,6 +141,7 @@ def run_ts_guessing(cfg: RunConfig, client: CompletionClient) -> dict[str, Any]:
     max_tokens = cfg.max_tokens if cfg.max_tokens is not None else spec.default_max_tokens
     ns = cfg.ontology_namespace
     records: list[dict] = []
+    web_searches = 0
     with open(run_dir / "records.jsonl", "w", encoding="utf-8") as records_file:
         for i, (item, given_id, gold_ids) in enumerate(prepared, start=1):
             prompt = build_prompt(spec, cfg.ontology_name, given_id, example_ids, predicate_label)
@@ -149,6 +150,7 @@ def run_ts_guessing(cfg: RunConfig, client: CompletionClient) -> dict[str, Any]:
                 prompt, model=cfg.model, temperature=cfg.temperature, max_tokens=max_tokens
             )
             raw = completion.text
+            web_searches += completion.web_searches
             gold_iris = [str(g) for g in item.gold]
             parsed, strict = score(
                 raw,
@@ -176,6 +178,8 @@ def run_ts_guessing(cfg: RunConfig, client: CompletionClient) -> dict[str, Any]:
                 strict_match=strict,
             )
             records.append(asdict(record))
+            if cfg.model.endswith("+web"):
+                records[-1]["web_searches"] = completion.web_searches  # 0 or 1 (max_tool_calls)
             records_file.write(json.dumps(records[-1], ensure_ascii=False) + "\n")
             shown = ", ".join(parsed)
             if len(shown) > 60:
@@ -183,6 +187,8 @@ def run_ts_guessing(cfg: RunConfig, client: CompletionClient) -> dict[str, Any]:
             print(f"  [{i}/{len(prepared)}] {given_id} -> {shown!r} strict={int(strict)}")
 
     summary = _summarize(records, cfg, spec)
+    if cfg.model.endswith("+web"):
+        summary["n_web_searches"] = web_searches  # to check the cost: at most one search per request
     (run_dir / "summary.json").write_text(
         json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8"
     )
