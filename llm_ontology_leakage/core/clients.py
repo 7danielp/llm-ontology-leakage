@@ -14,7 +14,13 @@ class Completion:
 
     text: str
     finish_reason: str | None
-    web_searches: int = 0
+    web_search_actions: tuple[dict, ...] = ()  # what the model did: search (queries, sources), open_page (url), find_in_page (url, pattern)
+    web_citations: tuple[str, ...] = ()  # urls the answer cites
+
+    @property
+    def web_searches(self) -> int:
+        """Number of searches (at most one per request)"""
+        return sum(1 for a in self.web_search_actions if a["type"] == "search")
 
 
 @dataclass(frozen=True)
@@ -93,6 +99,35 @@ class MakiClient:
         """MAKI has no web search, nothing to allow"""
 
 
+def _web_search_actions(response) -> tuple[dict, ...]:
+    """Every web action of the answer with its details"""
+    actions = []
+    for item in response.output:
+        if item.type != "web_search_call":
+            continue
+        a = item.action
+        if a.type == "search":
+            actions.append({"type": "search", "queries": a.queries or ([a.query] if a.query else []), "sources": [s.url for s in (a.sources or [])]})
+        elif a.type == "open_page":
+            actions.append({"type": "open_page", "url": a.url})
+        else:
+            actions.append({"type": "find_in_page", "url": a.url, "pattern": a.pattern})
+        actions[-1]["status"] = item.status  # completed or failed
+    return tuple(actions)
+
+
+def _web_citations(response) -> tuple[str, ...]:
+    """The urls the answer text cites, in order and without repeats"""
+    urls = []
+    for item in response.output:
+        if item.type == "message":
+            for part in item.content:
+                for annotation in getattr(part, "annotations", None) or []:
+                    if annotation.type == "url_citation":
+                        urls.append(annotation.url)
+    return tuple(dict.fromkeys(urls))
+
+
 class OpenAIClient:
     """Inference via OpenAI"""
 
@@ -129,7 +164,7 @@ class OpenAIClient:
             reasoning={"effort": "none"},  # measuring memorization, so reasoning should have no big impact
             max_output_tokens=max_tokens,
             **({"instructions": system} if system else {}),
-            **({"tools": [{"type": "web_search"}], "max_tool_calls": 1} if web_search else {}),  # one search per request
+            **({"tools": [{"type": "web_search"}], "max_tool_calls": 1} if web_search else {}),  # model decides whether to perform a web search (at most 1)
         )
         if response.status == "completed":
             finish = "stop"
@@ -138,8 +173,13 @@ class OpenAIClient:
             finish = "length" if reason == "max_output_tokens" else reason
         else:
             finish = response.status
-        searches = sum(1 for item in response.output if item.type == "web_search_call")
-        return Completion(text=response.output_text or "", finish_reason=finish, web_searches=searches)
+        completion = Completion(
+            text=response.output_text or "", finish_reason=finish,
+            web_search_actions=_web_search_actions(response), web_citations=_web_citations(response),
+        )
+        if completion.web_searches > 1:  # must never happen with max_tool_calls 1; stop before more money is spent
+            raise RuntimeError(f"{completion.web_searches} web searches in one request, the API ignored max_tool_calls")
+        return completion
 
     def token_logprobs(self, text: str, *, model: str) -> TokenLogprobs:
         """Min-K% needs prompt token logprobs, which OpenAI API does not offer"""

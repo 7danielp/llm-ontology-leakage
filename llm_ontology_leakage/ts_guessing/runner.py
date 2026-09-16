@@ -180,6 +180,8 @@ def run_ts_guessing(cfg: RunConfig, client: CompletionClient) -> dict[str, Any]:
             records.append(asdict(record))
             if cfg.model.endswith("+web"):
                 records[-1]["web_searches"] = completion.web_searches  # 0 or 1 (max_tool_calls)
+                records[-1]["web_search_actions"] = list(completion.web_search_actions)
+                records[-1]["web_citations"] = list(completion.web_citations)
             records_file.write(json.dumps(records[-1], ensure_ascii=False) + "\n")
             shown = ", ".join(parsed)
             if len(shown) > 60:

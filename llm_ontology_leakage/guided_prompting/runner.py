@@ -254,6 +254,10 @@ def run_guided_prompting(cfg: RunConfig, client: CompletionClient) -> dict[str, 
             if cfg.model.endswith("+web"):
                 records[-1]["web_searches_normal"] = completion_normal.web_searches  # 0 or 1 (max_tool_calls)
                 records[-1]["web_searches_guided"] = completion_guided.web_searches
+                records[-1]["web_search_actions_normal"] = list(completion_normal.web_search_actions)
+                records[-1]["web_search_actions_guided"] = list(completion_guided.web_search_actions)
+                records[-1]["web_citations_normal"] = list(completion_normal.web_citations)
+                records[-1]["web_citations_guided"] = list(completion_guided.web_citations)
             records_file.write(json.dumps(records[-1], ensure_ascii=False) + "\n")
             gaps = ", ".join(
                 f"{m}: {sim_guided[m]:.2f}-{sim_normal[m]:.2f}" for m in MEASURES
