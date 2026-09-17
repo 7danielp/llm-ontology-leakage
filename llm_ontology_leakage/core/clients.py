@@ -17,10 +17,12 @@ class Completion:
     web_search_actions: tuple[dict, ...] = ()  # what the model did: search (queries, sources), open_page (url), find_in_page (url, pattern)
     web_citations: tuple[str, ...] = ()  # urls the answer cites
 
+    usage: dict | None = None  # token usage of the request (input, output, reasoning), stored for web search runs
+
     @property
     def web_searches(self) -> int:
-        """Number of searches (at most one per request)"""
-        return sum(1 for a in self.web_search_actions if a["type"] == "search")
+        """1 if the model used the web for this answer (a completed search, open_page or find_in_page), else 0"""
+        return int(any(a["status"] == "completed" for a in self.web_search_actions))
 
 
 @dataclass(frozen=True)
@@ -99,6 +101,9 @@ class MakiClient:
         """MAKI has no web search, nothing to allow"""
 
 
+WEB_SEARCH_OUTPUT_RESERVE = 512  # extra output tokens for web search requests
+
+
 def _web_search_actions(response) -> tuple[dict, ...]:
     """Every web action of the answer with its details"""
     actions = []
@@ -106,14 +111,28 @@ def _web_search_actions(response) -> tuple[dict, ...]:
         if item.type != "web_search_call":
             continue
         a = item.action
-        if a.type == "search":
+        if a is None:
+            actions.append({"type": None})
+        elif a.type == "search":
             actions.append({"type": "search", "queries": a.queries or ([a.query] if a.query else []), "sources": [s.url for s in (a.sources or [])]})
         elif a.type == "open_page":
             actions.append({"type": "open_page", "url": a.url})
-        else:
+        elif a.type == "find_in_page":
             actions.append({"type": "find_in_page", "url": a.url, "pattern": a.pattern})
+        else:
+            actions.append({"type": a.type})
         actions[-1]["status"] = item.status  # completed or failed
     return tuple(actions)
+
+
+def _usage(response) -> dict | None:
+    """Token usage of the request: input, output and the hidden reasoning tokens inside the output"""
+    u = getattr(response, "usage", None)
+    if u is None:
+        return None
+    details = getattr(u, "output_tokens_details", None)
+    return {"input_tokens": u.input_tokens, "output_tokens": u.output_tokens,
+            "reasoning_tokens": getattr(details, "reasoning_tokens", None)}
 
 
 def _web_citations(response) -> tuple[str, ...]:
@@ -162,9 +181,11 @@ class OpenAIClient:
             input=prompt,
             temperature=temperature,
             reasoning={"effort": "none"},  # measuring memorization, so reasoning should have no big impact
-            max_output_tokens=max_tokens,
+            # tool call (its queries) and reasoning around it are output tokens and count against max_output_tokens (search results come back as input tokens)
+            max_output_tokens=max_tokens + (WEB_SEARCH_OUTPUT_RESERVE if web_search else 0),
             **({"instructions": system} if system else {}),
-            **({"tools": [{"type": "web_search"}], "max_tool_calls": 1} if web_search else {}),  # model decides whether to perform a web search (at most 1)
+            # model decides whether to perform a web search (at most 1)
+            **({"tools": [{"type": "web_search"}], "max_tool_calls": 1, "include": ["web_search_call.action.sources"]} if web_search else {}),
         )
         if response.status == "completed":
             finish = "stop"
@@ -176,9 +197,11 @@ class OpenAIClient:
         completion = Completion(
             text=response.output_text or "", finish_reason=finish,
             web_search_actions=_web_search_actions(response), web_citations=_web_citations(response),
+            usage=_usage(response) if web_search else None,
         )
-        if completion.web_searches > 1:  # must never happen with max_tool_calls 1; stop before more money is spent
-            raise RuntimeError(f"{completion.web_searches} web searches in one request, the API ignored max_tool_calls")
+        searches = sum(1 for a in completion.web_search_actions if a["type"] == "search" and a["status"] == "completed")
+        if searches > 1:  # should never happen with max_tool_calls 1, if it does the run stops
+            raise RuntimeError(f"{searches} web searches in one request, the API ignored max_tool_calls")
         return completion
 
     def token_logprobs(self, text: str, *, model: str) -> TokenLogprobs:

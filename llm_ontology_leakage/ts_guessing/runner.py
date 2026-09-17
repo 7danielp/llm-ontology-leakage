@@ -179,9 +179,10 @@ def run_ts_guessing(cfg: RunConfig, client: CompletionClient) -> dict[str, Any]:
             )
             records.append(asdict(record))
             if cfg.model.endswith("+web"):
-                records[-1]["web_searches"] = completion.web_searches  # 0 or 1 (max_tool_calls)
+                records[-1]["web_searches"] = completion.web_searches  # 1 if the model used the web
                 records[-1]["web_search_actions"] = list(completion.web_search_actions)
                 records[-1]["web_citations"] = list(completion.web_citations)
+                records[-1]["usage"] = completion.usage
             records_file.write(json.dumps(records[-1], ensure_ascii=False) + "\n")
             shown = ", ".join(parsed)
             if len(shown) > 60:
@@ -190,7 +191,7 @@ def run_ts_guessing(cfg: RunConfig, client: CompletionClient) -> dict[str, Any]:
 
     summary = _summarize(records, cfg, spec)
     if cfg.model.endswith("+web"):
-        summary["n_web_searches"] = web_searches  # to check the cost: at most one search per request
+        summary["n_web_searches"] = web_searches  # records where the model used the web
     (run_dir / "summary.json").write_text(
         json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8"
     )
