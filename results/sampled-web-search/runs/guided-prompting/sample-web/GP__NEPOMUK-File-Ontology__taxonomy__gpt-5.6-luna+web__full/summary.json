@@ -1,0 +1,31 @@
+{
+  "method": "guided-prompting",
+  "task": "taxonomy",
+  "model": "gpt-5.6-luna+web",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/medium/nfo.rdf",
+  "ontology_name": "NEPOMUK File Ontology",
+  "temperature": 0.0,
+  "n_records": 10,
+  "n_format_match_normal": 10,
+  "n_format_match_guided": 10,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "n_truncated_normal": 0,
+  "n_truncated_guided": 0,
+  "gap": {
+    "path": {
+      "n": 10,
+      "mean_normal": 6.6,
+      "mean_guided": 10.7,
+      "gap": 4.1
+    },
+    "wup": {
+      "n": 10,
+      "mean_normal": 0.36888888888888893,
+      "mean_guided": 0.6272222222222222,
+      "gap": 0.2583333333333333
+    }
+  },
+  "n_web_searches": 10
+}

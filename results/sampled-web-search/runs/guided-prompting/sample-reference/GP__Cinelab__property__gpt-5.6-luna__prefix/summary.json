@@ -1,0 +1,30 @@
+{
+  "method": "guided-prompting",
+  "task": "property",
+  "model": "gpt-5.6-luna",
+  "id_format": "prefix",
+  "ontology_source": "ressources/ontologies/unpopular/cinelab.ttl",
+  "ontology_name": "Cinelab",
+  "temperature": 0.0,
+  "n_records": 10,
+  "n_format_match_normal": 10,
+  "n_format_match_guided": 10,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "n_truncated_normal": 0,
+  "n_truncated_guided": 0,
+  "gap": {
+    "path": {
+      "n": 10,
+      "mean_normal": 0.7875,
+      "mean_guided": 0.6,
+      "gap": -0.1875
+    },
+    "wup": {
+      "n": 10,
+      "mean_normal": 0.09027777777777778,
+      "mean_guided": 0.075,
+      "gap": -0.015277777777777779
+    }
+  }
+}

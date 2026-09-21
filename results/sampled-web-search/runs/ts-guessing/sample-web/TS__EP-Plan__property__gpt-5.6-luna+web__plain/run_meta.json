@@ -1,0 +1,43 @@
+{
+  "method": "ts-guessing",
+  "client": "OpenAIClient",
+  "identity": {
+    "task": "property",
+    "model": "gpt-5.6-luna+web",
+    "id_format": "plain",
+    "ontology_source": "ressources/ontologies/unpopular/ep-plan.ttl",
+    "ontology_name": "EP-Plan",
+    "ontology_namespace": "https://w3id.org/ep-plan#",
+    "temperature": 0.0
+  },
+  "prefix_map": {
+    "ep-plan": "https://w3id.org/ep-plan#",
+    "prov": "http://www.w3.org/ns/prov#"
+  },
+  "format_example_iris": [
+    "https://w3id.org/ep-plan#exampleProperty",
+    "https://w3id.org/ep-plan#otherExampleProperty"
+  ],
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://www.w3.org/2000/01/rdf-schema#domain",
+    "range": "http://www.w3.org/2000/01/rdf-schema#range"
+  },
+  "limit": null,
+  "sample": {
+    "n": 10,
+    "seed": 42,
+    "keys": [
+      "http://www.w3.org/2000/01/rdf-schema#Resource",
+      "https://w3id.org/ep-plan#Activity",
+      "https://w3id.org/ep-plan#Agent",
+      "https://w3id.org/ep-plan#Communication",
+      "https://w3id.org/ep-plan#ExecutionTraceBundle",
+      "https://w3id.org/ep-plan#MultiVariable",
+      "https://w3id.org/ep-plan#Objective",
+      "https://w3id.org/ep-plan#Rationale",
+      "https://w3id.org/ep-plan#ResponsibleAgent",
+      "https://w3id.org/ep-plan#Variable"
+    ]
+  }
+}

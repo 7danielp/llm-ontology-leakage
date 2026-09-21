@@ -1,0 +1,50 @@
+{
+  "method": "ts-guessing",
+  "task": "range",
+  "model": "gpt-5.6-luna+web",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/unpopular/cinelab.ttl",
+  "ontology_name": "Cinelab",
+  "temperature": 0.0,
+  "n_records": 10,
+  "n_format_match": 10,
+  "n_truncated": 0,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 10,
+        "n_match": 4,
+        "em": 0.4,
+        "tp": 4,
+        "fp": 6,
+        "fn": 6,
+        "precision": 0.4,
+        "recall": 0.4,
+        "f1": 0.4000000000000001
+      },
+      "gold_in_ns": {
+        "n": 4,
+        "n_match": 3,
+        "em": 0.75,
+        "tp": 3,
+        "fp": 1,
+        "fn": 1,
+        "precision": 0.75,
+        "recall": 0.75,
+        "f1": 0.75
+      },
+      "gold_external": {
+        "n": 6,
+        "n_match": 1,
+        "em": 0.16666666666666666,
+        "tp": 1,
+        "fp": 5,
+        "fn": 5,
+        "precision": 0.16666666666666666,
+        "recall": 0.16666666666666666,
+        "f1": 0.16666666666666666
+      }
+    }
+  },
+  "n_web_searches": 10
+}

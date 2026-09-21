@@ -1,0 +1,41 @@
+{
+  "method": "guided-prompting",
+  "client": "OpenAIClient",
+  "identity": {
+    "task": "taxonomy",
+    "model": "gpt-5.6-luna+web",
+    "id_format": "plain",
+    "ontology_source": "ressources/ontologies/unpopular/cinelab.ttl",
+    "ontology_name": "Cinelab",
+    "ontology_namespace": "http://advene.org/ns/cinelab/ld#",
+    "temperature": 0.0
+  },
+  "prefix_map": {
+    "cl": "http://advene.org/ns/cinelab/ld#"
+  },
+  "format_example_iris": [
+    "http://advene.org/ns/cinelab/ld#ExampleClass"
+  ],
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://www.w3.org/2000/01/rdf-schema#domain",
+    "range": "http://www.w3.org/2000/01/rdf-schema#range"
+  },
+  "limit": null,
+  "sample": {
+    "n": 10,
+    "seed": 42,
+    "keys": [
+      "http://advene.org/ns/cinelab/ld#Annotation",
+      "http://advene.org/ns/cinelab/ld#AnnotationType",
+      "http://advene.org/ns/cinelab/ld#Content",
+      "http://advene.org/ns/cinelab/ld#Import",
+      "http://advene.org/ns/cinelab/ld#List",
+      "http://advene.org/ns/cinelab/ld#RelationType",
+      "http://advene.org/ns/cinelab/ld#Tag",
+      "http://advene.org/ns/cinelab/ld#Test",
+      "http://advene.org/ns/cinelab/ld#UserList",
+      "http://advene.org/ns/cinelab/ld#View"
+    ]
+  }
+}

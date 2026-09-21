@@ -1,0 +1,42 @@
+{
+  "method": "guided-prompting",
+  "client": "OpenAIClient",
+  "identity": {
+    "task": "property",
+    "model": "gpt-5.6-luna+web",
+    "id_format": "plain",
+    "ontology_source": "ressources/ontologies/medium/org.ttl",
+    "ontology_name": "W3C Organization Ontology",
+    "ontology_namespace": "http://www.w3.org/ns/org#",
+    "temperature": 0.0
+  },
+  "prefix_map": {
+    "org": "http://www.w3.org/ns/org#"
+  },
+  "format_example_iris": [
+    "http://www.w3.org/ns/org#exampleProperty",
+    "http://www.w3.org/ns/org#otherExampleProperty"
+  ],
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://www.w3.org/2000/01/rdf-schema#domain",
+    "range": "http://www.w3.org/2000/01/rdf-schema#range"
+  },
+  "limit": null,
+  "sample": {
+    "n": 10,
+    "seed": 42,
+    "keys": [
+      "http://www.w3.org/ns/org#ChangeEvent",
+      "http://www.w3.org/ns/org#FormalOrganization",
+      "http://www.w3.org/ns/org#Membership",
+      "http://www.w3.org/ns/org#Organization",
+      "http://www.w3.org/ns/org#OrganizationalUnit",
+      "http://www.w3.org/ns/org#Post",
+      "http://www.w3.org/ns/org#Role",
+      "http://www.w3.org/ns/org#Site",
+      "http://xmlns.com/foaf/0.1/Agent",
+      "http://xmlns.com/foaf/0.1/Person"
+    ]
+  }
+}

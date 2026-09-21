@@ -1,0 +1,50 @@
+{
+  "method": "ts-guessing",
+  "task": "taxonomy",
+  "model": "gpt-5.6-luna+web",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/medium/org.ttl",
+  "ontology_name": "W3C Organization Ontology",
+  "temperature": 0.0,
+  "n_records": 7,
+  "n_format_match": 7,
+  "n_truncated": 0,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 7,
+        "n_match": 7,
+        "em": 1.0,
+        "tp": 7,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "gold_in_ns": {
+        "n": 4,
+        "n_match": 4,
+        "em": 1.0,
+        "tp": 4,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "gold_external": {
+        "n": 3,
+        "n_match": 3,
+        "em": 1.0,
+        "tp": 3,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    }
+  },
+  "n_web_searches": 6
+}

@@ -1,0 +1,42 @@
+{
+  "method": "guided-prompting",
+  "client": "OpenAIClient",
+  "identity": {
+    "task": "domain",
+    "model": "gpt-5.6-luna",
+    "id_format": "full",
+    "ontology_source": "ressources/ontologies/medium/org.ttl",
+    "ontology_name": "W3C Organization Ontology",
+    "ontology_namespace": "http://www.w3.org/ns/org#",
+    "temperature": 0.0
+  },
+  "prefix_map": {
+    "org": "http://www.w3.org/ns/org#"
+  },
+  "format_example_iris": [
+    "http://www.w3.org/ns/org#ExampleClass"
+  ],
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://www.w3.org/2000/01/rdf-schema#domain",
+    "range": "http://www.w3.org/2000/01/rdf-schema#range"
+  },
+  "limit": null,
+  "sample": {
+    "n": 10,
+    "seed": 42,
+    "keys": [
+      "http://www.w3.org/ns/org#changedBy",
+      "http://www.w3.org/ns/org#hasMember",
+      "http://www.w3.org/ns/org#hasMembership",
+      "http://www.w3.org/ns/org#hasRegisteredSite",
+      "http://www.w3.org/ns/org#linkedTo",
+      "http://www.w3.org/ns/org#member",
+      "http://www.w3.org/ns/org#originalOrganization",
+      "http://www.w3.org/ns/org#purpose",
+      "http://www.w3.org/ns/org#role",
+      "http://www.w3.org/ns/org#unitOf"
+    ],
+    "from": "results/runs/guided-prompting/GP__W3C-Organization-Ontology__domain__gpt-5.6-luna__full"
+  }
+}

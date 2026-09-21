@@ -1,0 +1,41 @@
+{
+  "method": "ts-guessing",
+  "client": "OpenAIClient",
+  "identity": {
+    "task": "taxonomy",
+    "model": "gpt-5.6-luna+web",
+    "id_format": "full",
+    "ontology_source": "ressources/ontologies/synthetic/waste-management/waste-management.ttl",
+    "ontology_name": "Waste Management",
+    "ontology_namespace": "http://example.org/waste-management#",
+    "temperature": 0.0
+  },
+  "prefix_map": {
+    "waste-management": "http://example.org/waste-management#"
+  },
+  "format_example_iris": [
+    "http://example.org/waste-management#ExampleClass"
+  ],
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://www.w3.org/2000/01/rdf-schema#domain",
+    "range": "http://www.w3.org/2000/01/rdf-schema#range"
+  },
+  "limit": null,
+  "sample": {
+    "n": 10,
+    "seed": 42,
+    "keys": [
+      "http://example.org/waste-management#CollectionVehicle",
+      "http://example.org/waste-management#CompostingFacility",
+      "http://example.org/waste-management#ElectronicWaste",
+      "http://example.org/waste-management#EnvironmentalRegulation",
+      "http://example.org/waste-management#Landfill",
+      "http://example.org/waste-management#MedicalWaste",
+      "http://example.org/waste-management#OrganicWaste",
+      "http://example.org/waste-management#RecyclableWaste",
+      "http://example.org/waste-management#WasteGenerator",
+      "http://example.org/waste-management#WasteWorker"
+    ]
+  }
+}

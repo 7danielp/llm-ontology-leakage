@@ -1,0 +1,40 @@
+{
+  "method": "guided-prompting",
+  "client": "OpenAIClient",
+  "identity": {
+    "task": "taxonomy",
+    "model": "gpt-5.6-luna",
+    "id_format": "plain",
+    "ontology_source": "ressources/ontologies/popular/schemaorg-all-http.ttl",
+    "ontology_name": "schema.org",
+    "ontology_namespace": "http://schema.org/",
+    "temperature": 0.0
+  },
+  "prefix_map": {},
+  "format_example_iris": [
+    "http://schema.org/ExampleClass"
+  ],
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://schema.org/domainIncludes",
+    "range": "http://schema.org/rangeIncludes"
+  },
+  "limit": null,
+  "sample": {
+    "n": 10,
+    "seed": 42,
+    "keys": [
+      "http://schema.org/AmusementPark",
+      "http://schema.org/BuddhistTemple",
+      "http://schema.org/BuyAction",
+      "http://schema.org/CityHall",
+      "http://schema.org/DietNutrition",
+      "http://schema.org/DrugCostCategory",
+      "http://schema.org/EngineSpecification",
+      "http://schema.org/Plumber",
+      "http://schema.org/Review",
+      "http://schema.org/RoofingContractor"
+    ],
+    "from": "results/runs/guided-prompting/GP__schema.org__taxonomy__gpt-5.6-luna__plain"
+  }
+}
