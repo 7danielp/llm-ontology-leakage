@@ -7,7 +7,7 @@ from typing import Any
 
 from rdflib import URIRef
 
-from ..core.config import RunConfig
+from ..core.config import RunConfig, web_tool_calls
 from ..core.clients import CompletionClient
 from ..core.ontology import load_graph, render_identifier, sample_items
 from ..core.parsing import matches_format
@@ -178,7 +178,7 @@ def run_ts_guessing(cfg: RunConfig, client: CompletionClient) -> dict[str, Any]:
                 strict_match=strict,
             )
             records.append(asdict(record))
-            if cfg.model.endswith("+web"):
+            if web_tool_calls(cfg.model):
                 records[-1]["web_searches"] = completion.web_searches  # 1 if the model used the web
                 records[-1]["web_search_actions"] = list(completion.web_search_actions)
                 records[-1]["web_citations"] = list(completion.web_citations)
@@ -190,7 +190,7 @@ def run_ts_guessing(cfg: RunConfig, client: CompletionClient) -> dict[str, Any]:
             print(f"  [{i}/{len(prepared)}] {given_id} -> {shown!r} strict={int(strict)}")
 
     summary = _summarize(records, cfg, spec)
-    if cfg.model.endswith("+web"):
+    if web_tool_calls(cfg.model):
         summary["n_web_searches"] = web_searches  # records where the model used the web
     (run_dir / "summary.json").write_text(
         json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8"

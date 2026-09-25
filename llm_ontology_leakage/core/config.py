@@ -1,5 +1,6 @@
 """Experiment configuration (ontology x task x model x format) used to build a RunConfig"""
 
+import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Literal
@@ -11,7 +12,18 @@ GRID_TASKS: list[TaskName] = ["taxonomy", "domain", "range", "property"]
 GRID_MODELS: list[str] = ["qwen3.5-122b", "llama-3.3-70b", "qwen3.6-36b", "ministral-3-14b"]
 GRID_FORMATS: list[IdFormat] = ["plain", "prefix", "full"]
 
-OPENAI_MODELS: list[str] = ["gpt-5.6-luna", "gpt-5.6-luna+web"]
+OPENAI_MODELS: list[str] = ["gpt-5.6-luna", "gpt-5.6-luna+web", "gpt-5.6-luna+web3"]
+
+
+def web_tool_calls(model: str) -> int:
+    """Web tool calls a model name allows (0 without web search, +web allows 1, +webN allows N)"""
+    match = re.search(r"\+web(\d*)$", model)
+    return int(match.group(1) or 1) if match else 0
+
+
+def base_model(model: str) -> str:
+    """Model name without the web search suffix (for the API)"""
+    return re.sub(r"\+web\d*$", "", model)
 
 
 # Predicate per task, overridable per preset (the property task reuses the domain predicate)

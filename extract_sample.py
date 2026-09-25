@@ -7,7 +7,7 @@ from pathlib import Path
 
 from rdflib import URIRef
 
-from llm_ontology_leakage.core.config import RunConfig
+from llm_ontology_leakage.core.config import RunConfig, base_model
 from llm_ontology_leakage.core.ontology import EntityResolver, load_graph
 from llm_ontology_leakage.core.runs import METHOD_DIRS, read_records, run_dir_for, write_meta
 from llm_ontology_leakage.core.tasks import TASKS
@@ -66,7 +66,7 @@ def _config_from_meta(meta: dict, results_dir: Path) -> RunConfig:
         format_examples={ident["task"]: meta["format_example_iris"]},
         task=ident["task"],
         id_format=ident["id_format"],
-        model=ident["model"].removesuffix("+web"),
+        model=base_model(ident["model"]),
         temperature=ident["temperature"],
         max_tokens=None,
         axiom_predicates=meta["axiom_predicates"],

@@ -6,7 +6,7 @@ from typing import Any
 
 from rdflib import URIRef
 
-from ..core.config import RunConfig
+from ..core.config import RunConfig, web_tool_calls
 from ..core.clients import CompletionClient
 from ..core.ontology import EntityResolver, load_graph, render_identifier, sample_items
 from ..core.parsing import matches_format, parse_elements
@@ -251,7 +251,7 @@ def run_guided_prompting(cfg: RunConfig, client: CompletionClient) -> dict[str, 
                 sim_guided=sim_guided,
             )
             records.append(asdict(record))
-            if cfg.model.endswith("+web"):
+            if web_tool_calls(cfg.model):
                 records[-1]["web_searches_normal"] = completion_normal.web_searches  # 1 if the model used the web
                 records[-1]["web_searches_guided"] = completion_guided.web_searches
                 records[-1]["web_search_actions_normal"] = list(completion_normal.web_search_actions)
@@ -267,7 +267,7 @@ def run_guided_prompting(cfg: RunConfig, client: CompletionClient) -> dict[str, 
             print(f"  [{i}/{len(prepared)}] {given_id} (guided-normal {gaps})")
 
     summary = _summarize_gp(records, cfg, spec, resolver, class_sim, prop_sim)
-    if cfg.model.endswith("+web"):
+    if web_tool_calls(cfg.model):
         summary["n_web_searches"] = web_searches  # answers where the model used the web
     (run_dir / "summary.json").write_text(
         json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8"

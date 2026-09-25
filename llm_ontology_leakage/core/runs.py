@@ -58,7 +58,7 @@ def write_meta(
 
 def read_records(run_dir: Path) -> list[dict]:
     """Read the records.jsonl of a run"""
-    lines = (run_dir / "records.jsonl").read_text(encoding="utf-8").splitlines()
+    lines = (run_dir / "records.jsonl").read_text(encoding="utf-8").split("\n")
     return [json.loads(line) for line in lines if line.strip()]
 
 

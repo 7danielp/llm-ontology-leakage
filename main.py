@@ -24,6 +24,7 @@ from llm_ontology_leakage.core.config import (
     OPENAI_MODELS,
     RunConfig,
     build_run_config,
+    web_tool_calls,
 )
 from llm_ontology_leakage.core.clients import (
     CompletionClient,
@@ -141,7 +142,7 @@ def main() -> None:
         if args.results_dir is None:
             parser.error("--sample needs --results-dir, a sampled run has the same directory name as the full run")
         models = [args.model] if args.command == "run" else list(args.models)
-        if not all(m.endswith("+web") for m in models):
+        if not all(web_tool_calls(m) for m in models):
             parser.error("--sample is only for web search runs (a +web model)")
 
     if args.command == "run":  # run: task, model and format come straight from the arguments

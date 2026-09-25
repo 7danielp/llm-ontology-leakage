@@ -7,6 +7,8 @@ from typing import Protocol
 import httpx
 from openai import OpenAI
 
+from llm_ontology_leakage.core.config import base_model, web_tool_calls
+
 
 @dataclass(frozen=True)
 class Completion:
@@ -14,7 +16,7 @@ class Completion:
 
     text: str
     finish_reason: str | None
-    web_search_actions: tuple[dict, ...] = ()  # what the model did: search (queries, sources), open_page (url), find_in_page (url, pattern)
+    web_search_actions: tuple[dict, ...] = ()  # what the model did: search (queries, sources, results), open_page (url), find_in_page (url, pattern)
     web_citations: tuple[str, ...] = ()  # urls the answer cites
 
     usage: dict | None = None  # token usage of the request (input, output, reasoning), stored for web search runs
@@ -121,7 +123,10 @@ def _web_search_actions(response) -> tuple[dict, ...]:
             actions.append({"type": "find_in_page", "url": a.url, "pattern": a.pattern})
         else:
             actions.append({"type": a.type})
-        actions[-1]["status"] = item.status  # completed or failed
+        actions[-1]["status"] = item.status  # completed, or searching when the limit blocked the call
+        results = getattr(item, "results", None)  # text snippets the model read
+        if results is not None:
+            actions[-1]["results"] = list(results)  # plain dicts: type, title, url, snippet
     return tuple(actions)
 
 
@@ -170,22 +175,25 @@ class OpenAIClient:
         system: str | None = None,
     ) -> Completion:
         """Send the prompt and return the model's answer"""
-        web_search = model.endswith("+web")
+        tool_calls = web_tool_calls(model)  # 0 without web search, 1 for +web, 3 for +web3
+        web_search = tool_calls > 0
         if web_search:
             if self._web_search_left <= 0:
                 raise RuntimeError("no web search requests left for this client, only sampled runs (--sample) allow them")
             self._web_search_left -= 1
 
         response = self._client.responses.create(
-            model=model.removesuffix("+web"),
+            model=base_model(model),
             input=prompt,
             temperature=temperature,
             reasoning={"effort": "none"},  # measuring memorization, so reasoning should have no big impact
             # tool call (its queries) and reasoning around it are output tokens and count against max_output_tokens (search results come back as input tokens)
-            max_output_tokens=max_tokens + (WEB_SEARCH_OUTPUT_RESERVE if web_search else 0),
+            max_output_tokens=max_tokens + WEB_SEARCH_OUTPUT_RESERVE * tool_calls,  # one reserve per allowed call
             **({"instructions": system} if system else {}),
-            # model decides whether to perform a web search (at most 1)
-            **({"tools": [{"type": "web_search"}], "max_tool_calls": 1, "include": ["web_search_call.action.sources"]} if web_search else {}),
+            # model decides whether to use web search, at most tool_calls calls
+            **({"tools": [{"type": "web_search"}], "max_tool_calls": tool_calls,
+                # found URLs (sources) and the text snippets the model read (results)
+                "include": ["web_search_call.action.sources", "web_search_call.results"]} if web_search else {}),
         )
         if response.status == "completed":
             finish = "stop"
@@ -199,9 +207,9 @@ class OpenAIClient:
             web_search_actions=_web_search_actions(response), web_citations=_web_citations(response),
             usage=_usage(response) if web_search else None,
         )
-        searches = sum(1 for a in completion.web_search_actions if a["type"] == "search" and a["status"] == "completed")
-        if searches > 1:  # should never happen with max_tool_calls 1, if it does the run stops
-            raise RuntimeError(f"{searches} web searches in one request, the API ignored max_tool_calls")
+        calls = sum(1 for a in completion.web_search_actions if a["status"] == "completed")  # count every completed call (search, open_page, find_in_page)
+        if web_search and calls > tool_calls:  # should never happen, if it does the run stops
+            raise RuntimeError(f"{calls} web tool calls in one request, the limit is {tool_calls}, the API ignored max_tool_calls")
         return completion
 
     def token_logprobs(self, text: str, *, model: str) -> TokenLogprobs:
