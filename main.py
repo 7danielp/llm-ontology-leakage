@@ -17,6 +17,7 @@ from llm_ontology_leakage.guided_prompting.runner import run_guided_prompting
 from llm_ontology_leakage.min_k.aggregate import aggregate_mink
 from llm_ontology_leakage.min_k.runner import MINK_TASKS, run_min_k
 from llm_ontology_leakage.core.config import (
+    FULL_RUN_DIR,
     GRID_FORMATS,
     GRID_MODELS,
     GRID_TASKS,
@@ -123,7 +124,7 @@ def main() -> None:
     _add_common_args(grid_p)
 
     agg_p = sub.add_parser("aggregate", help="rebuild the method's CSV/LaTeX tables (no API calls)")
-    agg_p.add_argument("--results-dir", type=Path, default=Path("results"))
+    agg_p.add_argument("--results-dir", type=Path, default=FULL_RUN_DIR)
     agg_p.add_argument("--method", choices=list(METHODS), required=True)
 
     args = parser.parse_args()

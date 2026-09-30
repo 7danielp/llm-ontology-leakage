@@ -7,7 +7,7 @@ from pathlib import Path
 
 from rdflib import URIRef
 
-from llm_ontology_leakage.core.config import RunConfig, base_model
+from llm_ontology_leakage.core.config import FULL_RUN_DIR, RunConfig, base_model
 from llm_ontology_leakage.core.ontology import EntityResolver, load_graph
 from llm_ontology_leakage.core.runs import METHOD_DIRS, read_records, run_dir_for, write_meta
 from llm_ontology_leakage.core.tasks import TASKS
@@ -95,7 +95,7 @@ def main() -> None:
     """Parse the arguments and write the extracted runs"""
     parser = argparse.ArgumentParser(description="Cut the sampled questions out of the full runs")
     parser.add_argument("--results-dir", type=Path, required=True, help="results dir of the sampled runs")
-    parser.add_argument("--source", type=Path, default=Path("results"), help="results dir of the full runs")
+    parser.add_argument("--source", type=Path, default=FULL_RUN_DIR, help="results dir of the full runs")
     args = parser.parse_args()
     for run_dir in extract_sampled_runs(args.results_dir, args.source):
         print(f"  {run_dir}")

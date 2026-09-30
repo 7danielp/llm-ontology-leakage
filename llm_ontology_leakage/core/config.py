@@ -14,6 +14,8 @@ GRID_FORMATS: list[IdFormat] = ["plain", "prefix", "full"]
 
 OPENAI_MODELS: list[str] = ["gpt-5.6-luna", "gpt-5.6-luna+web", "gpt-5.6-luna+web3"]
 
+FULL_RUN_DIR = Path("results/full-no-web-search")  # full runs of all questions and their tables, sampled web runs go to their own --results-dir
+
 
 def web_tool_calls(model: str) -> int:
     """Web tool calls a model name allows (0 without web search, +web allows 1, +webN allows N)"""
@@ -269,5 +271,5 @@ def build_run_config(
         max_tokens=None,
         axiom_predicates={**DEFAULT_AXIOM_PREDICATES, **preset.get("axiom_predicates", {})},  # preset entries overwrite the defaults
         limit=None,
-        results_dir=Path("results"),
+        results_dir=FULL_RUN_DIR,
     )

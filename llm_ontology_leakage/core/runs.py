@@ -63,7 +63,7 @@ def read_records(run_dir: Path) -> list[dict]:
 
 
 def load_runs(results_dir: Path) -> list[dict]:
-    """Load all completed runs under results/runs (one dict per run with dir, meta and records)"""
+    """Load all completed runs under <results_dir>/runs (one dict per run with dir, meta and records)"""
     runs = []
     for meta_file in sorted((results_dir / "runs").rglob("run_meta.json")):
         run_dir = meta_file.parent
