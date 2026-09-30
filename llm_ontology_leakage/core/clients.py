@@ -23,8 +23,8 @@ class Completion:
 
     @property
     def web_searches(self) -> int:
-        """1 if the model used the web for this answer (a completed search, open_page or find_in_page), else 0"""
-        return int(any(a["status"] == "completed" for a in self.web_search_actions))
+        """Number of completed web tool calls of this answer (search, open_page, find_in_page), each counts once"""
+        return sum(a["status"] == "completed" for a in self.web_search_actions)
 
 
 @dataclass(frozen=True)

@@ -252,7 +252,7 @@ def run_guided_prompting(cfg: RunConfig, client: CompletionClient) -> dict[str, 
             )
             records.append(asdict(record))
             if web_tool_calls(cfg.model):
-                records[-1]["web_searches_normal"] = completion_normal.web_searches  # 1 if the model used the web
+                records[-1]["web_searches_normal"] = completion_normal.web_searches  # completed web tool calls
                 records[-1]["web_searches_guided"] = completion_guided.web_searches
                 records[-1]["web_search_actions_normal"] = list(completion_normal.web_search_actions)
                 records[-1]["web_search_actions_guided"] = list(completion_guided.web_search_actions)
@@ -268,7 +268,7 @@ def run_guided_prompting(cfg: RunConfig, client: CompletionClient) -> dict[str, 
 
     summary = _summarize_gp(records, cfg, spec, resolver, class_sim, prop_sim)
     if web_tool_calls(cfg.model):
-        summary["n_web_searches"] = web_searches  # answers where the model used the web
+        summary["n_web_searches"] = web_searches  # completed web tool calls over both arms of all records
     (run_dir / "summary.json").write_text(
         json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8"
     )
