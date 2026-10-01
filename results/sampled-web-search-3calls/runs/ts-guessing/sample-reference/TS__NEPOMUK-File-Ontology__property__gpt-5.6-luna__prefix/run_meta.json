@@ -1,0 +1,41 @@
+{
+  "method": "ts-guessing",
+  "client": "OpenAIClient",
+  "identity": {
+    "task": "property",
+    "model": "gpt-5.6-luna",
+    "id_format": "prefix",
+    "ontology_source": "ressources/ontologies/medium/nfo.rdf",
+    "ontology_name": "NEPOMUK File Ontology",
+    "ontology_namespace": "http://www.semanticdesktop.org/ontologies/",
+    "temperature": 0.0
+  },
+  "prefix_map": {},
+  "format_example_iris": [
+    "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#exampleProperty",
+    "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#otherExampleProperty"
+  ],
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://www.w3.org/2000/01/rdf-schema#domain",
+    "range": "http://www.w3.org/2000/01/rdf-schema#range"
+  },
+  "limit": null,
+  "sample": {
+    "n": 10,
+    "seed": 42,
+    "keys": [
+      "http://www.semanticdesktop.org/ontologies/2007/01/19/nie#DataObject",
+      "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Archive",
+      "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#ArchiveItem",
+      "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Audio",
+      "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#DeletedResource",
+      "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#EmbeddedFileDataObject",
+      "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Image",
+      "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#SourceCode",
+      "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Visual",
+      "http://www.w3.org/2000/01/rdf-schema#Resource"
+    ],
+    "from": "results/full-no-web-search/runs/ts-guessing/TS__NEPOMUK-File-Ontology__property__gpt-5.6-luna__prefix"
+  }
+}

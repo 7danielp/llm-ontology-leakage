@@ -1,0 +1,31 @@
+{
+  "method": "guided-prompting",
+  "task": "property",
+  "model": "gpt-5.6-luna+web3",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/unpopular/urban-iot_electric.rdf",
+  "ontology_name": "Urban IoT Electric Mobility",
+  "temperature": 0.0,
+  "n_records": 10,
+  "n_format_match_normal": 10,
+  "n_format_match_guided": 8,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "n_truncated_normal": 0,
+  "n_truncated_guided": 0,
+  "gap": {
+    "path": {
+      "n": 10,
+      "mean_normal": 0.9879545454545454,
+      "mean_guided": 1.3159848484848484,
+      "gap": 0.3280303030303031
+    },
+    "wup": {
+      "n": 10,
+      "mean_normal": 0.1606590909090909,
+      "mean_guided": 0.21366414141414142,
+      "gap": 0.05300505050505051
+    }
+  },
+  "n_web_searches": 26
+}

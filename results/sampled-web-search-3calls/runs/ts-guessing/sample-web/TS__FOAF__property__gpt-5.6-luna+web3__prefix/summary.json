@@ -1,0 +1,50 @@
+{
+  "method": "ts-guessing",
+  "task": "property",
+  "model": "gpt-5.6-luna+web3",
+  "id_format": "prefix",
+  "ontology_source": "ressources/ontologies/popular/foaf.rdf",
+  "ontology_name": "FOAF",
+  "temperature": 0.0,
+  "n_records": 9,
+  "n_format_match": 8,
+  "n_truncated": 1,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 9,
+        "n_match": 6,
+        "em": 0.6666666666666666,
+        "tp": 51,
+        "fp": 52,
+        "fn": 4,
+        "precision": 0.49514563106796117,
+        "recall": 0.9272727272727272,
+        "f1": 0.6455696202531646
+      },
+      "gold_in_ns": {
+        "n": 6,
+        "n_match": 4,
+        "em": 0.6666666666666666,
+        "tp": 40,
+        "fp": 0,
+        "fn": 4,
+        "precision": 1.0,
+        "recall": 0.9090909090909091,
+        "f1": 0.9523809523809523
+      },
+      "gold_external": {
+        "n": 3,
+        "n_match": 2,
+        "em": 0.6666666666666666,
+        "tp": 11,
+        "fp": 52,
+        "fn": 0,
+        "precision": 0.1746031746031746,
+        "recall": 1.0,
+        "f1": 0.29729729729729726
+      }
+    }
+  },
+  "n_web_searches": 9
+}

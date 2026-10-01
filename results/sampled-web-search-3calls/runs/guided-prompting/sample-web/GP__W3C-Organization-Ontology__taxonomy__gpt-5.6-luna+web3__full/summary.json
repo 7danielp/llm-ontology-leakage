@@ -1,0 +1,31 @@
+{
+  "method": "guided-prompting",
+  "task": "taxonomy",
+  "model": "gpt-5.6-luna+web3",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/medium/org.ttl",
+  "ontology_name": "W3C Organization Ontology",
+  "temperature": 0.0,
+  "n_records": 7,
+  "n_format_match_normal": 7,
+  "n_format_match_guided": 7,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "n_truncated_normal": 0,
+  "n_truncated_guided": 0,
+  "gap": {
+    "path": {
+      "n": 7,
+      "mean_normal": 6.571428571428571,
+      "mean_guided": 7.714285714285714,
+      "gap": 1.1428571428571428
+    },
+    "wup": {
+      "n": 7,
+      "mean_normal": 0.7857142857142857,
+      "mean_guided": 0.9523809523809524,
+      "gap": 0.1666666666666667
+    }
+  },
+  "n_web_searches": 6
+}

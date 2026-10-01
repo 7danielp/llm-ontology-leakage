@@ -1,0 +1,30 @@
+{
+  "method": "guided-prompting",
+  "task": "domain",
+  "model": "gpt-5.6-luna",
+  "id_format": "full",
+  "ontology_source": "ressources/ontologies/popular/schemaorg-all-http.ttl",
+  "ontology_name": "schema.org",
+  "temperature": 0.0,
+  "n_records": 10,
+  "n_format_match_normal": 10,
+  "n_format_match_guided": 10,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "n_truncated_normal": 0,
+  "n_truncated_guided": 0,
+  "gap": {
+    "path": {
+      "n": 10,
+      "mean_normal": 11.2,
+      "mean_guided": 12.2,
+      "gap": 1.0
+    },
+    "wup": {
+      "n": 10,
+      "mean_normal": 0.6561111111111111,
+      "mean_guided": 0.7853968253968253,
+      "gap": 0.12928571428571428
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "method": "guided-prompting",
+  "client": "OpenAIClient",
+  "identity": {
+    "task": "property",
+    "model": "gpt-5.6-luna",
+    "id_format": "full",
+    "ontology_source": "ressources/ontologies/popular/foaf.rdf",
+    "ontology_name": "FOAF",
+    "ontology_namespace": "http://xmlns.com/foaf/0.1/",
+    "temperature": 0.0
+  },
+  "prefix_map": {
+    "geo": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+    "skos": "http://www.w3.org/2004/02/skos/core#"
+  },
+  "format_example_iris": [
+    "http://xmlns.com/foaf/0.1/exampleProperty",
+    "http://xmlns.com/foaf/0.1/otherExampleProperty"
+  ],
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://www.w3.org/2000/01/rdf-schema#domain",
+    "range": "http://www.w3.org/2000/01/rdf-schema#range"
+  },
+  "limit": null,
+  "sample": {
+    "n": 10,
+    "seed": 42,
+    "keys": [
+      "http://www.w3.org/2002/07/owl#Thing",
+      "http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing",
+      "http://www.w3.org/2004/02/skos/core#Concept",
+      "http://xmlns.com/foaf/0.1/Agent",
+      "http://xmlns.com/foaf/0.1/Document",
+      "http://xmlns.com/foaf/0.1/Group",
+      "http://xmlns.com/foaf/0.1/Image",
+      "http://xmlns.com/foaf/0.1/OnlineAccount",
+      "http://xmlns.com/foaf/0.1/Person"
+    ],
+    "from": "results/full-no-web-search/runs/guided-prompting/GP__FOAF__property__gpt-5.6-luna__full"
+  }
+}

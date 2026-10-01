@@ -1,0 +1,49 @@
+ontology/task,gpt-5.6-luna sample-reference|plain,gpt-5.6-luna sample-reference|prefix,gpt-5.6-luna sample-reference|full,gpt-5.6-luna+web3 sample-web|plain,gpt-5.6-luna+web3 sample-web|prefix,gpt-5.6-luna+web3 sample-web|full
+FOAF/taxonomy,0.7778,0.8889,0.6667,0.7778,0.8889,0.6667
+FOAF/domain,0.3000,0.6000,0.5000,0.6000,0.6000,0.7000
+FOAF/range,0.2000,0.2000,0.2000,0.2000,0.2000,0.5000
+FOAF/property,0.2447,0.4646,0.4216,0.5417,0.6456,0.9908
+schema.org/taxonomy,0.4000,0.3000,0.6000,0.7000,0.4000,0.5000
+schema.org/domain,0.3000,0.2000,0.3000,0.5000,0.7000,1.0000
+schema.org/range,0.5000,0.8000,0.9000,0.7000,0.8000,0.9000
+schema.org/property,0.0000,0.0774,0.2000,0.3512,0.3757,0.2824
+Dublin Core Terms/taxonomy,0.3333,0.6667,0.4444,0.3333,0.6667,0.5556
+Dublin Core Terms/domain,0.0000,0.0000,0.0000,0.0000,0.0000,0.6667
+Dublin Core Terms/range,0.3000,0.8000,0.8000,0.6000,1.0000,0.9000
+Dublin Core Terms/property,0.0000,0.0000,0.0000,1.0000,1.0000,0.0000
+GoodRelations/taxonomy,0.3000,0.5000,0.2000,0.7000,0.8000,0.7000
+GoodRelations/domain,0.2000,0.2000,0.2000,0.4000,0.2000,0.8000
+GoodRelations/range,0.2000,0.4000,0.5000,0.3000,0.4000,0.8000
+GoodRelations/property,0.0000,0.2166,0.2143,0.5385,0.5181,0.4762
+NEPOMUK File Ontology/taxonomy,0.0000,0.1000,0.1000,0.5000,0.6000,0.6000
+NEPOMUK File Ontology/domain,0.4000,0.1000,0.3000,0.6000,0.7000,0.8000
+NEPOMUK File Ontology/range,0.3000,0.3000,0.6000,0.5000,0.5000,0.7000
+NEPOMUK File Ontology/property,0.0000,0.0229,0.1000,0.6000,0.6786,0.9796
+W3C Organization Ontology/taxonomy,0.2857,0.4286,0.7143,0.7143,0.5714,0.8571
+W3C Organization Ontology/domain,0.2000,0.4000,0.5000,0.7000,0.4000,0.7000
+W3C Organization Ontology/range,0.7000,0.9000,0.8000,0.7000,0.8000,0.9000
+W3C Organization Ontology/property,0.0000,0.3721,0.5333,0.8286,0.7949,0.8052
+Cinelab/taxonomy,0.0000,0.0000,0.0000,0.0000,0.1000,0.3000
+Cinelab/domain,0.1000,0.1000,0.1000,0.3000,0.2000,0.4000
+Cinelab/range,0.2000,0.2000,0.4000,0.3000,0.2000,0.4000
+Cinelab/property,0.0182,0.0233,0.0000,0.0000,0.0247,0.1159
+EP-Plan/taxonomy,0.2000,0.6000,0.5000,0.3000,0.5000,0.5000
+EP-Plan/domain,0.0000,0.0000,0.1000,0.1000,0.0000,0.3000
+EP-Plan/range,0.0000,0.2000,0.2000,0.1000,0.1000,0.2000
+EP-Plan/property,0.0000,0.0417,0.0723,0.0110,0.2169,0.0952
+Urban IoT Electric Mobility/taxonomy,0.0000,0.0000,0.0000,0.3750,0.2500,0.0000
+Urban IoT Electric Mobility/domain,0.1000,0.1000,0.1000,0.1000,0.3000,0.1000
+Urban IoT Electric Mobility/range,0.2000,0.2000,0.2000,0.3000,0.3000,0.2000
+Urban IoT Electric Mobility/property,0.0206,0.0244,0.0241,0.0990,0.1220,0.0260
+Weather Patterns/taxonomy,0.1000,0.1000,0.0000,0.2000,0.1000,0.1000
+Weather Patterns/domain,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+Weather Patterns/range,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+Weather Patterns/property,0.1333,0.1067,0.0964,0.0286,0.0396,0.0476
+Coffee Brewing/taxonomy,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+Coffee Brewing/domain,0.1000,0.0000,0.0000,0.0000,0.0000,0.0000
+Coffee Brewing/range,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+Coffee Brewing/property,0.0000,0.0000,0.0000,0.0597,0.0303,0.0000
+Waste Management/taxonomy,0.0000,0.0000,0.1000,0.0000,0.0000,0.0000
+Waste Management/domain,0.0000,0.0000,0.2000,0.0000,0.0000,0.1000
+Waste Management/range,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+Waste Management/property,0.0000,0.0294,0.0000,0.0455,0.0759,0.0000

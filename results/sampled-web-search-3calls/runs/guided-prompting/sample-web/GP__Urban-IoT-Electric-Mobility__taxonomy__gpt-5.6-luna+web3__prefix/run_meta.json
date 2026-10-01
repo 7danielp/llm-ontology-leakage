@@ -1,0 +1,43 @@
+{
+  "method": "guided-prompting",
+  "client": "OpenAIClient",
+  "identity": {
+    "task": "taxonomy",
+    "model": "gpt-5.6-luna+web3",
+    "id_format": "prefix",
+    "ontology_source": "ressources/ontologies/unpopular/urban-iot_electric.rdf",
+    "ontology_name": "Urban IoT Electric Mobility",
+    "ontology_namespace": "http://www.w3id.org/urban-iot/electric#",
+    "temperature": 0.0
+  },
+  "prefix_map": {
+    "uiote": "http://www.w3id.org/urban-iot/electric#",
+    "uiot": "http://www.w3id.org/urban-iot/core#",
+    "schema": "https://schema.org/",
+    "sosa": "http://www.w3.org/ns/sosa/",
+    "mv": "http://schema.mobivoc.org/#"
+  },
+  "format_example_iris": [
+    "http://www.w3id.org/urban-iot/electric#ExampleClass"
+  ],
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://www.w3.org/2000/01/rdf-schema#domain",
+    "range": "http://www.w3.org/2000/01/rdf-schema#range"
+  },
+  "limit": null,
+  "sample": {
+    "n": 10,
+    "seed": 42,
+    "keys": [
+      "http://www.w3id.org/urban-iot/electric#ChargePointOperator",
+      "http://www.w3id.org/urban-iot/electric#ChargingService",
+      "http://www.w3id.org/urban-iot/electric#ChargingServiceOffer",
+      "http://www.w3id.org/urban-iot/electric#ChargingSession",
+      "http://www.w3id.org/urban-iot/electric#ChargingStation",
+      "http://www.w3id.org/urban-iot/electric#EVSE",
+      "http://www.w3id.org/urban-iot/electric#EVSERecord",
+      "http://www.w3id.org/urban-iot/electric#eMobilityServiceProvider"
+    ]
+  }
+}

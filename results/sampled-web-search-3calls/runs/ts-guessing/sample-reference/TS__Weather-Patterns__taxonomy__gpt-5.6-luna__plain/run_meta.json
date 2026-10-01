@@ -1,0 +1,42 @@
+{
+  "method": "ts-guessing",
+  "client": "OpenAIClient",
+  "identity": {
+    "task": "taxonomy",
+    "model": "gpt-5.6-luna",
+    "id_format": "plain",
+    "ontology_source": "ressources/ontologies/synthetic/weather-patterns/weather-patterns.ttl",
+    "ontology_name": "Weather Patterns",
+    "ontology_namespace": "http://example.org/weather-patterns#",
+    "temperature": 0.0
+  },
+  "prefix_map": {
+    "weather-patterns": "http://example.org/weather-patterns#"
+  },
+  "format_example_iris": [
+    "http://example.org/weather-patterns#ExampleClass"
+  ],
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://www.w3.org/2000/01/rdf-schema#domain",
+    "range": "http://www.w3.org/2000/01/rdf-schema#range"
+  },
+  "limit": null,
+  "sample": {
+    "n": 10,
+    "seed": 42,
+    "keys": [
+      "http://example.org/weather-patterns#AirMass",
+      "http://example.org/weather-patterns#CloudType",
+      "http://example.org/weather-patterns#ColdFront",
+      "http://example.org/weather-patterns#CyclonicSystem",
+      "http://example.org/weather-patterns#Flood",
+      "http://example.org/weather-patterns#FrontalSystem",
+      "http://example.org/weather-patterns#Heatwave",
+      "http://example.org/weather-patterns#Thunderstorm",
+      "http://example.org/weather-patterns#Tornado",
+      "http://example.org/weather-patterns#WarmFront"
+    ],
+    "from": "results/full-no-web-search/runs/ts-guessing/TS__Weather-Patterns__taxonomy__gpt-5.6-luna__plain"
+  }
+}

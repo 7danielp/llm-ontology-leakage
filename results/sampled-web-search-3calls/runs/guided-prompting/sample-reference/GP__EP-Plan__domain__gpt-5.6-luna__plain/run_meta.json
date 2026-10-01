@@ -1,0 +1,43 @@
+{
+  "method": "guided-prompting",
+  "client": "OpenAIClient",
+  "identity": {
+    "task": "domain",
+    "model": "gpt-5.6-luna",
+    "id_format": "plain",
+    "ontology_source": "ressources/ontologies/unpopular/ep-plan.ttl",
+    "ontology_name": "EP-Plan",
+    "ontology_namespace": "https://w3id.org/ep-plan#",
+    "temperature": 0.0
+  },
+  "prefix_map": {
+    "ep-plan": "https://w3id.org/ep-plan#",
+    "prov": "http://www.w3.org/ns/prov#"
+  },
+  "format_example_iris": [
+    "https://w3id.org/ep-plan#ExampleClass"
+  ],
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://www.w3.org/2000/01/rdf-schema#domain",
+    "range": "http://www.w3.org/2000/01/rdf-schema#range"
+  },
+  "limit": null,
+  "sample": {
+    "n": 10,
+    "seed": 42,
+    "keys": [
+      "https://w3id.org/ep-plan#constrains",
+      "https://w3id.org/ep-plan#evaluatedAgainst",
+      "https://w3id.org/ep-plan#evaluatedFor",
+      "https://w3id.org/ep-plan#evaluatedTraceElement",
+      "https://w3id.org/ep-plan#hasInputVariable",
+      "https://w3id.org/ep-plan#hasOutputVariable",
+      "https://w3id.org/ep-plan#hasPayload",
+      "https://w3id.org/ep-plan#isObjectiveOfPlan",
+      "https://w3id.org/ep-plan#isQualifiedEvaluationOf",
+      "https://w3id.org/ep-plan#satisfiedBy"
+    ],
+    "from": "results/full-no-web-search/runs/guided-prompting/GP__EP-Plan__domain__gpt-5.6-luna__plain"
+  }
+}

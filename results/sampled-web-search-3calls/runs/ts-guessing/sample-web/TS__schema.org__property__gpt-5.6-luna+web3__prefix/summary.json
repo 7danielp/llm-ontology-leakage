@@ -1,0 +1,50 @@
+{
+  "method": "ts-guessing",
+  "task": "property",
+  "model": "gpt-5.6-luna+web3",
+  "id_format": "prefix",
+  "ontology_source": "ressources/ontologies/popular/schemaorg-all-http.ttl",
+  "ontology_name": "schema.org",
+  "temperature": 0.0,
+  "n_records": 10,
+  "n_format_match": 10,
+  "n_truncated": 0,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 10,
+        "n_match": 2,
+        "em": 0.2,
+        "tp": 34,
+        "fp": 109,
+        "fn": 4,
+        "precision": 0.23776223776223776,
+        "recall": 0.8947368421052632,
+        "f1": 0.3756906077348066
+      },
+      "gold_in_ns": {
+        "n": 10,
+        "n_match": 2,
+        "em": 0.2,
+        "tp": 34,
+        "fp": 109,
+        "fn": 4,
+        "precision": 0.23776223776223776,
+        "recall": 0.8947368421052632,
+        "f1": 0.3756906077348066
+      },
+      "gold_external": {
+        "n": 0,
+        "n_match": 0,
+        "em": null,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      }
+    }
+  },
+  "n_web_searches": 10
+}

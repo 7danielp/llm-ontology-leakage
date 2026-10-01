@@ -1,0 +1,31 @@
+{
+  "method": "guided-prompting",
+  "task": "range",
+  "model": "gpt-5.6-luna+web3",
+  "id_format": "prefix",
+  "ontology_source": "ressources/ontologies/popular/dublin_core_terms.ttl",
+  "ontology_name": "Dublin Core Terms",
+  "temperature": 0.0,
+  "n_records": 10,
+  "n_format_match_normal": 10,
+  "n_format_match_guided": 10,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "n_truncated_normal": 0,
+  "n_truncated_guided": 0,
+  "gap": {
+    "path": {
+      "n": 10,
+      "mean_normal": 6.9,
+      "mean_guided": 7.7,
+      "gap": 0.8
+    },
+    "wup": {
+      "n": 10,
+      "mean_normal": 0.8400000000000001,
+      "mean_guided": 0.9400000000000001,
+      "gap": 0.1
+    }
+  },
+  "n_web_searches": 10
+}

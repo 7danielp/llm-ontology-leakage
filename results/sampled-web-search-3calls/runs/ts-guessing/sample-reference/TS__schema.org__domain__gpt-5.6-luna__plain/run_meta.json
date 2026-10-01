@@ -1,0 +1,40 @@
+{
+  "method": "ts-guessing",
+  "client": "OpenAIClient",
+  "identity": {
+    "task": "domain",
+    "model": "gpt-5.6-luna",
+    "id_format": "plain",
+    "ontology_source": "ressources/ontologies/popular/schemaorg-all-http.ttl",
+    "ontology_name": "schema.org",
+    "ontology_namespace": "http://schema.org/",
+    "temperature": 0.0
+  },
+  "prefix_map": {},
+  "format_example_iris": [
+    "http://schema.org/ExampleClass"
+  ],
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://schema.org/domainIncludes",
+    "range": "http://schema.org/rangeIncludes"
+  },
+  "limit": null,
+  "sample": {
+    "n": 10,
+    "seed": 42,
+    "keys": [
+      "http://schema.org/afterMedia",
+      "http://schema.org/cashBack",
+      "http://schema.org/childMinAge",
+      "http://schema.org/costOrigin",
+      "http://schema.org/equal",
+      "http://schema.org/flightNumber",
+      "http://schema.org/guideline",
+      "http://schema.org/relatedLink",
+      "http://schema.org/targetUrl",
+      "http://schema.org/userInteractionCount"
+    ],
+    "from": "results/full-no-web-search/runs/ts-guessing/TS__schema.org__domain__gpt-5.6-luna__plain"
+  }
+}

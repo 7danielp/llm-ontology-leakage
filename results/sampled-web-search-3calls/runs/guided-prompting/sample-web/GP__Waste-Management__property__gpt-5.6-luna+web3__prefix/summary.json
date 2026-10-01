@@ -1,0 +1,31 @@
+{
+  "method": "guided-prompting",
+  "task": "property",
+  "model": "gpt-5.6-luna+web3",
+  "id_format": "prefix",
+  "ontology_source": "ressources/ontologies/synthetic/waste-management/waste-management.ttl",
+  "ontology_name": "Waste Management",
+  "temperature": 0.0,
+  "n_records": 10,
+  "n_format_match_normal": 10,
+  "n_format_match_guided": 8,
+  "n_self_echo_normal": 0,
+  "n_self_echo_guided": 0,
+  "n_truncated_normal": 0,
+  "n_truncated_guided": 0,
+  "gap": {
+    "path": {
+      "n": 10,
+      "mean_normal": 0.0,
+      "mean_guided": 0.14444444444444443,
+      "gap": 0.14444444444444443
+    },
+    "wup": {
+      "n": 10,
+      "mean_normal": 0.0,
+      "mean_guided": 0.018055555555555554,
+      "gap": 0.018055555555555554
+    }
+  },
+  "n_web_searches": 14
+}

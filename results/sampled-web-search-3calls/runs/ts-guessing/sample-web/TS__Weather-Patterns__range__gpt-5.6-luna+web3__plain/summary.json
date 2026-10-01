@@ -1,0 +1,50 @@
+{
+  "method": "ts-guessing",
+  "task": "range",
+  "model": "gpt-5.6-luna+web3",
+  "id_format": "plain",
+  "ontology_source": "ressources/ontologies/synthetic/weather-patterns/weather-patterns.ttl",
+  "ontology_name": "Weather Patterns",
+  "temperature": 0.0,
+  "n_records": 10,
+  "n_format_match": 10,
+  "n_truncated": 0,
+  "metrics": {
+    "strict": {
+      "all": {
+        "n": 10,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 0,
+        "fp": 10,
+        "fn": 10,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "gold_in_ns": {
+        "n": 10,
+        "n_match": 0,
+        "em": 0.0,
+        "tp": 0,
+        "fp": 10,
+        "fn": 10,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "gold_external": {
+        "n": 0,
+        "n_match": 0,
+        "em": null,
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      }
+    }
+  },
+  "n_web_searches": 4
+}

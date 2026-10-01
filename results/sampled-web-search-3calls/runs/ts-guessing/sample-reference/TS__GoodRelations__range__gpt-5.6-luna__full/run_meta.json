@@ -1,0 +1,42 @@
+{
+  "method": "ts-guessing",
+  "client": "OpenAIClient",
+  "identity": {
+    "task": "range",
+    "model": "gpt-5.6-luna",
+    "id_format": "full",
+    "ontology_source": "ressources/ontologies/medium/goodrelations.rdf",
+    "ontology_name": "GoodRelations",
+    "ontology_namespace": "http://purl.org/goodrelations/v1#",
+    "temperature": 0.0
+  },
+  "prefix_map": {
+    "schema": "http://schema.org/"
+  },
+  "format_example_iris": [
+    "http://purl.org/goodrelations/v1#ExampleClass"
+  ],
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://www.w3.org/2000/01/rdf-schema#domain",
+    "range": "http://www.w3.org/2000/01/rdf-schema#range"
+  },
+  "limit": null,
+  "sample": {
+    "n": 10,
+    "seed": 42,
+    "keys": [
+      "http://purl.org/goodrelations/v1#amountOfThisGood",
+      "http://purl.org/goodrelations/v1#color",
+      "http://purl.org/goodrelations/v1#condition",
+      "http://purl.org/goodrelations/v1#depth",
+      "http://purl.org/goodrelations/v1#hasBusinessFunction",
+      "http://purl.org/goodrelations/v1#hasDUNS",
+      "http://purl.org/goodrelations/v1#hasGTIN-8",
+      "http://purl.org/goodrelations/v1#qualitativeProductOrServiceProperty",
+      "http://purl.org/goodrelations/v1#taxID",
+      "http://purl.org/goodrelations/v1#width"
+    ],
+    "from": "results/full-no-web-search/runs/ts-guessing/TS__GoodRelations__range__gpt-5.6-luna__full"
+  }
+}

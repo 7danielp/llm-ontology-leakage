@@ -1,0 +1,40 @@
+{
+  "method": "guided-prompting",
+  "client": "OpenAIClient",
+  "identity": {
+    "task": "taxonomy",
+    "model": "gpt-5.6-luna",
+    "id_format": "full",
+    "ontology_source": "ressources/ontologies/medium/nfo.rdf",
+    "ontology_name": "NEPOMUK File Ontology",
+    "ontology_namespace": "http://www.semanticdesktop.org/ontologies/",
+    "temperature": 0.0
+  },
+  "prefix_map": {},
+  "format_example_iris": [
+    "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#ExampleClass"
+  ],
+  "axiom_predicates": {
+    "taxonomy": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "domain": "http://www.w3.org/2000/01/rdf-schema#domain",
+    "range": "http://www.w3.org/2000/01/rdf-schema#range"
+  },
+  "limit": null,
+  "sample": {
+    "n": 10,
+    "seed": 42,
+    "keys": [
+      "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Archive",
+      "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#BookmarkFolder",
+      "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#CompressionType",
+      "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Cursor",
+      "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject",
+      "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileHash",
+      "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FilesystemImage",
+      "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#PlainTextDocument",
+      "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#SoftwareItem",
+      "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Video"
+    ],
+    "from": "results/full-no-web-search/runs/guided-prompting/GP__NEPOMUK-File-Ontology__taxonomy__gpt-5.6-luna__full"
+  }
+}
