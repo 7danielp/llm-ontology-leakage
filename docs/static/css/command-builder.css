@@ -1,0 +1,60 @@
+.builder { max-width: 780px; margin: 0 auto; text-align: left; font-size: 1rem; }
+.builder [hidden] { display: none !important; }
+.builder .step {
+  background: var(--background-primary); border: 1px solid var(--border-color); border-radius: var(--border-radius);
+  padding: 1.1rem 1.3rem; margin-bottom: 0.85rem; box-shadow: var(--shadow-sm); transition: opacity .2s;
+}
+.builder .step.disabled { opacity: .4; pointer-events: none; }
+.builder .step-title { display: block; font-weight: 700; font-size: 1.02rem; color: var(--text-primary); margin-bottom: 0.55rem; }
+.builder .row { display: flex; gap: 0.75rem; }
+.builder .row > div { flex: 1; min-width: 0; }
+@media screen and (max-width: 600px) { .builder .row { flex-direction: column; gap: 0.5rem; } }
+.builder input[type=text], .builder input[type=number] {
+  width: 100%; padding: 0.55rem 0.8rem; background: var(--background-primary); color: var(--text-primary);
+  border: 1px solid var(--border-color); border-radius: 8px; font: inherit; font-size: 1rem;
+}
+.builder input:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgb(37 99 235 / 0.15); }
+
+.builder .dd { position: relative; }
+.builder .dd-btn {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+  padding: 0.55rem 0.8rem; background: var(--background-primary); color: var(--text-secondary);
+  border: 1px solid var(--border-color); border-radius: 8px; font: inherit; font-size: 1rem; cursor: pointer; text-align: left;
+}
+.builder .dd-btn:hover { border-color: var(--text-light); }
+.builder .dd.open .dd-btn, .builder .dd-btn:focus-visible { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgb(37 99 235 / 0.15); }
+.builder .dd.has-value .dd-btn { color: var(--text-primary); }
+.builder .dd-btn .caret { flex: none; transition: transform .15s; color: var(--text-light); }
+.builder .dd.open .caret { transform: rotate(180deg); }
+.builder .dd-menu {
+  position: absolute; z-index: 10; top: calc(100% + 6px); left: 0; right: 0;
+  background: var(--background-primary); border: 1px solid var(--border-color); border-radius: 10px;
+  box-shadow: var(--shadow-lg); padding: 4px; max-height: 340px; overflow-y: auto; display: none;
+}
+.builder .dd.open .dd-menu { display: block; }
+.builder .dd-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.65rem; border-radius: 6px; cursor: pointer; color: var(--text-primary); font-size: 1rem; }
+.builder .dd-item:hover { background: var(--background-accent); }
+.builder .dd-item .tick { width: 16px; flex: none; color: var(--primary-color); visibility: hidden; }
+.builder .dd-item.selected .tick { visibility: visible; }
+.builder .dd-item .note { margin-left: auto; color: var(--text-light); font-size: 0.8rem; }
+
+.builder .checks { display: flex; flex-wrap: wrap; gap: 0.4rem 0.9rem; }
+.builder .checks label { display: flex; align-items: center; gap: 0.4rem; color: var(--text-primary); }
+.builder .checks input { accent-color: var(--primary-color); }
+.builder .hint { color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem; }
+
+.builder #commandBox {
+  background: var(--background-primary); border: 1px solid var(--border-color); border-radius: var(--border-radius);
+  padding: 1.1rem 1.3rem; margin-top: 1.25rem; box-shadow: var(--shadow-sm);
+}
+.builder #commandBox .head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; }
+.builder #commandBox .head span { font-weight: 700; color: var(--text-primary); }
+.builder #output { margin: 0; padding: 0.9rem 1.05rem !important; white-space: pre-wrap; word-break: break-all; min-height: 54px; font-size: 0.9rem !important; box-shadow: none; }
+.builder #copyBtn {
+  background: var(--primary-color); color: #fff; border: none; border-radius: var(--border-radius);
+  padding: 0.55rem 1.2rem; font: inherit; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: var(--transition);
+}
+.builder #copyBtn:hover:not(:disabled) { background: var(--primary-hover); }
+.builder #copyBtn:disabled { opacity: .5; cursor: default; }
+.builder #copyBtn.copied { background: #10b981; }
+.builder #copyBtn:focus-visible { outline: 2px solid var(--primary-color); outline-offset: 2px; }
