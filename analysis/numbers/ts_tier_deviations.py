@@ -79,15 +79,22 @@ print(f"NFO range golds that are XML Schema datatypes: {datatypes} of {len(nfo)}
 print(f"NFO with the right datatype in another namespace as hit: {span([value_with_other_namespace(NFO, m) for m in MODELS])} "
       f"instead of {span([table_value(NFO, m) for m in MODELS])}")
 
-for t in ("domain", "range"):
+for t in ("taxonomy", "domain", "range"):
     questions = records(W3C, t, MAKI[0], "plain")
     n = sum(is_org(r) for r in questions)
     print(f"W3C Organization {t} questions with gold org:Organization: {n} of {len(questions)}, "
           f"F1 of always answering it: {number(n / len(questions))}")
-correct = [r for t in ("domain", "range") for m in MODELS for f in FORMATS for r in records(W3C, t, m, f) if r["strict_match"]]
+correct = [r for t in ("taxonomy", "domain", "range") for m in MODELS for f in FORMATS for r in records(W3C, t, m, f)
+           if r["strict_match"]]
 org = sum(map(is_org, correct))
-print(f"W3C Organization correct domain and range answers that are org:Organization: {org} of {len(correct)} "
+print(f"W3C Organization correct taxonomy, domain and range answers that are org:Organization: {org} of {len(correct)} "
       f"({number(org / len(correct))})")
 
-correct = [r for m in MODELS for f in FORMATS for r in records("EP-Plan", "range", m, f) if r["strict_match"]]
-print(f"EP-Plan correct range answers with the gold in the property name: {sum(map(name_inferable, correct))} of {len(correct)}")
+counts = []
+for t in ("taxonomy", "domain", "range"):
+    correct = [r for m in MODELS for f in FORMATS for r in records("EP-Plan", t, m, f) if r["strict_match"]]
+    counts.append((sum(map(name_inferable, correct)), len(correct)))
+    print(f"EP-Plan correct {t} answers with the gold in the given name: {counts[-1][0]} of {counts[-1][1]}")
+inferable, total = map(sum, zip(*counts))
+print(f"EP-Plan correct taxonomy, domain and range answers with the gold in the given name: {inferable} of {total} "
+      f"({number(inferable / total)})")
